@@ -29,3 +29,5 @@
 
 /server/node_modules
 /server/.env
+/server/utils/key.pem
+/server/utils/cert.pem
