@@ -1,0 +1,20 @@
+<nav>
+    <img src="/assets/BNBG-1.png" alt="">
+
+    <div class="links">    
+        <div *ngIf="!authService.loggedIn()">
+            <a routerLink="/login">Login</a>
+            <a routerLink="/register">Register</a>
+        </div>
+    
+        <div *ngIf="authService.loggedIn()">
+            <a routerLink="/dashboard">Dashboard</a>
+            <a routerLink="/reports">Reports</a>
+            <a (click)="logout()">Logout</a>
+        </div>
+
+        <div>
+            <a routerLink="/contact">Contact</a>
+        </div>
+    </div>
+</nav>

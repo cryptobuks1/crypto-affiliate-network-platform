@@ -1,0 +1,68 @@
+Registration/Sign Up Page
+- Username
+- Password
+- Confirm Password
+- Email
+- Affiliate Link/Referal Code
+- Term & Condition checkbox
+- Create Account or login if have account.
+
+Login Page
+- Username
+- Password
+- Register/Create Account
+- Forgot Password
+- Google Recaptcha
+- Checkbox - Keep me logged in on this device
+- Contact Support button 
+
+Main Dashboard Menu
+Dashboard/Home
+- Live Price of BNBG Token & Top Token( I will provide the formula and link)
+- Total Referal/USD sales under the affiliate
+- Affiliate Link
+- BNBG Affiliate Income
+
+Buy & Claim BNBG
+- Link to pancakeswap URL( I will provide the formula and link)
+- Total point in wallet
+- Transaction History
+- BNBG Withdrawal Request
+
+Affiliate Reports
+- Referral list (referral User ID, Bonus Earned, and Register Date & Time)
+- Bonus History (User ID, Bonus Earned)
+
+Contact Admin
+- Live Chat
+- Email Support
+
+User Right Menu
+- Profile Name
+- Email/Change Email
+- Contact/Phone Number
+- Country
+- Change Password[Old Password/New Password]
+- 2FA security
+- Logout
+
+
+The color you can follow
+https://bnbgold.fund/
+BNB Gold
+bnbgoldadmin
+Home
+You can login the this demo to get what I want actually
+Admin URL: https://proinvest.axis96.co/login 
+Admin email: admin@proinvest.com
+Admin password: 12345678
+Login
+Proinvest is an investment company that aggregates funds for investment in bitcoin and forex trading. ...
+and the user login.
+https://proinvest.axis96.co/login
+Login
+Proinvest is an investment company that aggregates funds for investment in bitcoin and forex trading. ...
+Test User Login : marketing@bnbgold.fund
+Password : test1234
+The system is just same like this the different is admin need to manually check the affiliate proof and link
+and there is no investment plan just need to inform in the system how many token they buy so we can know how much bonus they entitled.
