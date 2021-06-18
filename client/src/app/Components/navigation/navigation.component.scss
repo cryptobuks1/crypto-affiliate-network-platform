@@ -24,7 +24,11 @@ nav {
             padding: .75rem;
             background-color: #333;
             color: #FFD700;
-            border-radius: .5rem;
+            cursor: pointer;
+
+            &:hover {
+                background-color: rgb(65, 65, 65);
+            }
         }
     }
 }

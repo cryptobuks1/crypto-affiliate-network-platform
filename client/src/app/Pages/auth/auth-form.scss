@@ -1,0 +1,87 @@
+.form-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    form {
+        width: 400px;
+        background-color: #fff;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        padding: 2rem;
+        position: relative;
+
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            
+            a {
+                width: 100%;
+                display: inline-block;
+                text-align: center;
+                background-color: #333333;
+                padding: .85rem;
+                color: #FFD700;
+                text-decoration: none;
+
+                &:first-of-type {
+                    border-right: 1px solid #494949;
+                }
+
+                &:hover {
+                    background-color: rgb(65, 65, 65);
+                }
+            } 
+        }
+
+        section {
+            margin: 1rem 0;
+
+            &:first-of-type {
+                padding-top: 2rem;
+            }
+
+            &.fg-row {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                label {
+                    margin-bottom: 0;
+                }
+            }
+
+            label {
+                display: block;
+                margin-bottom: 8px;
+            }
+
+            input[type=text], 
+            input[type=password],
+            input[type=email] {
+                width: 100%;
+                padding: .6rem;
+            }
+        }
+
+        button {
+            display: block;
+            margin: 0 0 0 auto;
+            padding: .9rem;
+            width: 12rem;
+            border: none;
+            background-color: #333333;
+            color: #FFD700;
+            cursor: pointer;
+
+            &:hover {
+                background-color: rgb(65, 65, 65);
+            }
+        }
+    }
+}

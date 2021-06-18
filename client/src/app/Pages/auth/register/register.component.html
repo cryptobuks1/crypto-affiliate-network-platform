@@ -1,0 +1,34 @@
+<section class="form-container">
+    <form>
+        <header>
+            <a routerLink="/login">Login</a>
+            <a routerLink="/reset-password">Reset Password</a>
+        </header>
+        <section>
+            <label for="username">Username</label>
+            <input type="text" [(ngModel)]="username" name="username" id="username">
+        </section>
+        <section>
+            <label for="password">Password</label>
+            <input type="password" [(ngModel)]="password" name="password" id="password">
+        </section>
+        <section>
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" [(ngModel)]="confirmPassword" name="confirmPassword" id="confirmPassword">
+        </section>
+        <section>
+            <label for="email">Email</label>
+            <input type="email" [(ngModel)]="email" name="email" id="email">
+        </section>
+        <section>
+            <label for="referralCode">Affiliate Link/Referal Code</label>
+            <input type="text" [(ngModel)]="referralCode" name="referralCode" id="referralCode">
+        </section>
+        <section class="fg-row">
+            <label for="tos">Terms & Condition</label>
+            <input type="checkbox" [(ngModel)]="tos" name="tos" id="tos">
+        </section>
+
+        <button (click)="register()">Create Account</button>
+    </form>
+</section>

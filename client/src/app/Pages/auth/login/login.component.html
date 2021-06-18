@@ -1,0 +1,28 @@
+<section class="form-container">
+    <form>
+        <header>
+            <a routerLink="/register">Register</a>
+            <a routerLink="/reset-password">Reset Password</a>
+        </header>
+        <section>
+            <label for="username">Username</label>
+            <input type="text" [(ngModel)]="username" name="username" id="username">
+        </section>
+        <section>
+            <label for="password">Password</label>
+            <input type="password" [(ngModel)]="password" name="password" id="password">
+        </section>
+        <section class="fg-row">
+            <label for="keepMeLoggedIn">Keep me logged in on this device?</label>
+            <input type="checkbox" [(ngModel)]="keepMeLoggedIn" name="keepMeLoggedIn" id="keepMeLoggedIn">
+        </section>
+        <!-- <section>
+            <label>Are you a robot?</label>
+            <p>Google Recaptcha</p>
+        </section> -->
+        <section>
+            <a routerLink="/contact">Contact Support</a>
+        </section>
+        <button (click)="login()">Login</button>
+    </form>
+</section>

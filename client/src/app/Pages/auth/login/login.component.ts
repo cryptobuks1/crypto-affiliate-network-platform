@@ -3,11 +3,12 @@ import { HttpService } from 'src/app/Services/http.service';
 import { AlertsStoreService } from 'src/app/Store/alerts-store.service';
 import { AuthService } from 'src/app/Services/auth.service';
 import { Router } from '@angular/router';
+import { VantaService } from 'src/app/Services/vanta.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss',  '../auth-form.scss']
 })
 export class LoginComponent implements OnInit {
   public username: string = '';
@@ -15,6 +16,7 @@ export class LoginComponent implements OnInit {
   public keepMeLoggedIn: boolean = false;
 
   constructor(
+    private vantaService: VantaService,
     private httpService: HttpService, 
     private alertsStoreService: AlertsStoreService,
     private authService: AuthService,
@@ -22,6 +24,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void { 
+    this.vantaService.initVanta();
   }
 
   login(): void {
