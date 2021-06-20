@@ -1,3 +1,14 @@
-<section>
-    
+<section class="page container">
+    <h1>Dashboard <span *ngIf="user">{{user.email}}</span></h1>
+    <news-ticker></news-ticker>
+
+    <div class="dashboard-grid">
+        <div class="dashboard-grid-item"></div>
+        <div class="dashboard-grid-item"></div>
+        <div class="dashboard-grid-item"></div>
+        <div class="dashboard-grid-item"></div>
+        <div class="dashboard-grid-item"></div>
+        <div class="dashboard-grid-item"></div>
+        <div class="dashboard-grid-item"></div>
+    </div>
 </section>

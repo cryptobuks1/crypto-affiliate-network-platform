@@ -14,6 +14,7 @@ import { NavigationComponent } from './Components/navigation/navigation.componen
 import { ResetPasswordComponent } from './Pages/auth/reset-password/reset-password.component';
 import { AlertsComponent } from './Components/alerts/alerts.component';
 import { ModalComponent } from './Components/modal/modal.component';
+import { NewsTickerComponent } from './Components/news-ticker/news-ticker.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ModalComponent } from './Components/modal/modal.component';
     NavigationComponent,
     ResetPasswordComponent,
     AlertsComponent,
-    ModalComponent
+    ModalComponent,
+    NewsTickerComponent
   ], 
   imports: [
     BrowserModule,

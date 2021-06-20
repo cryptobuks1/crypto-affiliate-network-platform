@@ -66,6 +66,14 @@
             input[type=email] {
                 width: 100%;
                 padding: .6rem;
+                border: 1px solid rgb(231, 231, 231);
+                outline: none;
+                border-radius: .33rem;
+                transition: all 200ms linear;
+                
+                &:focus {
+                    box-shadow: 0 0 0 0.25rem rgb(82 82 82 / 36%);
+                }
             }
         }
 

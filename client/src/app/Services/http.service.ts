@@ -33,4 +33,16 @@ export class HttpService {
       headers: this.headers() 
     });
   }
+
+  prices(): Observable<any> {
+    return this.httpClient.get<any>('https://api.pancakeswap.info/api/v2/tokens/0x6509c95b1ac498390e40eb49e2248c441e78da15');
+  }
+
+  requestToken(data: any): Observable<iHttpResponse> {
+    return this.httpClient.put<iHttpResponse>(`${this.serverAddr}/reset-password`, data);
+  }
+
+  updatePassword(data: any): Observable<iHttpResponse> {
+    return this.httpClient.put<iHttpResponse>(`${this.serverAddr}/update-password`, data);
+  }
 }

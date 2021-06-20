@@ -9,7 +9,6 @@ async function signInController(req, res) {
 
     try {
         const user = await userModel.signIn(req.body);
-        token.createToken({ _id: user._id })
         return res.json({
             message: 'signed in',
             success: true,

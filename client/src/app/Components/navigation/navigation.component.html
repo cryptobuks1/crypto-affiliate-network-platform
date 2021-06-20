@@ -1,4 +1,4 @@
-<nav>
+<nav [ngClass]="{ 'open': navState }">
     <img src="/assets/BNBG-1.png" alt="">
 
     <div class="links">    
@@ -18,3 +18,5 @@
         </div>
     </div>
 </nav>
+
+<button class="toggle-nav" [ngClass]="{ 'open': navState }" (click)="navState = !navState ? true : false">Toggle Nav</button>

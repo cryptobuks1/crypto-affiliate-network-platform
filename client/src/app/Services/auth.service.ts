@@ -25,6 +25,10 @@ export class AuthService {
   loggedIn(): boolean {
     const isExpired = helper.isTokenExpired(this.getToken() || '');
 
+    if(isExpired) {
+      localStorage.removeItem('token');
+    }
+    
     return !isExpired;
   }
 }

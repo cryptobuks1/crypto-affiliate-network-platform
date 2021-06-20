@@ -28,6 +28,10 @@ const userSchema = new Schema({
     tos: {
         type: Boolean,
         default: false
+    },
+    resetPasswordToken: {
+        type: String,
+        default: null
     }
 });
 
@@ -70,7 +74,42 @@ async function signIn(data) {
     }
 }
 
+async function findUser(filter) {
+    try {
+        return UserModel.findOne(filter).select({ password: 0 }).exec();
+    } catch (err) {
+        return Promise.reject(err);
+    }
+}
+
+async function setResetToken(filter, update) {
+    try {
+        const user = await UserModel.findOne(filter);
+        user.resetPasswordToken = update.resetPasswordToken;
+        return await user.save();
+    } catch (err) {
+        return Promise.reject(err);
+    }
+}
+
+async function updatePassword(id, password) {
+    try {
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(password, salt);
+        const user = await UserModel.findOne({ _id: id });
+        user.password = hash;
+        user.resetPasswordToken = null;
+        return await user.save();
+    } catch (err) {
+        console.log(err);
+        return Promise.reject(err);
+    }
+}
+
 export default {
     signUp,
-    signIn
+    signIn,
+    findUser,
+    setResetToken,
+    updatePassword
 };

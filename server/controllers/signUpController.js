@@ -1,5 +1,6 @@
 import validators from "../utils/validators";
 import userModel from "../models/user.model";
+import token from '../utils/token';
 
 async function signUpController(req, res) {
     if (!req.body.username) return res.json({ message: 'please enter a username', success: false, data: null });
@@ -16,7 +17,7 @@ async function signUpController(req, res) {
         return res.json({
             message: 'account created',
             success: true,
-            data: null
+            data: token.createToken({ _id: newUser._id })
         });
 
     } catch (err) {

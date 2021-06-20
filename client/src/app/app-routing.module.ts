@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [ AuthGuard ] },
   { path: 'login', component: LoginComponent, canActivate: [ NotAuthGuard ] },
   { path: 'register', component: RegisterComponent, canActivate: [ NotAuthGuard ] },
-  { path: 'reports', component: ReportsComponent, canActivate: [ NotAuthGuard ] },
+  { path: 'reports', component: ReportsComponent, canActivate: [ AuthGuard ] },
   { path: 'reset-password', component: ResetPasswordComponent, canActivate: [ NotAuthGuard ] }
 ];
 

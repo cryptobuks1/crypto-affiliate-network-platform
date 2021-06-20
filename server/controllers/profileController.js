@@ -1,10 +1,10 @@
-function profileController(req, res) {
-    console.log(req.session);
+import userModel from "../models/user.model";
 
+async function profileController(req, res) {
     return res.json({
         message: 'Profile',
         success: true,
-        data: null
+        data: await userModel.findUser({ _id: req.session.uid })
     });
 }
 

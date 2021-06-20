@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent implements OnInit {
-
+  public navState: boolean = false;
   constructor(
     private router: Router,
     public authService: AuthService) { }

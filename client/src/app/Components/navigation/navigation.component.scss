@@ -1,3 +1,16 @@
+.toggle-nav {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 1rem 0 0 1rem;
+    transition: left 225ms linear;
+    
+    &.open {
+        left: 300px;
+    }
+}
+
 nav {
     background-color: #333;
     border-right: 1px solid #FFD700;
@@ -7,14 +20,14 @@ nav {
     padding: 100px 0;
     
     img {
-        width: 75%;
+        width: calc(300px * .75);
         margin: 0 auto;
         display: block;
     }
 
     .links {
         padding: 50px 0;
-        
+        width: 300px;
         a {
             width: 75%;
             display: block;
@@ -29,6 +42,27 @@ nav {
             &:hover {
                 background-color: rgb(48, 48, 48);
             }
+        }
+    }
+}
+
+@media only screen and(max-width: 1200px) {
+    .toggle-nav {
+        display: block;
+        z-index: 10;
+    }
+
+    nav {
+        position: fixed;
+        width: 0;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 10;
+        transition: width 225ms linear;
+
+        &.open {
+            width: 300px;
+            pointer-events: auto;
         }
     }
 }
