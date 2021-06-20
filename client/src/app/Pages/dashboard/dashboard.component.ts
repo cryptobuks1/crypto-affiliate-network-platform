@@ -23,17 +23,19 @@ export class DashboardComponent implements OnInit {
 
   profile(): void {
     this.httpService.profile().subscribe((response: iHttpResponse) => {
-      if(!response.success) {
-        localStorage.removeItem('token');
-        this.router.navigate(['/login'])
-      } else {
         this.user = response.data;
-      }
     })
   }
 
   fetchPrices(): void {
     this.httpService.prices()
     .subscribe(response => console.log(response));
+  }
+  
+  affiliateLink(): string {
+    console.log(this.user);
+    console.log(window.location);
+
+    return `${window.location.origin}/register?ref=${this.user.affiliateCode}`
   }
 }

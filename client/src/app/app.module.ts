@@ -15,6 +15,7 @@ import { ResetPasswordComponent } from './Pages/auth/reset-password/reset-passwo
 import { AlertsComponent } from './Components/alerts/alerts.component';
 import { ModalComponent } from './Components/modal/modal.component';
 import { NewsTickerComponent } from './Components/news-ticker/news-ticker.component';
+import { ClaimBuyComponent } from './Pages/claim-buy/claim-buy.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { NewsTickerComponent } from './Components/news-ticker/news-ticker.compon
     ResetPasswordComponent,
     AlertsComponent,
     ModalComponent,
-    NewsTickerComponent
+    NewsTickerComponent,
+    ClaimBuyComponent
   ], 
   imports: [
     BrowserModule,

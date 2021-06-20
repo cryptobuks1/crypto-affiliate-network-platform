@@ -10,6 +10,7 @@ import { LoginComponent } from './Pages/auth/login/login.component';
 import { RegisterComponent } from './Pages/auth/register/register.component';
 import { ReportsComponent } from './Pages/reports/reports.component';
 import { ResetPasswordComponent } from './Pages/auth/reset-password/reset-password.component';
+import { ClaimBuyComponent } from './Pages/claim-buy/claim-buy.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [ AuthGuard ] },
   { path: 'login', component: LoginComponent, canActivate: [ NotAuthGuard ] },
   { path: 'register', component: RegisterComponent, canActivate: [ NotAuthGuard ] },
+  { path: 'claim-buy', component: ClaimBuyComponent, canActivate: [ AuthGuard ]},
   { path: 'reports', component: ReportsComponent, canActivate: [ AuthGuard ] },
   { path: 'reset-password', component: ResetPasswordComponent, canActivate: [ NotAuthGuard ] }
 ];

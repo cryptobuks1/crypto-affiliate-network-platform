@@ -15,9 +15,7 @@ export class HttpService {
     private authService: AuthService) {}
 
   headers(): any  {
-    return {
-      'Authorization': this.authService.getToken()
-    }
+    return { 'Authorization': this.authService.getToken() }
   }
 
   login(data: any): Observable<iHttpResponse> {
@@ -29,9 +27,7 @@ export class HttpService {
   }
 
   profile(): Observable<iHttpResponse> {
-    return this.httpClient.get<iHttpResponse>(`${this.serverAddr}/users/profile`, { 
-      headers: this.headers() 
-    });
+    return this.httpClient.get<iHttpResponse>(`${this.serverAddr}/users/profile`, { headers: this.headers() });
   }
 
   prices(): Observable<any> {

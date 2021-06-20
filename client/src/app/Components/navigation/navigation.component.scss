@@ -1,3 +1,5 @@
+$navWidth: 340px;
+
 .toggle-nav {
     display: none;
     position: fixed;
@@ -7,37 +9,38 @@
     transition: left 225ms linear;
     
     &.open {
-        left: 300px;
+        left: $navWidth;
     }
 }
 
 nav {
     background-color: #333;
     border-right: 1px solid #FFD700;
-    width: 300px;
+    width: $navWidth;
     height: 100%;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     padding: 100px 0;
     
     img {
-        width: calc(300px * .75);
+        width: calc(#{$navWidth} * .75);
         margin: 0 auto;
         display: block;
     }
 
     .links {
         padding: 50px 0;
-        width: 300px;
+        width: $navWidth;
         a {
             width: 75%;
             display: block;
             text-align: center;
             margin: 0 auto 1rem auto;
             text-decoration: none;
-            padding: .75rem;
+            padding: 1rem .75rem;
             background-color: rgb(44, 44, 44);
             color: #FFD700;
             cursor: pointer;
+            border-radius: 1rem;
 
             &:hover {
                 background-color: rgb(48, 48, 48);
@@ -61,7 +64,7 @@ nav {
         transition: width 225ms linear;
 
         &.open {
-            width: 300px;
+            width: $navWidth;
             pointer-events: auto;
         }
     }

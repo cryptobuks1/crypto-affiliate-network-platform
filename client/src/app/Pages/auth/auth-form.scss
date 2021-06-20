@@ -60,21 +60,6 @@
                 display: block;
                 margin-bottom: 8px;
             }
-
-            input[type=text], 
-            input[type=password],
-            input[type=email] {
-                width: 100%;
-                padding: .6rem;
-                border: 1px solid rgb(231, 231, 231);
-                outline: none;
-                border-radius: .33rem;
-                transition: all 200ms linear;
-                
-                &:focus {
-                    box-shadow: 0 0 0 0.25rem rgb(82 82 82 / 36%);
-                }
-            }
         }
 
         button {
@@ -86,7 +71,7 @@
             background-color: #333333;
             color: #FFD700;
             cursor: pointer;
-
+            border-radius: 1rem;
             &:hover {
                 background-color: rgb(65, 65, 65);
             }

@@ -32,28 +32,44 @@ const userSchema = new Schema({
     resetPasswordToken: {
         type: String,
         default: null
-    }
+    },
+    referrals: [{ type: Schema.Types.ObjectId, ref: 'User' }]
 });
 
 const UserModel = mongoose.model('User', userSchema);
 
 async function signUp(data) {
-    try {
-        const salt = bcrypt.genSaltSync(10);
-        const hash = bcrypt.hashSync(data.password, salt);
+    console.log(data);
+    if (data.referralCode != undefined || data.referralCode != null && data.referralCode.length > 0) {
+        const referer = await UserModel.findOne({ affiliateCode: data.referralCode });
 
-        return await new UserModel({
-            username: data.username,
-            password: hash,
-            email: data.email,
-            affiliateCode: randStr(15),
-            referralCode: data.referralCode || 'empty',
-            tos: data.tos || false
-        }).save();
+        try {
+            const salt = bcrypt.genSaltSync(10);
+            const hash = bcrypt.hashSync(data.password, salt);
 
-    } catch (err) {
-        return Promise.reject('sign up failed');
+            const user = await new UserModel({
+                username: data.username,
+                password: hash,
+                email: data.email,
+                affiliateCode: randStr(15),
+                referralCode: data.referralCode || 'empty',
+                tos: data.tos || false
+            }).save();
+
+            if (referer != null) {
+                referer.referrals.push(user._id);
+                await referer.save();
+            }
+
+            return Promise.resolve(user);
+
+        } catch (err) {
+            return Promise.reject('sign up failed');
+        }
+
     }
+
+    return Promise.reject('hang tight...');
 }
 
 async function signIn(data) {
