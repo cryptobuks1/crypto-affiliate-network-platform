@@ -13,6 +13,7 @@ import { HomeComponent } from './Pages/home/home.component';
 import { NavigationComponent } from './Components/navigation/navigation.component';
 import { ResetPasswordComponent } from './Pages/auth/reset-password/reset-password.component';
 import { AlertsComponent } from './Components/alerts/alerts.component';
+import { ModalComponent } from './Components/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AlertsComponent } from './Components/alerts/alerts.component';
     HomeComponent,
     NavigationComponent,
     ResetPasswordComponent,
-    AlertsComponent
+    AlertsComponent,
+    ModalComponent
   ], 
   imports: [
     BrowserModule,

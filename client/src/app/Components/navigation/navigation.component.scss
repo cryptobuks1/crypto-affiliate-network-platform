@@ -1,6 +1,6 @@
 nav {
-    background-color: rgb(255, 255, 255);
-    border-right: 1px solid #eeeeee;
+    background-color: #333;
+    border-right: 1px solid #FFD700;
     width: 300px;
     height: 100%;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
@@ -22,12 +22,12 @@ nav {
             margin: 0 auto 1rem auto;
             text-decoration: none;
             padding: .75rem;
-            background-color: #333;
+            background-color: rgb(44, 44, 44);
             color: #FFD700;
             cursor: pointer;
 
             &:hover {
-                background-color: rgb(65, 65, 65);
+                background-color: rgb(48, 48, 48);
             }
         }
     }

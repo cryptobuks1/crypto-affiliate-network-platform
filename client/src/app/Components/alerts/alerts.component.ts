@@ -8,12 +8,17 @@ import { iAlert } from 'src/app/Interfaces/alert.interface';
   styleUrls: ['./alerts.component.scss']
 })
 export class AlertsComponent implements OnInit {
-  public alert: iAlert = { text: '', error: false };
+  public alert: iAlert = { text: 'Big Error!', type: 'error', show: false };
 
   constructor(private alertsStoreService: AlertsStoreService) { }
 
   ngOnInit(): void {
     this.alertsStoreService.getAlert()
-      .subscribe((alert: iAlert) => this.alert = alert);
+      .subscribe((alert: iAlert) => {
+        this.alert = alert;
+        setTimeout(() => {
+          alert.show = false;
+        }, 3000);
+      });
   }
 }

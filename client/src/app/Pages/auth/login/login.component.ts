@@ -36,7 +36,8 @@ export class LoginComponent implements OnInit {
       
       this.alertsStoreService.setAlert({ 
         text: response.message, 
-        error: !response.success 
+        type: `${!response.success ? 'error' : 'success'}`,
+        show: true  
       });
 
       if(response.success) {

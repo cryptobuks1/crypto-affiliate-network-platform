@@ -1,0 +1,32 @@
+.alert {
+    position: absolute;
+    width: 100%;
+    padding: 1rem;
+    width: 100%;
+    top: 0;
+    left: 0;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    transition: all 200ms ease;
+
+    &.error {
+        background-color: rgb(248, 197, 207);
+    }
+
+    &.success {
+        background-color: rgb(205, 247, 219);
+    }
+
+    &.info {
+        background-color: rgb(182, 233, 248);
+    }
+
+    &.hide {
+        transform: translateY(500px);
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    &.show {
+        transform: translateY(0)
+    }
+}

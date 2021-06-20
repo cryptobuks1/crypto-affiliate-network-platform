@@ -37,7 +37,8 @@ export class RegisterComponent implements OnInit {
     }).subscribe(response => {
       this.alertsStoreService.setAlert({
         text: response.message,
-        error: !response.success
+        type: `${!response.success ? 'error' : 'success'}`,
+        show: true
       });
     });
   }

@@ -1,4 +1,5 @@
 export interface iAlert {
     text: string;
-    error: boolean;
+    type: string;
+    show: boolean;
 }
