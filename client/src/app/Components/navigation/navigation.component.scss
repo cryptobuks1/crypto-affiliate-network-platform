@@ -1,4 +1,4 @@
-$navWidth: 340px;
+@import '../components.scss';
 
 .toggle-nav {
     display: none;
@@ -53,6 +53,14 @@ nav {
     .toggle-nav {
         display: block;
         z-index: 10;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: none;
+        background-color: #333;
+        color: #FFD700;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        cursor: pointer;
     }
 
     nav {

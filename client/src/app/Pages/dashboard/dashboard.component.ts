@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from 'src/app/Services/http.service';
-import { iHttpResponse } from 'src/app/Interfaces/http.interface';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,33 +6,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.component.scss', '../page.scss']
 })
 export class DashboardComponent implements OnInit {
-  public user: any = {};
-  
-  constructor(
-    private router: Router,
-    private httpService: HttpService
-  ) { }
 
-  ngOnInit(): void {
-    this.profile();
-    this.fetchPrices();
-  }
-
-  profile(): void {
-    this.httpService.profile().subscribe((response: iHttpResponse) => {
-        this.user = response.data;
-    })
-  }
-
-  fetchPrices(): void {
-    this.httpService.prices()
-    .subscribe(response => console.log(response));
+  constructor() {
+    window.addEventListener('resize', this.fixPadding);
   }
   
-  affiliateLink(): string {
-    console.log(this.user);
-    console.log(window.location);
+  ngOnInit() {
+    this.fixPadding();
+  }
 
-    return `${window.location.origin}/register?ref=${this.user.affiliateCode}`
+  fixPadding(): void {
+    let content = document.querySelector<Element>('.dashboard-content') as HTMLElement;
+    let dashboardNav: Element | null = document.querySelector<Element>('.dashboard-nav');
+
+    if(content != null && dashboardNav != null) {
+      content.style.paddingTop = dashboardNav.getBoundingClientRect().height + 'px';
+    }
   }
 }

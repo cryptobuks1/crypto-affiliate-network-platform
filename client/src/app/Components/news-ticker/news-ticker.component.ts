@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'news-ticker',
@@ -6,9 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./news-ticker.component.scss']
 })
 export class NewsTickerComponent implements OnInit {
+  @Input() priceData: any;
+
   constructor() { }
 
-  ngOnInit(): void {  }
+  ngOnInit(): void {
+    setTimeout(() => console.log(this.priceData), 3000)
+  }
 
-
+  round(n: number): number {
+    console.log(Math.round(n));
+    return n;
+  }
 }

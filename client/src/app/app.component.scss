@@ -5,7 +5,8 @@ main {
 
     .main {
         flex-grow: 1;
-        overflow: auto;
+        overflow-y: auto;
         position: relative;
+        overflow-x: hidden;
     }
 }

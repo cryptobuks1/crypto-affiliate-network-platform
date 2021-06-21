@@ -33,7 +33,8 @@ export class LoginComponent implements OnInit {
       password: this.password,
       keepMeLoggedIn: this.keepMeLoggedIn
     }).subscribe(response => {      
-      
+      console.log(response);
+
       this.alertsStoreService.setAlert({ 
         text: response.message, 
         type: `${!response.success ? 'error' : 'success'}`,
@@ -42,7 +43,7 @@ export class LoginComponent implements OnInit {
 
       if(response.success) {
         this.authService.setToken(response.data);
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/dashboard/home']);
       }
     });
   }

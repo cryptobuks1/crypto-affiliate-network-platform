@@ -1,33 +1,8 @@
 <section class="page container">
-    <h1>Dashboard <span *ngIf="user">{{user.email}}</span></h1>
-    <news-ticker></news-ticker>
+    <app-dashboard-nav></app-dashboard-nav>
 
-    <div class="dashboard-grid">
-        <div class="dashboard-grid-item">
-            <h3>USD 43.00</h3>
-            <p>Withdrawable</p>
-        </div>  
-        <div class="dashboard-grid-item">
-            <h3>USD 124332.42</h3>
-            <p>Locked</p>
-        </div>
-        <div class="dashboard-grid-item">
-
-        </div>
-        <div class="dashboard-grid-item">
-
-        </div>
-        <div class="dashboard-grid-item">
-
-        </div>
-        <div class="dashboard-grid-item invite-friends">
-            <h3>Refer & earn 2% 1% 0.5% 3%</h3>
-            <p>{{ affiliateLink() }}</p>
-            <input type="text" placeholder="Enter email">
-            <button>Invite Friend</button>
-        </div>
-        <div class="dashboard-grid-item">
-
-        </div>
+    <div class="dashboard-content">
+        <h1 class="page-title">Dashboard</h1>
+        <router-outlet></router-outlet>
     </div>
 </section>

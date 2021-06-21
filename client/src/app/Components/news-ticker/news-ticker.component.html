@@ -1,2 +1,6 @@
-<section class="news-ticker">
+<section class="news-ticker" *ngIf="priceData">
+    <div class="holder">
+        <p>USD/BNB Gold {{ round(priceData.price) }}</p>
+        <p>USD/BNB {{ round(priceData.price_BNB) }}</p>
+    </div>
 </section>

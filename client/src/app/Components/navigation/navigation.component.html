@@ -1,5 +1,5 @@
 <nav [ngClass]="{ 'open': navState }">
-    <img src="/assets/BNBG-1.png" alt="">
+    <img src="/assets/img/BNBG-1.png" alt="">
 
     <div class="links">    
         <div *ngIf="!authService.loggedIn()">
@@ -8,9 +8,9 @@
         </div>
     
         <div *ngIf="authService.loggedIn()">
-            <a routerLink="/dashboard">Dashboard</a>
-            <a routerLink="/claim-buy">Buy & Claim BNBG</a>
-            <a routerLink="/reports">Affiliate Reports</a>
+            <a routerLink="/dashboard/home">Dashboard</a>
+            <a routerLink="/dashboard/claim-buy">Buy & Claim BNBG</a>
+            <a routerLink="/dashboard/reports">Affiliate Reports</a>
             <a (click)="logout()">Logout</a>
         </div>
 
@@ -20,4 +20,7 @@
     </div>
 </nav>
 
-<button class="toggle-nav" [ngClass]="{ 'open': navState }" (click)="navState = !navState ? true : false">Toggle Nav</button>
+<button class="toggle-nav" [ngClass]="{ 'open': navState }" (click)="navState = !navState ? true : false">
+    <span class="material-icons" *ngIf="!navState">menu</span>
+    <span class="material-icons" *ngIf="navState">close</span>
+</button>

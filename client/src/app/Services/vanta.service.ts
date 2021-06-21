@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 
 declare var VANTA: any;
 
-
 @Injectable({
   providedIn: 'root'
 })

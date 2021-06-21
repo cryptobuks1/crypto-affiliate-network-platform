@@ -1,0 +1,36 @@
+.news-ticker {
+    background-color: #333;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin: 1rem 0;
+    overflow: hidden;
+    height: 50px;
+
+    .holder {
+        animation: move 25s linear infinite normal;
+        display: flex;
+
+        p {
+            color: #FFD700;
+            white-space: nowrap;        
+            &:not(:last-of-type) {
+                &::after {
+                    content: '|';
+                    margin: 0 1rem;
+                    display: inline-block;
+                    color: #fff;
+                }
+            }
+        }
+    }
+}
+
+@keyframes move {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}

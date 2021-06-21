@@ -4,10 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './Pages/dashboard/dashboard.component';
 import { LoginComponent } from './Pages/auth/login/login.component';
 import { RegisterComponent } from './Pages/auth/register/register.component';
-import { ReportsComponent } from './Pages/reports/reports.component';
 import { ContactComponent } from './Pages/contact/contact.component';
 import { HomeComponent } from './Pages/home/home.component';
 import { NavigationComponent } from './Components/navigation/navigation.component';
@@ -15,12 +13,18 @@ import { ResetPasswordComponent } from './Pages/auth/reset-password/reset-passwo
 import { AlertsComponent } from './Components/alerts/alerts.component';
 import { ModalComponent } from './Components/modal/modal.component';
 import { NewsTickerComponent } from './Components/news-ticker/news-ticker.component';
-import { ClaimBuyComponent } from './Pages/claim-buy/claim-buy.component';
+
+
+import { DashboardComponent } from './Pages/dashboard/dashboard.component';
+import { ClaimBuyComponent } from './Pages/dashboard/claim-buy/claim-buy.component';
+import { DashboardHomeComponent } from './Pages/dashboard/home/dashboard.component';
+import { ReportsComponent } from './Pages/dashboard/reports/reports.component';
+import { DashboardNavComponent } from './Components/dashboard-nav/dashboard-nav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
+    DashboardHomeComponent,
     LoginComponent,
     RegisterComponent,
     ReportsComponent,
@@ -31,7 +35,9 @@ import { ClaimBuyComponent } from './Pages/claim-buy/claim-buy.component';
     AlertsComponent,
     ModalComponent,
     NewsTickerComponent,
-    ClaimBuyComponent
+    ClaimBuyComponent,
+    DashboardComponent,
+    DashboardNavComponent
   ], 
   imports: [
     BrowserModule,

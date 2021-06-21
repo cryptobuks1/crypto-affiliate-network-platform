@@ -54,7 +54,7 @@ export class RegisterComponent implements OnInit {
       
       if(response.success) {
         this.authService.setToken(response.data);
-        this.router.navigate(['/dashboard'])
+        this.router.navigate(['/dashboard/home'])
       }
     });
   }

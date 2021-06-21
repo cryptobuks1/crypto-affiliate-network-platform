@@ -4,10 +4,10 @@ import fs from 'fs';
 function createToken(data) {
     const key = fs.readFileSync('./utils/key.pem');
 
-    return jwt.sign({
-        data: data,
-        exp: Math.floor(Date.now() / 1000) + (60 * 24)
-    }, key, { algorithm: 'RS256' });
+    return jwt.sign({ data: data }, key, {
+        algorithm: 'RS256',
+        expiresIn: '12h'
+    });
 }
 
 function validateToken(token) {

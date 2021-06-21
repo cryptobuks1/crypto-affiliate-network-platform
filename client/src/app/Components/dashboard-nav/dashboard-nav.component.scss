@@ -1,0 +1,23 @@
+@import '../components.scss';
+
+nav {
+    position: fixed;
+    top: 0;
+    left: $navWidth;
+    background-color: #333;
+    width: calc(100% - #{$navWidth});
+    padding: 1rem 0;
+    color: #FFD700;
+    z-index: 2;
+    .container {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+@media only screen and(max-width: 1200px) {
+    nav {
+        left: 0;
+        width: 100%;
+    }
+}
