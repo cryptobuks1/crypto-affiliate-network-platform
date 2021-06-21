@@ -1,12 +1,36 @@
 <form>
-    <section>
-        <label>Amount USD</label>
-        <input type="number">
-    </section>
-    <section>
-        <label>Proof</label>
-        <input type="file">
-    </section>
-
-    <button>Submit Request</button>
+  <section>
+    <label>Amount in USD</label>
+    <input type="number" [(ngModel)]="amount" name="amount" placeholder="25" />
+  </section>
+  <section>
+    <label>Transaction Hash</label>
+    <input
+      type="text"
+      [(ngModel)]="transactionHash"
+      name="transactionHash"
+      placeholder="0x4d6e11e54d0fca5cfbb1aa86649866c9a78cf2da9f67e889ffaefb4d6623e08f"
+    />
+  </section>
+  <section>
+    <label>Proof</label>
+    <input
+      type="file"
+      (change)="upload($event)"
+      accept="image/jpeg, image/jpg, image/png"
+      #files
+      multiple
+    />
+  </section>
+  <section *ngIf="uploaded.length > 0">
+    <label>Files</label>
+    <div class="images">
+      <img
+        *ngFor="let img of uploaded"
+        [src]="getURL(img)"
+        alt="Uploaded Image"
+      />
+    </div>
+  </section>
+  <button (click)="submit()">Submit Request</button>
 </form>

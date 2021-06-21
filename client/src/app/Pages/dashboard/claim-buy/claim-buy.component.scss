@@ -1,25 +1,34 @@
 form {
-    section {
-        margin: 1.5rem 0;
+  section {
+    margin: 1.5rem 0;
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-        }
+    label {
+      display: block;
+      margin-bottom: 8px;
     }
 
-    button {
-        display: block;
-        margin: 0 0 0 auto;
-        padding: .75rem;
-        border: none;
-        border-radius: .6rem;
-        background-color: #333;
-        color: #FFD700;
-        cursor: pointer;
+    .images {
+      display: flex;
+      flex-wrap: wrap;
 
-        &:hover {
-            background-color: rgb(68, 68, 68);
-        }
+      img {
+        max-height: 200px;
+      }
     }
+  }
+
+  button {
+    display: block;
+    margin: 0 0 0 auto;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 0.6rem;
+    background-color: #333;
+    color: #ffd700;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgb(68, 68, 68);
+    }
+  }
 }

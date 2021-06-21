@@ -3,12 +3,12 @@ import { Observable, Subject } from 'rxjs';
 import { iAlert } from 'src/app/Interfaces/alert.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AlertsStoreService {
   private alertsStore = new Subject<iAlert>();
 
-  constructor() { }
+  constructor() {}
 
   public setAlert(alert: iAlert) {
     return this.alertsStore.next(alert);

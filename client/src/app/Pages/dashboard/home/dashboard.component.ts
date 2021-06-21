@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from 'src/app/Services/http.service';
+import { HttpServiceAuth, HttpService } from 'src/app/Services/http.service';
 import { iHttpResponse } from 'src/app/Interfaces/http.interface';
 
 
@@ -13,7 +13,9 @@ export class DashboardHomeComponent implements OnInit {
   public user: any = {};
   private __ngContext__: any;
 
-  constructor(private httpService: HttpService) {}
+  constructor(
+    private httpService: HttpService,
+    private httpServiceAuth: HttpServiceAuth) {}
 
   ngOnInit(): void {
     this.profile();
@@ -22,7 +24,7 @@ export class DashboardHomeComponent implements OnInit {
   }
 
   profile(): void {
-    this.httpService.profile().subscribe((response: iHttpResponse) => {
+    this.httpServiceAuth.profile().subscribe((response: iHttpResponse) => {
         this.user = response.data;
     });
   }

@@ -14,7 +14,6 @@ import { AlertsComponent } from './Components/alerts/alerts.component';
 import { ModalComponent } from './Components/modal/modal.component';
 import { NewsTickerComponent } from './Components/news-ticker/news-ticker.component';
 
-
 import { DashboardComponent } from './Pages/dashboard/dashboard.component';
 import { ClaimBuyComponent } from './Pages/dashboard/claim-buy/claim-buy.component';
 import { DashboardHomeComponent } from './Pages/dashboard/home/dashboard.component';
@@ -37,15 +36,10 @@ import { DashboardNavComponent } from './Components/dashboard-nav/dashboard-nav.
     NewsTickerComponent,
     ClaimBuyComponent,
     DashboardComponent,
-    DashboardNavComponent
-  ], 
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule
+    DashboardNavComponent,
   ],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

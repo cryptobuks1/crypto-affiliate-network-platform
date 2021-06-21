@@ -12,6 +12,21 @@ nav {
     .container {
         display: flex;
         justify-content: flex-end;
+
+        a {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            padding: .7rem 2rem;
+            background-color: rgb(44, 44, 44);
+            color: #FFD700;
+            cursor: pointer;
+            border-radius: 1rem;
+
+            &:hover {
+                background-color: rgb(48, 48, 48);
+            }
+        }
     }
 }
 

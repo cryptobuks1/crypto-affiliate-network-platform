@@ -18,26 +18,32 @@ import { ReportsComponent } from './Pages/dashboard/reports/reports.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'contact', component: ContactComponent },
-  { path: 'login', component: LoginComponent, canActivate: [ NotAuthGuard ] },
-  { path: 'register', component: RegisterComponent, canActivate: [ NotAuthGuard ] },
-  { path: 'reset-password', component: ResetPasswordComponent, canActivate: [ NotAuthGuard ] },
-  
-  { 
-    path: 'dashboard', 
-    component: DashboardComponent, 
-    canActivate: [ AuthGuard ],
+  { path: 'login', component: LoginComponent, canActivate: [NotAuthGuard] },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    canActivate: [NotAuthGuard],
+  },
+  {
+    path: 'reset-password',
+    component: ResetPasswordComponent,
+    canActivate: [NotAuthGuard],
+  },
+
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: 'home', component: DashboardHomeComponent },
       { path: 'claim-buy', component: ClaimBuyComponent },
       { path: 'reports', component: ReportsComponent },
-    ]
-  }
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-
-export class AppRoutingModule { }
- 
+export class AppRoutingModule {}

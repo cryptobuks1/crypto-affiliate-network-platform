@@ -5,40 +5,84 @@ import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HttpService {
   private serverAddr: string = 'http://localhost:3000/api';
 
-  constructor(
-    private httpClient: HttpClient,
-    private authService: AuthService) {}
-
-  headers(): any  {
-    return { 'Authorization': this.authService.getToken() }
-  }
+  constructor(private httpClient: HttpClient) {}
 
   login(data: any): Observable<iHttpResponse> {
-      return this.httpClient.post<iHttpResponse>(`${this.serverAddr}/sign-in`, data);
+    return this.httpClient.post<iHttpResponse>(
+      `${this.serverAddr}/sign-in`,
+      data
+    );
   }
 
   register(data: any): Observable<iHttpResponse> {
-    return this.httpClient.post<iHttpResponse>(`${this.serverAddr}/sign-up`, data);
-  }
-
-  profile(): Observable<iHttpResponse> {
-    return this.httpClient.get<iHttpResponse>(`${this.serverAddr}/users/profile`, { headers: this.headers() });
+    return this.httpClient.post<iHttpResponse>(
+      `${this.serverAddr}/sign-up`,
+      data
+    );
   }
 
   prices(): Observable<any> {
-    return this.httpClient.get<any>('https://api.pancakeswap.info/api/v2/tokens/0x6509c95b1ac498390e40eb49e2248c441e78da15');
+    return this.httpClient.get<any>(
+      'https://api.pancakeswap.info/api/v2/tokens/0x6509c95b1ac498390e40eb49e2248c441e78da15'
+    );
   }
 
   requestToken(data: any): Observable<iHttpResponse> {
-    return this.httpClient.put<iHttpResponse>(`${this.serverAddr}/reset-password`, data);
+    return this.httpClient.put<iHttpResponse>(
+      `${this.serverAddr}/reset-password`,
+      data
+    );
   }
 
   updatePassword(data: any): Observable<iHttpResponse> {
-    return this.httpClient.put<iHttpResponse>(`${this.serverAddr}/update-password`, data);
+    return this.httpClient.put<iHttpResponse>(
+      `${this.serverAddr}/update-password`,
+      data
+    );
+  }
+}
+
+@Injectable({
+  providedIn: 'root',
+})
+export class HttpServiceAuth {
+  private serverAddr: string = 'http://localhost:3000/api/users';
+
+  constructor(
+    private httpClient: HttpClient,
+    private authService: AuthService
+  ) {}
+
+  headers(): any {
+    return { Authorization: this.authService.getToken() };
+  }
+
+  profile(): Observable<iHttpResponse> {
+    return this.httpClient.get<iHttpResponse>(`${this.serverAddr}/profile`, {
+      headers: this.headers(),
+    });
+  }
+
+  upload(data: FormData): Observable<iHttpResponse> {
+    return this.httpClient.post<iHttpResponse>(
+      `${this.serverAddr}/upload`,
+      data,
+      { headers: this.headers() }
+    );
+  }
+
+  requestMoney(data: any): Observable<iHttpResponse> {
+    return this.httpClient.post<iHttpResponse>(
+      `${this.serverAddr}/request-money`,
+      data,
+      {
+        headers: this.headers(),
+      }
+    );
   }
 }
