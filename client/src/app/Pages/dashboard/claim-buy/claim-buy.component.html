@@ -12,25 +12,30 @@
       placeholder="0x4d6e11e54d0fca5cfbb1aa86649866c9a78cf2da9f67e889ffaefb4d6623e08f"
     />
   </section>
-  <section>
-    <label>Proof</label>
-    <input
-      type="file"
-      (change)="upload($event)"
-      accept="image/jpeg, image/jpg, image/png"
-      #files
-      multiple
-    />
-  </section>
   <section *ngIf="uploaded.length > 0">
     <label>Files</label>
     <div class="images">
       <img
-        *ngFor="let img of uploaded"
+        title="Remove image"
+        *ngFor="let img of uploaded; let i = index"
         [src]="getURL(img)"
         alt="Uploaded Image"
+        (click)="uploaded.splice(i, 1)"
       />
     </div>
   </section>
-  <button (click)="submit()">Submit Request</button>
+  <div class="actions">
+    <button (click)="files.click()" class="file-upload-btn">
+      Select Files <span class="material-icons">upload_file</span>
+    </button>
+    <button class="submit-request" (click)="submit()">Submit Request</button>
+  </div>
 </form>
+
+<input
+  type="file"
+  (change)="upload($event)"
+  accept="image/jpeg, image/jpg, image/png"
+  #files
+  multiple
+/>

@@ -23,14 +23,24 @@ async function requestMoney(req, res) {
     });
   }
 
-  req.body.requestedBy = req.session.uid;
-
   try {
-    const result = await requestsModel.newRequest(req.body);
-    console.log(result);
-  } catch (err) {
+    const result = await requestsModel.newRequest({
+      requestedBy: req.session.uid,
+      ...req.body,
+    });
     return res.json({
-      message: "something went wrong",
+      message: "your request has been received",
+      success: true,
+      data: result,
+    });
+  } catch (err) {
+    console.log(err);
+    return res.json({
+      message: `${
+        err.code === 11000
+          ? "your request has already been received"
+          : "something went wrong"
+      }`,
       success: false,
       data: null,
     });

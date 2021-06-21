@@ -1,7 +1,10 @@
 <nav class="dashboard-nav">
-    <div class="container">
-        <div>
-            <a>Account Settings</a>
-        </div>
+  <div class="container">
+    <div>
+      <a routerLink="/dashboard/administration" *ngIf="isAdmin"
+        >Administration</a
+      >
+      <a routerLink="/dashboard/account-settings">Account Settings</a>
     </div>
+  </div>
 </nav>

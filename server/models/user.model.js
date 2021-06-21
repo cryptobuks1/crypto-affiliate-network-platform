@@ -19,17 +19,31 @@ const userSchema = new Schema({
   },
   createdAt: {
     type: Date,
-    default: Date.now(),
+    default: new Date(),
   },
   updatedAt: {
     type: Date,
-    default: Date.now(),
+    default: new Date(),
+  },
+  balance: {
+    type: Number,
+    default: 0,
+  },
+  administrator: {
+    type: Boolean,
+    default: false,
+  },
+  pendingBalance: {
+    type: Number,
+    default: 0,
   },
   referralCode: {
+    // who was the user referred by
     type: String,
-    default: "",
+    default: null,
   },
   affiliateCode: {
+    // the code users will sign up with to give this user a percentage
     type: String,
     required: true,
   },
@@ -65,7 +79,7 @@ async function signUp(data) {
         password: hash,
         email: data.email,
         affiliateCode: randStr(15),
-        referralCode: data.referralCode || "empty",
+        referralCode: data.referralCode || null,
         tos: data.tos || false,
       }).save();
 
@@ -108,6 +122,14 @@ async function findUser(filter) {
   }
 }
 
+async function findUsers(filter) {
+  try {
+    return UserModel.find(filter).select({ password: 0 }).exec();
+  } catch (err) {
+    return Promise.reject(err);
+  }
+}
+
 async function setResetToken(filter, update) {
   try {
     const user = await UserModel.findOne(filter);
@@ -132,10 +154,20 @@ async function updatePassword(id, password) {
   }
 }
 
+async function updateUser(id, update) {
+  try {
+    return await UserModel.findOneAndUpdate(id, update);
+  } catch (err) {
+    return Promise.reject(err);
+  }
+}
+
 export default {
   signUp,
   signIn,
   findUser,
   setResetToken,
   updatePassword,
+  updateUser,
+  findUsers,
 };

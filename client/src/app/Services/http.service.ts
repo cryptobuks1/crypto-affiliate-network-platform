@@ -32,6 +32,13 @@ export class HttpService {
     );
   }
 
+  validateHash(hash: string): Observable<any> {
+    const apiKey = '7BDRK3QQ5BQQRY2IXP4EMIESQVGJGGB6DD';
+    return this.httpClient.get(
+      `https://api.bscscan.com/api?module=transaction&action=gettxreceiptstatus&txhash=${hash}&apikey=${apiKey}`
+    );
+  }
+
   requestToken(data: any): Observable<iHttpResponse> {
     return this.httpClient.put<iHttpResponse>(
       `${this.serverAddr}/reset-password`,
@@ -84,5 +91,20 @@ export class HttpServiceAuth {
         headers: this.headers(),
       }
     );
+  }
+
+  myReferrals(): Observable<iHttpResponse> {
+    return this.httpClient.get<iHttpResponse>(
+      `${this.serverAddr}/my-referrals`,
+      {
+        headers: this.headers(),
+      }
+    );
+  }
+
+  isAdmin(): Observable<iHttpResponse> {
+    return this.httpClient.get<iHttpResponse>(`${this.serverAddr}/is-admin`, {
+      headers: this.headers(),
+    });
   }
 }

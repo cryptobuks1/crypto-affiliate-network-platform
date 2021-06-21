@@ -1,38 +1,42 @@
-@import '../components.scss';
+@import "../components.scss";
 
 nav {
-    position: fixed;
-    top: 0;
-    left: $navWidth;
-    background-color: #333;
-    width: calc(100% - #{$navWidth});
-    padding: 1rem 0;
-    color: #FFD700;
-    z-index: 2;
-    .container {
-        display: flex;
-        justify-content: flex-end;
+  position: fixed;
+  top: 0;
+  left: $navWidth;
+  background-color: #333;
+  width: calc(100% - #{$navWidth});
+  padding: 1rem 0;
+  color: #ffd700;
+  z-index: 2;
+  .container {
+    display: flex;
+    justify-content: flex-end;
 
-        a {
-            display: block;
-            text-align: center;
-            text-decoration: none;
-            padding: .7rem 2rem;
-            background-color: rgb(44, 44, 44);
-            color: #FFD700;
-            cursor: pointer;
-            border-radius: 1rem;
+    a {
+      display: inline-block;
+      text-align: center;
+      text-decoration: none;
+      padding: 0.7rem 2rem;
+      background-color: rgb(44, 44, 44);
+      color: #ffd700;
+      cursor: pointer;
+      border-radius: 1rem;
 
-            &:hover {
-                background-color: rgb(48, 48, 48);
-            }
-        }
+      &:not(:last-of-type) {
+        margin-right: 1rem;
+      }
+
+      &:hover {
+        background-color: rgb(48, 48, 48);
+      }
     }
+  }
 }
 
 @media only screen and(max-width: 1200px) {
-    nav {
-        left: 0;
-        width: 100%;
-    }
+  nav {
+    left: 0;
+    width: 100%;
+  }
 }

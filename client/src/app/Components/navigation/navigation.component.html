@@ -1,26 +1,30 @@
-<nav [ngClass]="{ 'open': navState }">
-    <img src="/assets/img/BNBG-1.png" alt="">
+<nav [ngClass]="{ open: navState }">
+  <img src="/assets/img/BNBG-1.png" alt="" />
 
-    <div class="links">    
-        <div *ngIf="!authService.loggedIn()">
-            <a routerLink="/login">Login</a>
-            <a routerLink="/register">Register</a>
-        </div>
-    
-        <div *ngIf="authService.loggedIn()">
-            <a routerLink="/dashboard/home">Dashboard</a>
-            <a routerLink="/dashboard/claim-buy">Buy & Claim BNBG</a>
-            <a routerLink="/dashboard/reports">Affiliate Reports</a>
-            <a (click)="logout()">Logout</a>
-        </div>
-
-        <div>
-            <a routerLink="/contact">Contact</a>
-        </div>
+  <div class="links">
+    <div *ngIf="!authService.loggedIn()">
+      <a routerLink="/login">Login</a>
+      <a routerLink="/register">Register</a>
     </div>
+
+    <div *ngIf="authService.loggedIn()">
+      <a routerLink="/dashboard/home">Dashboard</a>
+      <a routerLink="/dashboard/claim-buy">Buy & Claim BNBG</a>
+      <a routerLink="/dashboard/reports">Affiliate Reports</a>
+      <a (click)="logout()">Logout</a>
+    </div>
+
+    <div>
+      <a routerLink="/contact">Contact</a>
+    </div>
+  </div>
 </nav>
 
-<button class="toggle-nav" [ngClass]="{ 'open': navState }" (click)="navState = !navState ? true : false">
-    <span class="material-icons" *ngIf="!navState">menu</span>
-    <span class="material-icons" *ngIf="navState">close</span>
+<button
+  class="toggle-nav"
+  [ngClass]="{ open: navState }"
+  (click)="navState = !navState ? true : false"
+>
+  <span class="material-icons" *ngIf="!navState">menu</span>
+  <span class="material-icons" *ngIf="navState">close</span>
 </button>

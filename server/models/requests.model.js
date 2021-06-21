@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import userModel from "./user.model";
 const Schema = mongoose.Schema;
 
 const requestSchema = new Schema({
@@ -10,6 +11,7 @@ const requestSchema = new Schema({
     type: Date,
     default: Date.now(),
   },
+  approved: { type: Boolean, default: false },
   transactionHash: { type: String, required: true, unique: true },
   requestedBy: { type: Schema.Types.ObjectId, ref: "User" },
   proof: { type: Array, required: true },
@@ -20,7 +22,11 @@ const RequestModel = mongoose.model("Request", requestSchema);
 
 async function newRequest(data) {
   try {
-    return await new RequestModel(data).save();
+    const request = await new RequestModel(data).save();
+    const user = await userModel.findUser({ _id: data.requestedBy });
+    user.pendingBalance += data.amount;
+    await user.save();
+    return Promise.resolve(request);
   } catch (err) {
     return Promise.reject(err);
   }

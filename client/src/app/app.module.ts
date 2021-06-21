@@ -19,6 +19,8 @@ import { ClaimBuyComponent } from './Pages/dashboard/claim-buy/claim-buy.compone
 import { DashboardHomeComponent } from './Pages/dashboard/home/dashboard.component';
 import { ReportsComponent } from './Pages/dashboard/reports/reports.component';
 import { DashboardNavComponent } from './Components/dashboard-nav/dashboard-nav.component';
+import { AdministrationComponent } from './Pages/dashboard/administration/administration.component';
+import { AccountSettingsComponent } from './Pages/dashboard/account-settings/account-settings.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { DashboardNavComponent } from './Components/dashboard-nav/dashboard-nav.
     ClaimBuyComponent,
     DashboardComponent,
     DashboardNavComponent,
+    AdministrationComponent,
+    AccountSettingsComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],

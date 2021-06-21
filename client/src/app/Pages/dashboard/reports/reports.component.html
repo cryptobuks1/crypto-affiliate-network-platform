@@ -1,0 +1,9 @@
+<section>
+  <h3>My Referrals ({{ referrals.length }})</h3>
+  <ul>
+    <li *ngFor="let referral of referrals">
+      <p>{{ referral.email }}</p>
+      <p>{{ referral.createdAt | date: "medium" }}</p>
+    </li>
+  </ul>
+</section>

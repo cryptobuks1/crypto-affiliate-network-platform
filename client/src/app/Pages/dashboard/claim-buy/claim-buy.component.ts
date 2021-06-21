@@ -1,22 +1,23 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { iHttpResponse } from 'src/app/Interfaces/http.interface';
-import { HttpServiceAuth } from 'src/app/Services/http.service';
+import { HttpServiceAuth, HttpService } from 'src/app/Services/http.service';
 import { AlertsStoreService } from 'src/app/Store/alerts-store.service';
 
 @Component({
   selector: 'app-claim-buy',
   templateUrl: './claim-buy.component.html',
-  styleUrls: ['./claim-buy.component.scss', '../../page.scss'],
+  styleUrls: ['./claim-buy.component.scss'],
 })
 export class ClaimBuyComponent implements OnInit {
   private __ngContext__: any;
   public uploaded: string[] = [];
-  public amount: string | undefined;
+  public amount: number | undefined;
   public transactionHash: string | undefined;
 
   @ViewChild('files') filesInput: ElementRef | undefined;
 
   constructor(
+    private httpService: HttpService,
     private alertsStoreService: AlertsStoreService,
     private httpServiceAuth: HttpServiceAuth
   ) {}
@@ -31,20 +32,39 @@ export class ClaimBuyComponent implements OnInit {
   }
 
   submit(): void {
-    this.httpServiceAuth
-      .requestMoney({
-        amount: this.amount,
-        transactionHash: this.transactionHash,
-        proof: this.uploaded,
-      })
-      .subscribe((response: iHttpResponse) => {
-        console.log(response);
-        this.alertsStoreService.setAlert({
-          text: response.message,
-          type: `${response.success ? 'success' : 'error'}`,
-          show: true,
+    if (this.transactionHash != undefined) {
+      this.httpService
+        .validateHash(this.transactionHash)
+        .subscribe((hashResult: any) => {
+          if (parseInt(hashResult.result.status) === 1) {
+            this.httpServiceAuth
+              .requestMoney({
+                amount: this.amount,
+                transactionHash: this.transactionHash,
+                proof: this.uploaded,
+              })
+              .subscribe((response: iHttpResponse) => {
+                if (response.success) {
+                  this.uploaded = [];
+                  this.amount = 0;
+                  this.transactionHash = undefined;
+                }
+
+                this.alertsStoreService.setAlert({
+                  text: response.message,
+                  type: `${response.success ? 'success' : 'error'}`,
+                  show: true,
+                });
+              });
+          } else {
+            this.alertsStoreService.setAlert({
+              type: 'error',
+              text: "please check the hash you've entered",
+              show: true,
+            });
+          }
         });
-      });
+    }
   }
 
   upload(e: Event): void {

@@ -14,6 +14,8 @@ import { DashboardHomeComponent } from './Pages/dashboard/home/dashboard.compone
 import { ClaimBuyComponent } from './Pages/dashboard/claim-buy/claim-buy.component';
 import { DashboardComponent } from './Pages/dashboard/dashboard.component';
 import { ReportsComponent } from './Pages/dashboard/reports/reports.component';
+import { AccountSettingsComponent } from './Pages/dashboard/account-settings/account-settings.component';
+import { AdministrationComponent } from './Pages/dashboard/administration/administration.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -38,6 +40,8 @@ const routes: Routes = [
       { path: 'home', component: DashboardHomeComponent },
       { path: 'claim-buy', component: ClaimBuyComponent },
       { path: 'reports', component: ReportsComponent },
+      { path: 'account-settings', component: AccountSettingsComponent },
+      { path: 'administration', component: AdministrationComponent },
     ],
   },
 ];
