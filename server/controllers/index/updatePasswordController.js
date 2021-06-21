@@ -1,4 +1,4 @@
-import userModel from "../models/user.model";
+import userModel from "../../models/user.model";
 
 async function updatePassword(req, res) {
   if (!req.body.resetCode)

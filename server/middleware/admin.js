@@ -1,16 +1,14 @@
 import userModel from "../models/user.model";
 
-async function isAdmin(req, res) {
+async function isAdmin(req, res, next) {
   try {
     const user = await userModel.findUser({ _id: req.session.uid });
-    return res.json({
-      message: "",
-      success: true,
-      data: user.administrator,
-    });
+    if (user.administrator) return next();
+
+    throw new Error("user not admin");
   } catch (err) {
     return res.json({
-      message: "something went wrong",
+      message: "only administrator can perform that action",
       success: false,
       data: null,
     });

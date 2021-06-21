@@ -1,4 +1,4 @@
-import requestsModel from "../models/requests.model";
+import requestsModel from "../../models/requests.model";
 
 async function requestMoney(req, res) {
   if (!req.body.amount || req.body.amount < 1)

@@ -1,1 +1,50 @@
-<p>administration works!</p>
+<section *ngIf="!requests">
+  <p>Loading...</p>
+</section>
+
+<section *ngIf="requests" class="requests">
+  <h3>Requests</h3>
+  <ul>
+    <li
+      *ngFor="let request of requests"
+      [ngClass]="{ expanded: request.expanded }"
+    >
+      <header (click)="request.expanded = !request.expanded ? true : false">
+        <div>
+          <p>{{ request.createdAt | date: "short" }}</p>
+          <p>{{ request.transactionHash }}</p>
+        </div>
+        <span class="material-icons" [ngClass]="{ expanded: request.expanded }"
+          >expand_more</span
+        >
+      </header>
+      <div class="body">
+        <p><span>Requested Amount:</span> USD {{ request.amount }}</p>
+        <p><span>Username:</span> {{ request.requestedBy.username }}</p>
+        <p><span>Email:</span> {{ request.requestedBy.email }}</p>
+        <p *ngIf="request.requestedBy.referralCode">
+          <span>Referred By:</span> {{ request.requestedBy.referralCode }}
+        </p>
+        <p>
+          <span>Referrals:</span> {{ request.requestedBy.referrals.length }}
+        </p>
+        <p>
+          <span>Status:</span>
+          {{ request.approved ? "approved" : "not approved" }}
+        </p>
+        <div class="images">
+          <img *ngFor="let img of request.proof" [src]="getURL(img)" alt="" />
+        </div>
+
+        <div class="actions">
+          <button class="reject" (click)="reject(request._id)">
+            Reject <span class="material-icons">close</span>
+          </button>
+          <button class="approve" (click)="approve(request._id)">
+            Approve <span class="material-icons">done</span>
+          </button>
+        </div>
+      </div>
+    </li>
+  </ul>
+</section>

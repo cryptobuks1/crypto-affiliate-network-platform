@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { iHttpResponse } from 'src/app/Interfaces/http.interface';
 import { Observable } from 'rxjs';
-import { AuthService } from './auth.service';
+import { serverAddr } from './settings';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HttpService {
-  private serverAddr: string = 'http://localhost:3000/api';
+  private serverAddr: string = `${serverAddr}/api`;
+  private apiKey: string = '7BDRK3QQ5BQQRY2IXP4EMIESQVGJGGB6DD';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -33,9 +34,8 @@ export class HttpService {
   }
 
   validateHash(hash: string): Observable<any> {
-    const apiKey = '7BDRK3QQ5BQQRY2IXP4EMIESQVGJGGB6DD';
     return this.httpClient.get(
-      `https://api.bscscan.com/api?module=transaction&action=gettxreceiptstatus&txhash=${hash}&apikey=${apiKey}`
+      `https://api.bscscan.com/api?module=transaction&action=gettxreceiptstatus&txhash=${hash}&apikey=${this.apiKey}`
     );
   }
 
@@ -51,60 +51,5 @@ export class HttpService {
       `${this.serverAddr}/update-password`,
       data
     );
-  }
-}
-
-@Injectable({
-  providedIn: 'root',
-})
-export class HttpServiceAuth {
-  private serverAddr: string = 'http://localhost:3000/api/users';
-
-  constructor(
-    private httpClient: HttpClient,
-    private authService: AuthService
-  ) {}
-
-  headers(): any {
-    return { Authorization: this.authService.getToken() };
-  }
-
-  profile(): Observable<iHttpResponse> {
-    return this.httpClient.get<iHttpResponse>(`${this.serverAddr}/profile`, {
-      headers: this.headers(),
-    });
-  }
-
-  upload(data: FormData): Observable<iHttpResponse> {
-    return this.httpClient.post<iHttpResponse>(
-      `${this.serverAddr}/upload`,
-      data,
-      { headers: this.headers() }
-    );
-  }
-
-  requestMoney(data: any): Observable<iHttpResponse> {
-    return this.httpClient.post<iHttpResponse>(
-      `${this.serverAddr}/request-money`,
-      data,
-      {
-        headers: this.headers(),
-      }
-    );
-  }
-
-  myReferrals(): Observable<iHttpResponse> {
-    return this.httpClient.get<iHttpResponse>(
-      `${this.serverAddr}/my-referrals`,
-      {
-        headers: this.headers(),
-      }
-    );
-  }
-
-  isAdmin(): Observable<iHttpResponse> {
-    return this.httpClient.get<iHttpResponse>(`${this.serverAddr}/is-admin`, {
-      headers: this.headers(),
-    });
   }
 }

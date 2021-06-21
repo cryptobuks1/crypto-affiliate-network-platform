@@ -32,4 +32,14 @@ async function newRequest(data) {
   }
 }
 
-export default { newRequest };
+async function findRequests(filter) {
+  try {
+    return await RequestModel.find(filter)
+      .populate({ path: "requestedBy", model: "User", select: { password: 0 } })
+      .exec();
+  } catch (err) {
+    return Promise.reject(err);
+  }
+}
+
+export default { newRequest, findRequests };

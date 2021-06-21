@@ -8,17 +8,23 @@
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   transition: all 200ms ease;
   z-index: 3;
+  min-height: 75px;
+  display: flex;
+  align-items: center;
 
   &.error {
-    background-color: rgb(248, 197, 207);
+    background-color: crimson;
+    color: #fff;
   }
 
   &.success {
-    background-color: rgb(205, 247, 219);
+    background-color: #45956a;
+    color: #333333;
   }
 
   &.info {
-    background-color: rgb(182, 233, 248);
+    background-color: #42b8cf;
+    color: #333333;
   }
 
   &.hide {

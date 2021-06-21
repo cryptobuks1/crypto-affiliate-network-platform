@@ -1,5 +1,5 @@
-import userModel from "../models/user.model";
-import token from "../utils/token";
+import userModel from "../../models/user.model";
+import token from "../../utils/token";
 
 async function signInController(req, res) {
   if (!req.body.username)

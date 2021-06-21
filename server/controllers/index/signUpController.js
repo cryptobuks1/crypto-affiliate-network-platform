@@ -1,6 +1,6 @@
-import validators from "../utils/validators";
-import userModel from "../models/user.model";
-import token from "../utils/token";
+import validators from "../../utils/validators";
+import userModel from "../../models/user.model";
+import token from "../../utils/token";
 
 async function signUpController(req, res) {
   if (!req.body.username)

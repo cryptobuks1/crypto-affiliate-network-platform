@@ -1,0 +1,105 @@
+.requests {
+  h3 {
+    margin-bottom: 1.5rem;
+  }
+
+  ul {
+    li {
+      overflow: hidden;
+      background-color: rgb(255, 255, 255);
+      border-bottom: 1px solid rgb(230, 230, 230);
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+      margin: 1rem 0;
+
+      header {
+        padding: 1rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        div {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          p {
+            &:not(:last-of-type) {
+              margin-right: 1rem;
+            }
+          }
+        }
+
+        &:hover {
+          background-color: rgb(233, 233, 233);
+        }
+        span {
+          transition: all 225ms linear;
+          transform: rotate(180deg);
+
+          &.expanded {
+            transform: rotate(0);
+          }
+        }
+      }
+
+      .body {
+        height: 0;
+
+        .images {
+          display: flex;
+          flex-wrap: wrap;
+
+          img {
+            max-height: 125px;
+          }
+        }
+      }
+
+      &.expanded {
+        .body {
+          height: auto;
+          padding: 2rem;
+
+          .actions {
+            display: flex;
+            margin-top: 1rem;
+
+            button {
+              border: none;
+              display: flex;
+              align-items: center;
+              padding: 0.5rem;
+              border-radius: 0.5rem;
+              cursor: pointer;
+              transition: transform 225ms linear;
+              background-color: #333;
+
+              &:hover {
+                transform: scale(0.9);
+              }
+
+              &.approve {
+                color: #45956a;
+              }
+
+              &.reject {
+                margin-right: 0.5rem;
+                color: crimson;
+              }
+            }
+          }
+          p {
+            margin: 0.75rem 0;
+
+            span {
+              font-weight: bold;
+              margin-right: 0.25rem;
+              display: inline-block;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import userModel from "../models/user.model";
+import userModel from "../../models/user.model";
 
 async function profileController(req, res) {
   return res.json({

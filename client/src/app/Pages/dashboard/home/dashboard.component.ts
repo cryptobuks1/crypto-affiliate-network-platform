@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpServiceAuth, HttpService } from 'src/app/Services/http.service';
+import { HttpService } from 'src/app/Services/http.service';
 import { iHttpResponse } from 'src/app/Interfaces/http.interface';
+import { AuthService } from 'src/app/Services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,12 +10,12 @@ import { iHttpResponse } from 'src/app/Interfaces/http.interface';
 })
 export class DashboardHomeComponent implements OnInit {
   public priceData: any;
-  public user: any = {};
+  public user: any | undefined;
   private __ngContext__: any;
 
   constructor(
     private httpService: HttpService,
-    private httpServiceAuth: HttpServiceAuth
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -25,7 +26,7 @@ export class DashboardHomeComponent implements OnInit {
   }
 
   profile(): void {
-    this.httpServiceAuth.profile().subscribe((response: iHttpResponse) => {
+    this.authService.profile().subscribe((response: iHttpResponse) => {
       this.user = response.data;
     });
   }

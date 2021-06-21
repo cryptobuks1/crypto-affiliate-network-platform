@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpServiceAuth } from 'src/app/Services/http.service';
 import { iHttpResponse } from 'src/app/Interfaces/http.interface';
+import { AdminService } from 'src/app/Services/admin.service';
 
 @Component({
   selector: 'app-dashboard-nav',
@@ -10,11 +10,12 @@ import { iHttpResponse } from 'src/app/Interfaces/http.interface';
 export class DashboardNavComponent implements OnInit {
   public isAdmin: boolean = false;
 
-  constructor(public httpServiceAuth: HttpServiceAuth) {}
+  constructor(private adminService: AdminService) {}
 
   ngOnInit(): void {
-    this.httpServiceAuth
-      .isAdmin()
-      .subscribe((response: iHttpResponse) => (this.isAdmin = response.data));
+    this.adminService.isAdmin().subscribe((response: iHttpResponse) => {
+      console.log(response);
+      this.isAdmin = response.data;
+    });
   }
 }

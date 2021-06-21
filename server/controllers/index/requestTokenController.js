@@ -1,5 +1,5 @@
-import userModel from "../models/user.model";
-import randStr from "../utils/randStr";
+import userModel from "../../models/user.model";
+import randStr from "../../utils/randStr";
 
 async function requestToken(req, res) {
   try {

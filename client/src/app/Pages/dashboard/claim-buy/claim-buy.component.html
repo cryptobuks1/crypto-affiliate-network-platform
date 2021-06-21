@@ -9,10 +9,10 @@
       type="text"
       [(ngModel)]="transactionHash"
       name="transactionHash"
-      placeholder="0x4d6e11e54d0fca5cfbb1aa86649866c9a78cf2da9f67e889ffaefb4d6623e08f"
+      placeholder="0x4d6e16e57d0fca5cfbb1aa86249826c9a78cf2da9f67e789ffaefb4d6623e08f"
     />
   </section>
-  <section *ngIf="uploaded.length > 0">
+  <section *ngIf="uploaded && uploaded.length > 0">
     <label>Files</label>
     <div class="images">
       <img

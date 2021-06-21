@@ -1,7 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { iHttpResponse } from 'src/app/Interfaces/http.interface';
-import { HttpServiceAuth, HttpService } from 'src/app/Services/http.service';
+import { HttpService } from 'src/app/Services/http.service';
+import { AuthService } from 'src/app/Services/auth.service';
 import { AlertsStoreService } from 'src/app/Store/alerts-store.service';
+import { serverAddr } from 'src/app/Services/settings';
 
 @Component({
   selector: 'app-claim-buy',
@@ -19,7 +21,7 @@ export class ClaimBuyComponent implements OnInit {
   constructor(
     private httpService: HttpService,
     private alertsStoreService: AlertsStoreService,
-    private httpServiceAuth: HttpServiceAuth
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -28,7 +30,7 @@ export class ClaimBuyComponent implements OnInit {
   }
 
   getURL(img: string): string {
-    return 'http://localhost:3000/uploads/' + img;
+    return `${serverAddr}/uploads/${img}`;
   }
 
   submit(): void {
@@ -37,7 +39,7 @@ export class ClaimBuyComponent implements OnInit {
         .validateHash(this.transactionHash)
         .subscribe((hashResult: any) => {
           if (parseInt(hashResult.result.status) === 1) {
-            this.httpServiceAuth
+            this.authService
               .requestMoney({
                 amount: this.amount,
                 transactionHash: this.transactionHash,
@@ -75,20 +77,18 @@ export class ClaimBuyComponent implements OnInit {
     if (files != null) {
       Array.from(files).forEach((file: File) => formData.append('files', file));
 
-      this.httpServiceAuth
-        .upload(formData)
-        .subscribe((response: iHttpResponse) => {
-          if (response.data != null)
-            this.uploaded = [...this.uploaded, ...response.data];
-          if (this.filesInput != undefined)
-            this.filesInput.nativeElement.value = '';
+      this.authService.upload(formData).subscribe((response: iHttpResponse) => {
+        if (response.data != null)
+          this.uploaded = [...this.uploaded, ...response.data];
+        if (this.filesInput != undefined)
+          this.filesInput.nativeElement.value = '';
 
-          this.alertsStoreService.setAlert({
-            text: response.message,
-            type: 'info',
-            show: true,
-          });
+        this.alertsStoreService.setAlert({
+          text: response.message,
+          type: 'info',
+          show: true,
         });
+      });
     }
   }
 }
