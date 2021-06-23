@@ -2,7 +2,6 @@ import personalModel from '../../models/personal.model';
 import userModel from '../../models/user.model';
 
 async function updatePersonalDetails(req, res) {
-    console.log(req.body);
     try {
         await userModel.updateUser(req.session.uid, {
             affiliateCode: req.body.affiliateCode,

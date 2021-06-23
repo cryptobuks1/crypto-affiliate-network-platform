@@ -33,10 +33,23 @@
       </div>
     </section>
     <div class="actions">
-      <button (click)="files.click()" class="file-upload-btn">
-        Select Files <span class="material-icons">upload_file</span>
+      <button
+        (click)="files.click()"
+        class="file-upload-btn"
+        color="primary"
+        aria-label="upload file button"
+        mat-fab
+      >
+        <span class="material-icons">upload_file</span>
       </button>
-      <button class="submit-request" (click)="submit()">Submit Request</button>
+      <button
+        class="submit-request"
+        (click)="submit()"
+        color="primary"
+        mat-raised-button
+      >
+        Submit Request
+      </button>
     </div>
   </form>
 </section>

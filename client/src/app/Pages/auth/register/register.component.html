@@ -1,9 +1,8 @@
 <section class="form-container">
   <div class="form-body">
     <header>
-      <a routerLink="/login" matRipple>Login</a>
-      <a routerLink="/reset-password" matRipple>Reset Password</a>
-      <a routerLink="/contact" matRipple>Contact Support</a>
+      <a routerLink="/reset-password">Reset Password</a>
+      <a routerLink="/login">Login</a>
     </header>
     <form>
       <mat-form-field appearance="outline">
@@ -62,10 +61,12 @@
       </mat-form-field>
 
       <mat-checkbox [(ngModel)]="tos" name="tos"
-        >Terms & Condition</mat-checkbox
+        >I Agree - Terms & Condition</mat-checkbox
       >
 
-      <button (click)="register()" matRipple>Create Account</button>
+      <button (click)="register()" color="primary" mat-raised-button>
+        Create Account
+      </button>
     </form>
   </div>
 </section>

@@ -43,4 +43,10 @@ export class AdminService {
       { headers: this.tokenService.headers() }
     );
   }
+
+  getChats(): Observable<iHttpResponse> {
+    return this.httpClient.get<iHttpResponse>(`${this.serverAddr}/get-chats`, {
+      headers: this.tokenService.headers(),
+    });
+  }
 }

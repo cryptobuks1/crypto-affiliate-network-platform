@@ -1,79 +1,70 @@
-@import '../components.scss';
+@import "../components.scss";
 
 .toggle-nav {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    margin: 1rem 0 0 1rem;
-    transition: left 225ms linear;
-    
-    &.open {
-        left: $navWidth;
-    }
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 1rem 0 0 1rem;
+  transition: left 225ms linear;
+
+  &.open {
+    left: $navWidth;
+  }
 }
 
 nav {
-    background-color: #333;
-    border-right: 1px solid #FFD700;
+  background-color: #333;
+  border-right: 1px solid #ffd700;
+  width: $navWidth;
+  height: 100%;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  padding: 100px 0;
+
+  img {
+    width: calc(#{$navWidth} * 0.75);
+    margin: 0 auto;
+    display: block;
+  }
+
+  .links {
+    padding: 50px 0;
     width: $navWidth;
-    height: 100%;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    padding: 100px 0;
-    
-    img {
-        width: calc(#{$navWidth} * .75);
-        margin: 0 auto;
-        display: block;
-    }
+    a {
+      width: 75%;
+      display: block;
+      text-align: center;
+      margin: 0 auto 1rem auto;
+      text-decoration: none;
+      padding: 1rem 0.75rem;
+      background-color: rgb(44, 44, 44);
+      color: #ffd700;
+      cursor: pointer;
 
-    .links {
-        padding: 50px 0;
-        width: $navWidth;
-        a {
-            width: 75%;
-            display: block;
-            text-align: center;
-            margin: 0 auto 1rem auto;
-            text-decoration: none;
-            padding: 1rem .75rem;
-            background-color: rgb(44, 44, 44);
-            color: #FFD700;
-            cursor: pointer;
-            border-radius: 1rem;
-
-            &:hover {
-                background-color: rgb(48, 48, 48);
-            }
-        }
+      &:hover {
+        background-color: rgb(48, 48, 48);
+      }
     }
+  }
 }
 
 @media only screen and(max-width: 1200px) {
-    .toggle-nav {
-        display: block;
-        z-index: 10;
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        border: none;
-        background-color: #333;
-        color: #FFD700;
-        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-        cursor: pointer;
-    }
+  .toggle-nav {
+    display: block;
+    z-index: 10;
+  }
 
-    nav {
-        position: fixed;
-        width: 0;
-        overflow: hidden;
-        pointer-events: none;
-        z-index: 10;
-        transition: width 225ms linear;
+  nav {
+    position: fixed;
+    width: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 10;
+    transition: width 225ms linear;
 
-        &.open {
-            width: $navWidth;
-            pointer-events: auto;
-        }
+    &.open {
+      width: $navWidth;
+      pointer-events: auto;
     }
+  }
 }

@@ -27,11 +27,8 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss"
-            ],
-            "scripts": []
+            "styles": ["src/assets/css/theme.css", "src/styles.scss"],
+            "scripts": ["src/assets/js/socket.io.min.js"]
           },
           "configurations": {
             "production": {

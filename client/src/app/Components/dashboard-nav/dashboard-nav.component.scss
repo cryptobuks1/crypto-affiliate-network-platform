@@ -13,23 +13,8 @@ nav {
     display: flex;
     justify-content: flex-end;
 
-    a {
-      display: inline-block;
-      text-align: center;
-      text-decoration: none;
-      padding: 0.7rem 2rem;
-      background-color: rgb(44, 44, 44);
-      color: #ffd700;
-      cursor: pointer;
-      border-radius: 1rem;
-
-      &:not(:last-of-type) {
-        margin-right: 1rem;
-      }
-
-      &:hover {
-        background-color: rgb(48, 48, 48);
-      }
+    a:not(:last-of-type) {
+      margin-right: 1rem;
     }
   }
 }

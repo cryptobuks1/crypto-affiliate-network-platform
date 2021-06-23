@@ -80,4 +80,27 @@ export class AuthService {
       { headers: this.tokenService.headers() }
     );
   }
+
+  setToken(): Observable<iHttpResponse> {
+    return this.httpClient.get<iHttpResponse>(
+      `${this.serverAddr}/profile/set-token`,
+      { headers: this.tokenService.headers() }
+    );
+  }
+
+  verifyEmail(token: string): Observable<iHttpResponse> {
+    return this.httpClient.put<iHttpResponse>(
+      `${this.serverAddr}/profile/verify-email`,
+      { token },
+      { headers: this.tokenService.headers() }
+    );
+  }
+
+  updateEmail(data: any): Observable<iHttpResponse> {
+    return this.httpClient.put<iHttpResponse>(
+      `${this.serverAddr}/profile/update-email`,
+      data,
+      { headers: this.tokenService.headers() }
+    );
+  }
 }

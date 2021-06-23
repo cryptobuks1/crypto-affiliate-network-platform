@@ -22,7 +22,7 @@ export class TokenService {
   }
 
   headers(): any {
-    return { Authorization: this.getToken() };
+    return this.getToken() !== null ? { Authorization: this.getToken() } : {};
   }
 
   loggedIn(): boolean {

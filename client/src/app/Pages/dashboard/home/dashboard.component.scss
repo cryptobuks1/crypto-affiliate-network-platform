@@ -53,19 +53,7 @@
       grid-row: 1;
 
       a {
-        display: inline-block;
         margin-top: 1rem;
-        text-decoration: none;
-        border: 1px solid #333;
-        background-color: #2c2c2c;
-        color: #ffd700;
-        padding: 0.55rem;
-        border-radius: 0.5rem;
-        font-family: Arial, Helvetica, sans-serif;
-
-        &:hover {
-          background-color: #353535;
-        }
       }
     }
 
@@ -89,23 +77,7 @@
       mat-form-field {
         width: 100%;
       }
-
-      button {
-        display: block;
-        padding: 1rem;
-        border: none;
-        background-color: #333;
-        color: #ffd700;
-        width: 100%;
-        border-radius: 0.4rem;
-        cursor: pointer;
-
-        &:hover {
-          background-color: rgb(58, 58, 58);
-        }
-      }
     }
-
     &:nth-child(7) {
       grid-column: 3/5;
       grid-row: 4;

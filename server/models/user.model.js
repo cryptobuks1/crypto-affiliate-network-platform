@@ -67,6 +67,10 @@ const userSchema = new Schema({
         type: String,
         default: null,
     },
+    token: {
+        type: String,
+        default: null,
+    },
     referrals: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 });
 

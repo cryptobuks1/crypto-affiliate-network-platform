@@ -10,6 +10,9 @@ import myRequestsController from '../controllers/users/myRequestsController';
 import getPersonalController from '../controllers/users/getPersonalController';
 import updatePersonalController from '../controllers/users/updatePersonalController';
 import updatePasswordController from '../controllers/users/updatePasswordController';
+import setUserTokenController from '../controllers/users/setUserTokenController';
+import verifyEmailController from '../controllers/users/verifyEmailController';
+import updateEmailController from '../controllers/users/updateEmailController';
 
 router.get('/profile', profileController);
 router.post('/upload', upload.array('files', 10), uploadController);
@@ -19,4 +22,8 @@ router.get('/my-requests', myRequestsController);
 router.get('/profile/personal', getPersonalController);
 router.put('/profile/personal', updatePersonalController);
 router.put('/profile/update-password', updatePasswordController);
+router.get('/profile/set-token', setUserTokenController);
+router.put('/profile/verify-email', verifyEmailController);
+router.put('/profile/update-email', updateEmailController);
+
 export default router;

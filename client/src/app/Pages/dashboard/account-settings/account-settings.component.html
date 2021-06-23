@@ -1,9 +1,31 @@
 <section class="overview" *ngIf="user">
   <h1>Account Settings</h1>
-  <p>
-    Your email is not verified
-    <a *ngIf="!user.emailVerified" routerLink="/verify-email">verify now</a>
+  <p *ngIf="user.emailVerified">
+    Your email is verified <span class="material-icons">done</span>
   </p>
+  <p *ngIf="!user.emailVerified">Your email is not verified</p>
+  <a
+    *ngIf="!user.emailVerified && !tokenSent"
+    color="primary"
+    mat-raised-button
+    (click)="setToken()"
+    >verify now</a
+  >
+  <div *ngIf="tokenSent && !user.emailVerified" class="token-form">
+    <mat-form-field appearance="outline">
+      <mat-label>Token</mat-label>
+      <input
+        type="text"
+        name="token"
+        placeholder="Token"
+        [(ngModel)]="token"
+        matInput
+      />
+    </mat-form-field>
+    <button (click)="submitToken()" color="primary" mat-raised-button>
+      Verify
+    </button>
+  </div>
 </section>
 
 <form *ngIf="formData && user">
@@ -93,7 +115,9 @@
     />
   </mat-form-field>
 
-  <button (click)="submit()">Update Account Settings</button>
+  <button (click)="submit()" color="primary" mat-raised-button>
+    Update Account Settings
+  </button>
 </form>
 <form *ngIf="passwordFormData && user">
   <h3>Update Password</h3>
@@ -131,11 +155,24 @@
     />
   </mat-form-field>
 
-  <button (click)="updatePassword()">Update Password</button>
+  <button (click)="updatePassword()" color="primary" mat-raised-button>
+    Update Password
+  </button>
 </form>
 
 <form *ngIf="emailFormData && user">
   <h3>Update Email</h3>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Password</mat-label>
+    <input
+      type="Password"
+      name="password"
+      placeholder="Password"
+      [(ngModel)]="emailFormData.password"
+      matInput
+    />
+  </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>New Email</mat-label>
@@ -159,5 +196,7 @@
     />
   </mat-form-field>
 
-  <button (click)="updateEmail()">Update Email</button>
+  <button (click)="updateEmail()" color="primary" mat-raised-button>
+    Update Email
+  </button>
 </form>

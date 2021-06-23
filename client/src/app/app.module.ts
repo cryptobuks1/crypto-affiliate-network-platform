@@ -9,6 +9,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRippleModule } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatExpansionModule } from '@angular/material/expansion';
+
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Pages/auth/login/login.component';
 import { RegisterComponent } from './Pages/auth/register/register.component';
@@ -28,6 +32,7 @@ import { DashboardNavComponent } from './Components/dashboard-nav/dashboard-nav.
 import { AdministrationComponent } from './Pages/dashboard/administration/administration.component';
 import { AccountSettingsComponent } from './Pages/dashboard/account-settings/account-settings.component';
 import { IdentityVerificationComponent } from './Pages/identity-verification/identity-verification.component';
+import { LiveChatComponent } from './Components/live-chat/live-chat.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +54,7 @@ import { IdentityVerificationComponent } from './Pages/identity-verification/ide
     AdministrationComponent,
     AccountSettingsComponent,
     IdentityVerificationComponent,
+    LiveChatComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,6 +67,9 @@ import { IdentityVerificationComponent } from './Pages/identity-verification/ide
     MatSelectModule,
     MatCheckboxModule,
     MatRippleModule,
+    MatButtonModule,
+    MatTabsModule,
+    MatExpansionModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -14,6 +14,8 @@ import { TokenService } from 'src/app/Services/token.service';
 export class AccountSettingsComponent implements OnInit {
   public countries: any[];
   public formData: any | undefined;
+  public tokenSent: boolean = false;
+  public token: string | undefined;
   public passwordFormData: any = {
     newPassword: '',
     confirmNewPassword: '',
@@ -48,6 +50,24 @@ export class AccountSettingsComponent implements OnInit {
     this.authService.profile().subscribe((response: iHttpResponse) => {
       this.user = response.data;
     });
+  }
+
+  submitToken(): void {
+    if (this.token !== undefined) {
+      this.authService
+        .verifyEmail(this.token)
+        .subscribe((response: iHttpResponse) => {
+          this.alertsStoreService.setAlert({
+            text: response.message,
+            type: `${response.success ? 'success' : 'error'}`,
+            show: true,
+          });
+
+          if (response.success) {
+            this.user.emailVerified = true;
+          }
+        });
+    }
   }
 
   submit(): void {
@@ -91,5 +111,34 @@ export class AccountSettingsComponent implements OnInit {
 
   updateEmail(): void {
     console.log(this.emailFormData);
+    if (this.emailFormData !== undefined) {
+      this.authService
+        .updateEmail(this.emailFormData)
+        .subscribe((response: iHttpResponse) => {
+          if (response.success) {
+            this.fetchUser();
+          }
+
+          this.alertsStoreService.setAlert({
+            text: response.message,
+            type: `${response.success ? 'success' : 'error'}`,
+            show: true,
+          });
+        });
+    }
+  }
+
+  setToken() {
+    this.authService.setToken().subscribe((response: iHttpResponse) => {
+      if (response.success) {
+        this.tokenSent = true;
+      }
+
+      this.alertsStoreService.setAlert({
+        text: response.message,
+        type: `${response.success ? 'success' : 'error'}`,
+        show: true,
+      });
+    });
   }
 }

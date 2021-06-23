@@ -1,9 +1,8 @@
 <section class="form-container">
   <div class="form-body">
     <header>
-      <a routerLink="/register" matRipple>Register</a>
-      <a routerLink="/reset-password" matRipple>Reset Password</a>
-      <a routerLink="/contact" matRipple>Contact Support</a>
+      <a routerLink="/reset-password">Reset Password</a>
+      <a routerLink="/register">Register</a>
     </header>
     <form>
       <mat-form-field appearance="outline">
@@ -36,7 +35,7 @@
                 <mat-label>Are you a robot?</mat-label>
                 <p>Google Recaptcha</p>
             </section> -->
-      <button (click)="login()" matRipple>Login</button>
+      <button (click)="login()" color="primary" mat-raised-button>Login</button>
     </form>
   </div>
 </section>

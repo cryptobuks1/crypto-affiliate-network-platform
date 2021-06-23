@@ -24,6 +24,8 @@
   class="toggle-nav"
   [ngClass]="{ open: navState }"
   (click)="navState = !navState ? true : false"
+  color="primary"
+  mat-fab
 >
   <span class="material-icons" *ngIf="!navState">menu</span>
   <span class="material-icons" *ngIf="navState">close</span>

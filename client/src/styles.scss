@@ -17,7 +17,6 @@
   &::-webkit-scrollbar-thumb {
     background-color: #333;
     width: 10px;
-    border-radius: 1rem;
   }
 }
 
@@ -30,10 +29,6 @@ body {
 body {
   overflow: hidden;
   font-family: "Ubuntu", sans-serif;
-}
-
-button {
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 p {
@@ -52,7 +47,7 @@ p {
 
 @media only screen and(max-width: 1400px) and(min-width: 1200px) {
   .container {
-    width: 1140px;
+    width: 75%;
   }
 }
 

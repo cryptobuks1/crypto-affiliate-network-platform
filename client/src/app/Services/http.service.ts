@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { iHttpResponse } from 'src/app/Interfaces/http.interface';
 import { Observable } from 'rxjs';
 import { serverAddr, apiKey } from './settings';
+import { TokenService } from './token.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,10 @@ import { serverAddr, apiKey } from './settings';
 export class HttpService {
   private serverAddr: string = `${serverAddr}/api`;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+    private tokenService: TokenService
+  ) {}
 
   login(data: any): Observable<iHttpResponse> {
     return this.httpClient.post<iHttpResponse>(
@@ -50,5 +54,28 @@ export class HttpService {
       `${this.serverAddr}/update-password`,
       data
     );
+  }
+
+  startChat(data: any): Observable<iHttpResponse> {
+    let args = {
+      url: `${this.serverAddr}/start-chat`,
+      data,
+      headers: { headers: this.tokenService.headers() },
+    };
+
+    return this.httpClient.post<iHttpResponse>(
+      args.url,
+      args.data,
+      args.headers
+    );
+  }
+
+  findChat(chatId: string): Observable<iHttpResponse> {
+    let args = {
+      url: `${this.serverAddr}/find-chat/${chatId}`,
+      headers: { headers: this.tokenService.headers() },
+    };
+
+    return this.httpClient.get<iHttpResponse>(args.url, args.headers);
   }
 }
