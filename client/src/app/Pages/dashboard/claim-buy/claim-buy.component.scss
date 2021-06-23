@@ -1,3 +1,23 @@
+.faq {
+  padding: 20px 0;
+  ul {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    padding: 2rem !important;
+
+    li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+
+      span {
+        font-weight: 700;
+        margin-right: 0.4rem;
+        color: #313131;
+      }
+    }
+  }
+}
+
 input[type="file"] {
   width: 0;
   height: 0;
@@ -5,14 +25,15 @@ input[type="file"] {
 }
 
 form {
+  margin-bottom: 2rem;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  padding: 2rem;
+
+  mat-form-field {
+    width: 100%;
+  }
+
   section {
-    margin: 1.5rem 0;
-
-    label {
-      display: block;
-      margin-bottom: 8px;
-    }
-
     .images {
       display: flex;
       flex-wrap: wrap;
@@ -63,6 +84,87 @@ form {
 
     &:hover {
       background-color: rgb(68, 68, 68);
+    }
+  }
+}
+
+.block {
+  margin: 2rem 0;
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+
+  h3 {
+    font-size: 2rem;
+    margin-bottom: 1.4rem;
+    color: #313131;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+}
+
+.my-requests {
+  text-align: left;
+  padding: 20px 0;
+
+  table {
+    border-collapse: collapse;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    width: 100%;
+
+    th,
+    td {
+      border-bottom: 1px solid rgb(236, 236, 236);
+      padding: 1rem;
+    }
+
+    tbody {
+      tr {
+        border-bottom: 1px solid #333;
+
+        .status {
+          background-color: black;
+          width: 16px;
+          height: 16px;
+          display: block;
+          border-radius: 50%;
+          margin-left: 1rem;
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16),
+            0 3px 6px rgba(0, 0, 0, 0.23);
+
+          &.pending {
+            background-color: rgb(255, 255, 0);
+          }
+          &.approved {
+            background-color: green;
+          }
+          &.rejected {
+            background-color: red;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and(max-width: 850px) {
+  .faq {
+    ul {
+      li {
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        margin-bottom: 24px;
+
+        span {
+          margin-right: 0;
+          margin-bottom: 8px;
+        }
+      }
     }
   }
 }

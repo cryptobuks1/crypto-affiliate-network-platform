@@ -4,6 +4,7 @@ import { AdminService } from 'src/app/Services/admin.service';
 import { iHttpResponse } from 'src/app/Interfaces/http.interface';
 import { AuthService } from 'src/app/Services/auth.service';
 import { serverAddr } from 'src/app/Services/settings';
+import { AlertsStoreService } from 'src/app/Store/alerts-store.service';
 
 @Component({
   selector: 'app-administration',
@@ -15,15 +16,13 @@ export class AdministrationComponent implements OnInit {
   public requests: any[] | undefined;
 
   constructor(
+    private alertsStoreService: AlertsStoreService,
     public adminService: AdminService,
     private router: Router,
     public authService: AuthService
   ) {}
 
   ngOnInit(): void {
-    this.__ngContext__[0].querySelector('.page-title').textContent =
-      'Administration';
-
     this.adminService.isAdmin().subscribe((response: iHttpResponse) => {
       if (!response.data) {
         this.router.navigate(['/']);
@@ -31,6 +30,16 @@ export class AdministrationComponent implements OnInit {
 
       this.fetchRequests();
     });
+  }
+
+  togglePanel(clickedIndex: number): void {
+    if (this.requests != undefined) {
+      this.requests.forEach(
+        (request: any, i: number) =>
+          (request.expanded =
+            clickedIndex != i ? false : !request.expanded ? true : false)
+      );
+    }
   }
 
   getURL(img: string): string {
@@ -41,19 +50,35 @@ export class AdministrationComponent implements OnInit {
     this.adminService.requests().subscribe((response: iHttpResponse) => {
       if (response.success) {
         console.log(response.data);
-        this.requests = response.data.map((request: any) => {
-          request.expanded = false;
-          return request;
-        });
+        this.requests = response.data;
       }
     });
   }
 
-  reject(id: string): void {
-    console.log('reject', id);
+  approve(id: string): void {
+    this.adminService.approve({ id }).subscribe((response: iHttpResponse) => {
+      if (response.success) {
+        this.fetchRequests();
+      }
+
+      this.alertsStoreService.setAlert({
+        text: response.message,
+        type: `${response.success ? 'success' : 'error'}`,
+        show: true,
+      });
+    });
   }
 
-  approve(id: string): void {
-    console.log('approve', id);
+  reject(id: string): void {
+    this.adminService.reject({ id }).subscribe((response: iHttpResponse) => {
+      if (response.success) {
+        this.fetchRequests();
+      }
+      this.alertsStoreService.setAlert({
+        text: response.message,
+        type: `${response.success ? 'success' : 'error'}`,
+        show: true,
+      });
+    });
   }
 }

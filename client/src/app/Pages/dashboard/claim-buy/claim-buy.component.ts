@@ -12,7 +12,8 @@ import { serverAddr } from 'src/app/Services/settings';
 })
 export class ClaimBuyComponent implements OnInit {
   private __ngContext__: any;
-  public uploaded: string[] = [];
+  public uploaded: string[] | undefined;
+  public myRequests: any[] | undefined;
   public amount: number | undefined;
   public transactionHash: string | undefined;
 
@@ -25,12 +26,20 @@ export class ClaimBuyComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.__ngContext__[0].querySelector('.page-title').textContent =
-      'Claim & Buy';
+    this.fetchRequests();
   }
 
   getURL(img: string): string {
     return `${serverAddr}/uploads/${img}`;
+  }
+
+  fetchRequests(): void {
+    this.authService.myRequests().subscribe((response: iHttpResponse) => {
+      console.log(response.data);
+      if (response.success) {
+        this.myRequests = response.data;
+      }
+    });
   }
 
   submit(): void {
@@ -50,6 +59,7 @@ export class ClaimBuyComponent implements OnInit {
                   this.uploaded = [];
                   this.amount = 0;
                   this.transactionHash = undefined;
+                  this.myRequests?.push(response.data);
                 }
 
                 this.alertsStoreService.setAlert({
@@ -78,8 +88,12 @@ export class ClaimBuyComponent implements OnInit {
       Array.from(files).forEach((file: File) => formData.append('files', file));
 
       this.authService.upload(formData).subscribe((response: iHttpResponse) => {
-        if (response.data != null)
-          this.uploaded = [...this.uploaded, ...response.data];
+        if (response.data !== null)
+          this.uploaded =
+            this.uploaded !== undefined
+              ? [...this.uploaded, ...response.data]
+              : [...response.data];
+
         if (this.filesInput != undefined)
           this.filesInput.nativeElement.value = '';
 

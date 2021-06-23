@@ -1,0 +1,51 @@
+.overview {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  padding: 2rem;
+  margin-bottom: 1.7rem;
+  color: #313131;
+
+  h1 {
+    font-size: 5rem;
+  }
+
+  p {
+    padding: 1rem 0;
+    a {
+      margin-left: 0.5rem;
+    }
+  }
+}
+
+form {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  padding: 2rem;
+
+  &:not(:last-of-type) {
+    margin-bottom: 1.7rem;
+  }
+
+  h3 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #313131;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  button {
+    padding: 1rem;
+    border: none;
+    background-color: #333;
+    color: #ffd700;
+    border-radius: 0.7rem;
+    margin: 0 0 0 auto;
+    display: block;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgb(61, 61, 61);
+    }
+  }
+}

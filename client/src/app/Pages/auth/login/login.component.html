@@ -1,28 +1,42 @@
 <section class="form-container">
+  <div class="form-body">
+    <header>
+      <a routerLink="/register" matRipple>Register</a>
+      <a routerLink="/reset-password" matRipple>Reset Password</a>
+      <a routerLink="/contact" matRipple>Contact Support</a>
+    </header>
     <form>
-        <header>
-            <a routerLink="/register">Register</a>
-            <a routerLink="/reset-password">Reset Password</a>
-        </header>
-        <section>
-            <label for="username">Username</label>
-            <input type="text" [(ngModel)]="username" name="username" id="username">
-        </section>
-        <section>
-            <label for="password">Password</label>
-            <input type="password" [(ngModel)]="password" name="password" id="password">
-        </section>
-        <section class="fg-row">
-            <label for="keepMeLoggedIn">Keep me logged in on this device?</label>
-            <input type="checkbox" [(ngModel)]="keepMeLoggedIn" name="keepMeLoggedIn" id="keepMeLoggedIn">
-        </section>
-        <!-- <section>
-            <label>Are you a robot?</label>
-            <p>Google Recaptcha</p>
-        </section> -->
-        <section>
-            <a routerLink="/contact">Contact Support</a>
-        </section>
-        <button (click)="login()">Login</button>
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input
+          type="text"
+          [(ngModel)]="username"
+          name="username"
+          placeholder="Username"
+          id="username"
+          matInput
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input
+          type="password"
+          [(ngModel)]="password"
+          name="password"
+          placeholder="Password"
+          id="password"
+          matInput
+        />
+      </mat-form-field>
+
+      <mat-checkbox [(ngModel)]="keepMeLoggedIn" name="keepMeLoggedIn"
+        >Keep me logged in on this device?</mat-checkbox
+      >
+      <!-- <section>
+                <mat-label>Are you a robot?</mat-label>
+                <p>Google Recaptcha</p>
+            </section> -->
+      <button (click)="login()" matRipple>Login</button>
     </form>
+  </div>
 </section>

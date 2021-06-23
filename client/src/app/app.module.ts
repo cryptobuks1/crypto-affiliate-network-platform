@@ -3,6 +3,12 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRippleModule } from '@angular/material/core';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Pages/auth/login/login.component';
 import { RegisterComponent } from './Pages/auth/register/register.component';
@@ -21,6 +27,7 @@ import { ReportsComponent } from './Pages/dashboard/reports/reports.component';
 import { DashboardNavComponent } from './Components/dashboard-nav/dashboard-nav.component';
 import { AdministrationComponent } from './Pages/dashboard/administration/administration.component';
 import { AccountSettingsComponent } from './Pages/dashboard/account-settings/account-settings.component';
+import { IdentityVerificationComponent } from './Pages/identity-verification/identity-verification.component';
 
 @NgModule({
   declarations: [
@@ -41,8 +48,20 @@ import { AccountSettingsComponent } from './Pages/dashboard/account-settings/acc
     DashboardNavComponent,
     AdministrationComponent,
     AccountSettingsComponent,
+    IdentityVerificationComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatRippleModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

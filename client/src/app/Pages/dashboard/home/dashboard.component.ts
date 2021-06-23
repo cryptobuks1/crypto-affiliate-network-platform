@@ -11,7 +11,6 @@ import { AuthService } from 'src/app/Services/auth.service';
 export class DashboardHomeComponent implements OnInit {
   public priceData: any;
   public user: any | undefined;
-  private __ngContext__: any;
 
   constructor(
     private httpService: HttpService,
@@ -21,8 +20,6 @@ export class DashboardHomeComponent implements OnInit {
   ngOnInit(): void {
     this.profile();
     this.fetchPrices();
-    this.__ngContext__[0].querySelector('.page-title').textContent =
-      'Dashboard';
   }
 
   profile(): void {

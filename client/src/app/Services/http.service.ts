@@ -2,14 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { iHttpResponse } from 'src/app/Interfaces/http.interface';
 import { Observable } from 'rxjs';
-import { serverAddr } from './settings';
+import { serverAddr, apiKey } from './settings';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HttpService {
   private serverAddr: string = `${serverAddr}/api`;
-  private apiKey: string = '7BDRK3QQ5BQQRY2IXP4EMIESQVGJGGB6DD';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -35,7 +34,7 @@ export class HttpService {
 
   validateHash(hash: string): Observable<any> {
     return this.httpClient.get(
-      `https://api.bscscan.com/api?module=transaction&action=gettxreceiptstatus&txhash=${hash}&apikey=${this.apiKey}`
+      `https://api.bscscan.com/api?module=transaction&action=gettxreceiptstatus&txhash=${hash}&apikey=${apiKey}`
     );
   }
 

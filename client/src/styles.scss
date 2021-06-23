@@ -1,9 +1,24 @@
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+* {
+  &::-webkit-scrollbar,
+  &::-webkit-scrollbar-track {
+    background-color: rgb(241, 241, 241);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #333;
+    width: 10px;
+    border-radius: 1rem;
+  }
 }
 
 html,
@@ -21,28 +36,12 @@ button {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.container {
-  margin: 0 auto;
-}
-
-input[type="text"],
-input[type="number"],
-input[type="password"],
-input[type="email"] {
-  width: 100%;
-  padding: 0.6rem;
-  border: 1px solid rgb(231, 231, 231);
-  outline: none;
-  border-radius: 0.33rem;
-  transition: all 200ms linear;
-
-  &:focus {
-    box-shadow: 0 0 0 0.25rem rgb(82 82 82 / 36%);
-  }
-}
-
 p {
   line-height: 1.5;
+}
+
+.container {
+  margin: 0 auto;
 }
 
 @media only screen and(min-width: 1400px) {

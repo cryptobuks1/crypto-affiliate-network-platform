@@ -10,25 +10,22 @@ import { AuthService } from 'src/app/Services/auth.service';
 export class ReportsComponent implements OnInit {
   private __ngContext__: any;
   public referrals: any[] = [];
+  public user: any | undefined;
 
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.__ngContext__[0].querySelector('.page-title').textContent = 'Reports';
-    this.profile();
+    // this.profile();
     this.myReferrals();
   }
 
   profile(): void {
-    this.authService.profile().subscribe((response: iHttpResponse) => {
-      console.log(response);
-    });
+    this.authService.profile().subscribe((response: iHttpResponse) => {});
   }
 
   myReferrals() {
     this.authService.myReferrals().subscribe((response: iHttpResponse) => {
       if (response.success) {
-        console.log(response.data);
         this.referrals = response.data;
       }
     });

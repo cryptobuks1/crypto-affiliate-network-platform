@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TokenService } from 'src/app/Services/token.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.component.scss', '../page.scss'],
 })
 export class DashboardComponent implements OnInit {
-  constructor(private router: Router) {
+  constructor(private tokenService: TokenService, private router: Router) {
     window.addEventListener('resize', this.fixPadding);
   }
 

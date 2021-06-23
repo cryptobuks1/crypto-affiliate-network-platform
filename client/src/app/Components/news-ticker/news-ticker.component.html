@@ -1,6 +1,6 @@
-<section class="news-ticker" *ngIf="priceData">
-    <div class="holder">
-        <p>USD/BNB Gold {{ round(priceData.price) }}</p>
-        <p>USD/BNB {{ round(priceData.price_BNB) }}</p>
-    </div>
+<section class="news-ticker" *ngIf="priceData && dataPoints">
+  <p *ngFor="let dp of dataPoints">
+    {{ dp.label }}
+    {{ dp.price }}
+  </p>
 </section>

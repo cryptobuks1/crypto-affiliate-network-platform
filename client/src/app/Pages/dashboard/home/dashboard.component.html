@@ -15,11 +15,14 @@
     <div class="icon"><span class="material-icons">trending_up</span></div>
     <h3>Portfolio</h3>
   </div>
-  <div class="dashboard-grid-item">
+
+  <div class="dashboard-grid-item verify-identity">
     <div class="icon right">
       <span class="material-icons">assignment_ind</span>
     </div>
     <h3>KYC Verification</h3>
+
+    <a routerLink="/identity-verification">Verify Identity</a>
   </div>
   <div class="dashboard-grid-item">
     <div class="icon right">
@@ -32,8 +35,11 @@
     <div class="icon right"><span class="material-icons">redeem</span></div>
     <h3>Refer & earn 2% 1% 0.5% 3%</h3>
     <p>{{ affiliateLink() }}</p>
-    <input type="text" placeholder="Enter email" />
-    <button>Invite Friend</button>
+    <mat-form-field appearance="outline">
+      <mat-label>Enter email</mat-label>
+      <input matInput placeholder="Enter email" />
+    </mat-form-field>
+    <button matRipple>Invite Friend</button>
   </div>
 
   <div class="dashboard-grid-item">

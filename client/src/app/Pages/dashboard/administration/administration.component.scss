@@ -1,6 +1,7 @@
 .requests {
   h3 {
     margin-bottom: 1.5rem;
+    color: #313131;
   }
 
   ul {
@@ -9,7 +10,8 @@
       background-color: rgb(255, 255, 255);
       border-bottom: 1px solid rgb(230, 230, 230);
       box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-      margin: 1rem 0;
+      margin: 0;
+      transition: all 225ms linear;
 
       header {
         padding: 1rem;
@@ -44,11 +46,49 @@
       }
 
       .body {
-        height: 0;
+        max-height: 0;
+        transition: all 225ms linear;
+        padding: 0 2rem;
+
+        .actions {
+          display: flex;
+
+          button {
+            border: none;
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: transform 225ms linear;
+            background-color: #333;
+
+            &:hover {
+              transform: scale(0.9);
+            }
+
+            &.approve {
+              color: #45956a;
+            }
+
+            &.reject {
+              margin-right: 0.5rem;
+              color: crimson;
+            }
+          }
+        }
+        p {
+          span {
+            font-weight: bold;
+            margin-right: 0.25rem;
+            display: inline-block;
+          }
+        }
 
         .images {
           display: flex;
           flex-wrap: wrap;
+          margin-top: 1rem;
 
           img {
             max-height: 125px;
@@ -57,47 +97,18 @@
       }
 
       &.expanded {
+        margin: 1rem 0;
+
+        header {
+          border-bottom: 1px solid rgb(240, 240, 240);
+        }
+        .actions {
+          margin-top: 1rem;
+        }
         .body {
-          height: auto;
+          overflow: auto;
+          max-height: 30rem;
           padding: 2rem;
-
-          .actions {
-            display: flex;
-            margin-top: 1rem;
-
-            button {
-              border: none;
-              display: flex;
-              align-items: center;
-              padding: 0.5rem;
-              border-radius: 0.5rem;
-              cursor: pointer;
-              transition: transform 225ms linear;
-              background-color: #333;
-
-              &:hover {
-                transform: scale(0.9);
-              }
-
-              &.approve {
-                color: #45956a;
-              }
-
-              &.reject {
-                margin-right: 0.5rem;
-                color: crimson;
-              }
-            }
-          }
-          p {
-            margin: 0.75rem 0;
-
-            span {
-              font-weight: bold;
-              margin-right: 0.25rem;
-              display: inline-block;
-            }
-          }
         }
       }
     }

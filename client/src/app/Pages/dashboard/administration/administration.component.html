@@ -6,10 +6,10 @@
   <h3>Requests</h3>
   <ul>
     <li
-      *ngFor="let request of requests"
+      *ngFor="let request of requests; let i = index"
       [ngClass]="{ expanded: request.expanded }"
     >
-      <header (click)="request.expanded = !request.expanded ? true : false">
+      <header (click)="togglePanel(i)">
         <div>
           <p>{{ request.createdAt | date: "short" }}</p>
           <p>{{ request.transactionHash }}</p>
@@ -30,18 +30,26 @@
         </p>
         <p>
           <span>Status:</span>
-          {{ request.approved ? "approved" : "not approved" }}
+          {{ request.status }}
         </p>
         <div class="images">
           <img *ngFor="let img of request.proof" [src]="getURL(img)" alt="" />
         </div>
 
-        <div class="actions">
-          <button class="reject" (click)="reject(request._id)">
-            Reject <span class="material-icons">close</span>
+        <div class="actions" *ngIf="request.status === 'pending'">
+          <button
+            class="reject"
+            (click)="reject(request._id)"
+            title="Reject this request"
+          >
+            <span class="material-icons">close</span>
           </button>
-          <button class="approve" (click)="approve(request._id)">
-            Approve <span class="material-icons">done</span>
+          <button
+            class="approve"
+            (click)="approve(request._id)"
+            title="Approve this request"
+          >
+            <span class="material-icons">done</span>
           </button>
         </div>
       </div>

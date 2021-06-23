@@ -1,36 +1,91 @@
-<form>
-  <section>
-    <label>Amount in USD</label>
-    <input type="number" [(ngModel)]="amount" name="amount" placeholder="25" />
-  </section>
-  <section>
-    <label>Transaction Hash</label>
-    <input
-      type="text"
-      [(ngModel)]="transactionHash"
-      name="transactionHash"
-      placeholder="0x4d6e16e57d0fca5cfbb1aa86249826c9a78cf2da9f67e789ffaefb4d6623e08f"
-    />
-  </section>
-  <section *ngIf="uploaded && uploaded.length > 0">
-    <label>Files</label>
-    <div class="images">
-      <img
-        title="Remove image"
-        *ngFor="let img of uploaded; let i = index"
-        [src]="getURL(img)"
-        alt="Uploaded Image"
-        (click)="uploaded.splice(i, 1)"
+<section class="block">
+  <h3>New Request</h3>
+  <form>
+    <mat-form-field appearance="outline">
+      <mat-label>Amount in USD</mat-label>
+      <input
+        type="number"
+        [(ngModel)]="amount"
+        name="amount"
+        placeholder="25"
+        matInput
       />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Transaction Hash</mat-label>
+      <input
+        type="text"
+        [(ngModel)]="transactionHash"
+        name="transactionHash"
+        placeholder="0x4d6e16e57d0fca5cfbb1aa86249826c9a78cf2da9f67e789ffaefb4d6623e08f"
+        matInput
+      />
+    </mat-form-field>
+    <section *ngIf="uploaded && uploaded.length > 0">
+      <div class="images">
+        <img
+          title="Remove image"
+          *ngFor="let img of uploaded; let i = index"
+          [src]="getURL(img)"
+          alt="Uploaded Image"
+          (click)="uploaded.splice(i, 1)"
+        />
+      </div>
+    </section>
+    <div class="actions">
+      <button (click)="files.click()" class="file-upload-btn">
+        Select Files <span class="material-icons">upload_file</span>
+      </button>
+      <button class="submit-request" (click)="submit()">Submit Request</button>
     </div>
-  </section>
-  <div class="actions">
-    <button (click)="files.click()" class="file-upload-btn">
-      Select Files <span class="material-icons">upload_file</span>
-    </button>
-    <button class="submit-request" (click)="submit()">Submit Request</button>
-  </div>
-</form>
+  </form>
+</section>
+<section class="my-requests block" *ngIf="myRequests && myRequests.length > 0">
+  <h3>My Requests</h3>
+  <table>
+    <thead>
+      <th>Date</th>
+      <th>Transaction Hash</th>
+      <th>Amount Requested</th>
+      <th>Status</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let request of myRequests">
+        <td>{{ request.createdAt | date: "short" }}</td>
+        <td>{{ request.transactionHash }}</td>
+        <td>USD {{ request.amount }}</td>
+        <td>
+          <span
+            class="status"
+            [ngClass]="request.status"
+            [title]="request.status"
+          ></span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="faq block">
+  <h3>Frequently Asked Questions (FAQ)</h3>
+  <ul>
+    <li>
+      <span>Where can I purchase the token?</span>
+      <p>
+        You can purchase the token here:
+        <a href="https://exchange.pancakeswap.finance/#/swap">Pancake Swap</a>
+      </p>
+    </li>
+    <li>
+      <span>Is it safe?</span>
+      <p>Yes the process is safe and all purchases are credited instantly.</p>
+    </li>
+    <li>
+      <span>What kind of proof should I include?</span>
+      <p>A screenshot of the transaction</p>
+    </li>
+  </ul>
+</section>
 
 <input
   type="file"

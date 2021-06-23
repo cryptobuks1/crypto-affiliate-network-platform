@@ -1,20 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/Services/auth.service';
+import { TokenService } from 'src/app/Services/token.service';
 import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private tokenService: TokenService) {}
 
   ngOnInit(): void {
-    console.log(this.authService.loggedIn());
-    if(this.authService.loggedIn()) {
+    if (this.tokenService.loggedIn()) {
       this.router.navigate(['/dashboard']);
     } else {
       this.router.navigate(['/login']);

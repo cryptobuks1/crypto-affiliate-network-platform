@@ -1,10 +1,12 @@
+@import "../components.scss";
+
 .alert {
-  position: absolute;
+  position: fixed;
   width: 100%;
   padding: 1rem;
-  width: 100%;
+  width: calc(100% - #{$navWidth});
   top: 0;
-  left: 0;
+  left: $navWidth;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   transition: all 200ms ease;
   z-index: 3;
@@ -35,5 +37,14 @@
 
   &.show {
     transform: translateY(0);
+  }
+}
+
+@media only screen and(max-width: 1200px) {
+  .alert {
+    left: 0;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
   }
 }

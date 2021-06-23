@@ -1,1 +1,163 @@
-<p>account-settings works!</p>
+<section class="overview" *ngIf="user">
+  <h1>Account Settings</h1>
+  <p>
+    Your email is not verified
+    <a *ngIf="!user.emailVerified" routerLink="/verify-email">verify now</a>
+  </p>
+</section>
+
+<form *ngIf="formData && user">
+  <h3>Personal Information</h3>
+  <mat-form-field appearance="outline">
+    <mat-label>Affiliate Code</mat-label>
+    <input
+      type="text"
+      name="affiliateCode"
+      [(ngModel)]="user.affiliateCode"
+      placeholder="Affiliate Code"
+      matInput
+    />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>First Name</mat-label>
+    <input
+      type="text"
+      name="firstName"
+      placeholder="First Name"
+      [(ngModel)]="formData.firstName"
+      matInput
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Last Name</mat-label>
+    <input
+      type="text"
+      name="lastName"
+      placeholder="Last Name"
+      [(ngModel)]="formData.lastName"
+      matInput
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Country</mat-label>
+    <mat-select [(ngModel)]="formData.country" name="country">
+      <mat-option *ngFor="let country of countries" [value]="country.name">
+        {{ country.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Address</mat-label>
+    <input
+      type="text"
+      name="address"
+      placeholder="Address"
+      [(ngModel)]="formData.address"
+      matInput
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Zip Code</mat-label>
+    <input
+      type="text"
+      name="zipCode"
+      placeholder="Zip Code"
+      [(ngModel)]="formData.zipCode"
+      matInput
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>City</mat-label>
+    <input
+      type="text"
+      name="city"
+      placeholder="City"
+      [(ngModel)]="formData.city"
+      matInput
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>State</mat-label>
+    <input
+      type="text"
+      name="state"
+      placeholder="State"
+      [(ngModel)]="formData.state"
+      matInput
+    />
+  </mat-form-field>
+
+  <button (click)="submit()">Update Account Settings</button>
+</form>
+<form *ngIf="passwordFormData && user">
+  <h3>Update Password</h3>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Old Password</mat-label>
+    <input
+      type="password"
+      name="oldPassword"
+      placeholder="Old Password"
+      [(ngModel)]="passwordFormData.oldPassword"
+      matInput
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>New Password</mat-label>
+    <input
+      type="password"
+      name="newPassword"
+      placeholder="New Password"
+      [(ngModel)]="passwordFormData.newPassword"
+      matInput
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Confirm New Password</mat-label>
+    <input
+      type="password"
+      name="confirmNewPassword"
+      placeholder="Confirm New Password"
+      [(ngModel)]="passwordFormData.confirmNewPassword"
+      matInput
+    />
+  </mat-form-field>
+
+  <button (click)="updatePassword()">Update Password</button>
+</form>
+
+<form *ngIf="emailFormData && user">
+  <h3>Update Email</h3>
+
+  <mat-form-field appearance="outline">
+    <mat-label>New Email</mat-label>
+    <input
+      type="email"
+      name="newEmail"
+      placeholder="New Email"
+      [(ngModel)]="emailFormData.newEmail"
+      matInput
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Confirm New Email</mat-label>
+    <input
+      type="email"
+      name="confirmNewEmail"
+      placeholder="Confirm New Email"
+      [(ngModel)]="emailFormData.confirmNewEmail"
+      matInput
+    />
+  </mat-form-field>
+
+  <button (click)="updateEmail()">Update Email</button>
+</form>

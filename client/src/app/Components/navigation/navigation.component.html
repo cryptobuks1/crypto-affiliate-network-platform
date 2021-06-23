@@ -2,12 +2,12 @@
   <img src="/assets/img/BNBG-1.png" alt="" />
 
   <div class="links">
-    <div *ngIf="!authService.loggedIn()">
+    <div *ngIf="!tokenService.loggedIn()">
       <a routerLink="/login">Login</a>
       <a routerLink="/register">Register</a>
     </div>
 
-    <div *ngIf="authService.loggedIn()">
+    <div *ngIf="tokenService.loggedIn()">
       <a routerLink="/dashboard/home">Dashboard</a>
       <a routerLink="/dashboard/claim-buy">Buy & Claim BNBG</a>
       <a routerLink="/dashboard/reports">Affiliate Reports</a>

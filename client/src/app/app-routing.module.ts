@@ -16,6 +16,7 @@ import { DashboardComponent } from './Pages/dashboard/dashboard.component';
 import { ReportsComponent } from './Pages/dashboard/reports/reports.component';
 import { AccountSettingsComponent } from './Pages/dashboard/account-settings/account-settings.component';
 import { AdministrationComponent } from './Pages/dashboard/administration/administration.component';
+import { IdentityVerificationComponent } from './Pages/identity-verification/identity-verification.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -31,7 +32,11 @@ const routes: Routes = [
     component: ResetPasswordComponent,
     canActivate: [NotAuthGuard],
   },
-
+  {
+    path: 'identity-verification',
+    component: IdentityVerificationComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'dashboard',
     component: DashboardComponent,
