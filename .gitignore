@@ -31,3 +31,4 @@
 /server/.env
 /server/utils/key.pem
 /server/utils/cert.pem
+/client/src/assets/css/theme.css
