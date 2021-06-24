@@ -1,12 +1,12 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import connect from './database';
+import database from './database';
 import { app, server } from './server';
 import { io } from './sockets';
 
 dotenv.config();
-connect();
+database.connect();
 app.use(express.json());
 
 import index from './routers/index';
@@ -26,5 +26,5 @@ app.use('/api/admin', extract, auth, isAdmin, admin);
 io.on('connection', stream);
 
 server.listen(process.env.PORT, () =>
-    console.log(`Server listening on ${process.env.PORT}`)
+    console.log(`Server listening on ${process.env.PORT} 👂`)
 );

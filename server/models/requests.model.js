@@ -48,31 +48,46 @@ async function findRequests(filter) {
     }
 }
 
-async function approveRequest(requestId) {
+async function approveRequest(requestId, amount) {
     try {
         const request = await RequestModel.findOne({ _id: requestId });
         const user = await userModel.findUser({ _id: request.requestedBy });
 
-        if (user.referralCode != null) {
+        if (user.referralCode !== null) {
             const referredBy = await userModel.findUser({
                 affiliateCode: user.referralCode,
             });
-            referredBy.balance +=
-                (request.amount / 100) * referredBy.percentage;
+
+            referredBy.balance += (amount / 100) * referredBy.percentage;
+
             await balanceHistoryModel.create({
                 amount: referredBy.balance,
                 belongsTo: referredBy._id,
+                summary: true,
+            });
+
+            await balanceHistoryModel.create({
+                amount: (amount / 100) * referredBy.percentage,
+                belongsTo: referredBy._id,
+                summary: false,
             });
             await referredBy.save();
         }
 
         request.approved = true;
         user.pendingBalance -= request.amount;
-        user.balance += request.amount;
+        user.balance += amount;
 
         await balanceHistoryModel.create({
             amount: user.balance,
             belongsTo: user._id,
+            summary: true,
+        });
+
+        await balanceHistoryModel.create({
+            amount: amount,
+            belongsTo: user._id,
+            summary: false,
         });
 
         request.status = 'approved';

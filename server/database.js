@@ -13,10 +13,19 @@ const mongooseOptions = {
 async function connect() {
     try {
         await mongoose.connect(process.env.DB_URI, mongooseOptions);
-        console.log('MongoDB has connected');
+        console.log('MongoDB has connected ✔️');
     } catch (err) {
         console.log(err);
     }
 }
 
-export default connect;
+async function disconnect() {
+    try {
+        await mongoose.disconnect();
+        console.log('MongoDB has disconnected ✔️');
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+export default { connect, disconnect };

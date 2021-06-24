@@ -14,6 +14,10 @@ const chatSchema = new Schema({
         type: String,
         required: true,
     },
+    ended: {
+        type: Boolean,
+        default: false,
+    },
     startedBy: {
         type: Object,
         required: true,
@@ -66,4 +70,12 @@ async function sendMessage(data) {
     }
 }
 
-export default { startChat, findChat, findChats, sendMessage };
+async function endChat(id) {
+    try {
+        return await ChatModel.findOneAndUpdate({ _id: id }, { ended: true });
+    } catch (err) {
+        return Promise.reject(err);
+    }
+}
+
+export default { startChat, findChat, findChats, sendMessage, endChat };

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from 'src/app/Services/http.service';
 import { iHttpResponse } from 'src/app/Interfaces/http.interface';
 import { AlertsStoreService } from 'src/app/Store/alerts-store.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reset-password',
@@ -16,6 +17,7 @@ export class ResetPasswordComponent implements OnInit {
   public resetCode: string = '';
 
   constructor(
+    private router: Router,
     private alertsStoreService: AlertsStoreService,
     private httpService: HttpService
   ) {}
@@ -46,6 +48,9 @@ export class ResetPasswordComponent implements OnInit {
         confirmPassword: this.confirmPassword,
       })
       .subscribe((response: iHttpResponse) => {
+        if (response.success) {
+          setTimeout(() => this.router.navigate(['/login']), 2800);
+        }
         this.alertsStoreService.setAlert({
           text: response.message,
           show: true,

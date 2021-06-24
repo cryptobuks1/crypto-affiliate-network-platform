@@ -38,6 +38,12 @@ export class LiveChatComponent implements OnInit {
       this.socket.on(`message new ${id}`, (data: any) => {
         this.chatData.messages.push(data);
       });
+
+      this.socket.on(`chat end ${id}`, () => {
+        alert('Admin has ended the chat');
+        this.windowOpen = false;
+        this.endChat();
+      });
     }
   }
 
@@ -56,16 +62,9 @@ export class LiveChatComponent implements OnInit {
   }
 
   endChat() {
-    this.streamService.sendMessage({
-      message: `User Ended Chat`,
-      id: this.chatData._id,
-      fullName: 'Event:',
-      admin: false,
-    });
     this.stage = 'starting';
     this.chatMessage = '';
     this.chatData = undefined;
-    this.windowOpen = false;
     sessionStorage.removeItem('chatId');
   }
 
@@ -99,6 +98,7 @@ export class LiveChatComponent implements OnInit {
           this.listenForMessages(response.data._id);
           sessionStorage.setItem('chatId', response.data._id);
           this.stage = 'chatting';
+          this.socket.emit('chat new', response.data);
         } else {
           this.alertsStoreService.setAlert({
             text: response.message,

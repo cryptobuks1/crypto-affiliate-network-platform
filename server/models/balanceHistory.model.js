@@ -14,6 +14,10 @@ const balanceHistorySchema = new Schema({
         type: Number,
         required: true,
     },
+    summary: {
+        type: Boolean,
+        default: true,
+    },
     belongsTo: {
         type: Schema.Types.ObjectId,
         ref: 'User',
@@ -34,4 +38,12 @@ async function create(data) {
     }
 }
 
-export default { create };
+async function getHistory(filter) {
+    try {
+        return await BalanceHistoryModel.find(filter);
+    } catch (err) {
+        return Promise.reject(err);
+    }
+}
+
+export default { create, getHistory };

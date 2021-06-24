@@ -25,6 +25,7 @@ export class AccountSettingsComponent implements OnInit {
     newEmail: '',
     confirmNewEmail: '',
   };
+
   public user: any | undefined;
 
   constructor(

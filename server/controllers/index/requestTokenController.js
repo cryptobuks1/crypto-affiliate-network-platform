@@ -1,14 +1,26 @@
 import userModel from '../../models/user.model';
 import randStr from '../../utils/randStr';
+import mail from '../../utils/mail';
+import dotenv from 'dotenv';
+dotenv.config();
 
 async function requestToken(req, res) {
     try {
-        const resetToken = randStr(8);
+        const resetToken = randStr(15);
         await userModel.setResetToken(req.body, {
             resetPasswordToken: resetToken,
         });
+
+        const user = await userModel.findUser({ email: req.body.email });
+
+        await mail.send({
+            receiver: user.email,
+            subject: 'Your password reset token',
+            html: resetToken,
+        });
+
         return res.json({
-            message: `an email has been sent to ${req.body.email} with a verification code.`,
+            message: `an email has been sent to ${user.email} with a verification code.`,
             success: true,
             data: null,
         });

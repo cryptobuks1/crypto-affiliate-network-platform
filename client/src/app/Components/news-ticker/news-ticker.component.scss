@@ -14,3 +14,28 @@
     margin: 0 1rem;
   }
 }
+
+@media only screen and(max-width:1600px) {
+  .news-ticker {
+    p {
+      font-size: 0.75rem;
+    }
+  }
+}
+
+@media only screen and(max-width:1400px) {
+  .news-ticker {
+    flex-direction: column;
+    p {
+      font-size: 0.75rem;
+    }
+  }
+}
+
+@media only screen and(max-width:490px) {
+  .news-ticker {
+    p {
+      font-size: 0.55rem;
+    }
+  }
+}

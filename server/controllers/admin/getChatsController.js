@@ -2,7 +2,7 @@ import chatModel from '../../models/chat.model';
 
 async function getChats(req, res) {
     try {
-        const chats = await chatModel.findChats({});
+        const chats = await chatModel.findChats({ ended: false });
         return res.json({
             message: `found ${chats.length} chats`,
             success: true,

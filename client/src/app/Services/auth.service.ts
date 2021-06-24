@@ -103,4 +103,36 @@ export class AuthService {
       { headers: this.tokenService.headers() }
     );
   }
+
+  balanceHistory(): Observable<iHttpResponse> {
+    return this.httpClient.get<iHttpResponse>(
+      `${this.serverAddr}/dashboard/balance-history`,
+      {
+        headers: this.tokenService.headers(),
+      }
+    );
+  }
+
+  inviteFriend(data: any): Observable<iHttpResponse> {
+    return this.httpClient.post<iHttpResponse>(
+      `${this.serverAddr}/dashboard/invite-friend`,
+      data,
+      { headers: this.tokenService.headers() }
+    );
+  }
+
+  newKycRequest(data: any): Observable<iHttpResponse> {
+    return this.httpClient.post<iHttpResponse>(
+      `${this.serverAddr}/dashboard/kyc-request `,
+      data,
+      { headers: this.tokenService.headers() }
+    );
+  }
+
+  myKyc(): Observable<iHttpResponse> {
+    return this.httpClient.get<iHttpResponse>(
+      `${this.serverAddr}/dashboard/my-kyc`,
+      { headers: this.tokenService.headers() }
+    );
+  }
 }

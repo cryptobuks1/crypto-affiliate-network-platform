@@ -7,7 +7,17 @@ export default function (socket) {
         socket.broadcast.emit(`message new ${data.id}`, data);
     });
 
-    socket.on('disconnect', () => {
-        console.log('disconnect');
+    socket.on('chat new', (data) => {
+        socket.broadcast.emit(`chat new sync`, data);
     });
+
+    socket.on('chat end', (data) => {
+        console.log(data);
+        chatModel.endChat(data.id);
+        socket.broadcast.emit(`chat end ${data.id}`, {});
+    });
+
+    // socket.on('disconnect', () => {
+    //     console.log('disconnect');
+    // });
 }

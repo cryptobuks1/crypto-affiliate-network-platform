@@ -31,6 +31,16 @@
 <form *ngIf="formData && user">
   <h3>Personal Information</h3>
   <mat-form-field appearance="outline">
+    <mat-label>Username</mat-label>
+    <input
+      [value]="user.username"
+      placeholder="Username"
+      name="username"
+      disabled
+      matInput
+    />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
     <mat-label>Affiliate Code</mat-label>
     <input
       type="text"
@@ -164,9 +174,20 @@
   <h3>Update Email</h3>
 
   <mat-form-field appearance="outline">
+    <mat-label>Current Email</mat-label>
+    <input
+      type="email"
+      name="email"
+      placeholder="Email"
+      disabled
+      [value]="user.email"
+      matInput
+    />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
     <mat-label>Password</mat-label>
     <input
-      type="Password"
+      type="password"
       name="password"
       placeholder="Password"
       [(ngModel)]="emailFormData.password"

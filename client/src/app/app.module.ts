@@ -12,6 +12,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Pages/auth/login/login.component';
@@ -70,6 +71,9 @@ import { LiveChatComponent } from './Components/live-chat/live-chat.component';
     MatButtonModule,
     MatTabsModule,
     MatExpansionModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts'),
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

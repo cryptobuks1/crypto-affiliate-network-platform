@@ -21,3 +21,18 @@ section {
     }
   }
 }
+
+@media only screen and(max-width: 620px) {
+  section {
+    ul {
+      li {
+        p:first-child {
+          max-width: 30%;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
+}

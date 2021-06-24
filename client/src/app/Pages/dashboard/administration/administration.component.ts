@@ -19,7 +19,11 @@ export class AdministrationComponent implements OnInit {
   public chat: any | undefined;
   private socket: any | undefined;
   public message: string | undefined;
-
+  public requestsStore: any[] | undefined;
+  public filterByStatusValue: string = 'all';
+  public searchStr: string = '';
+  public asideOpen: boolean = false;
+  
   constructor(
     private alertsStoreService: AlertsStoreService,
     public adminService: AdminService,
@@ -38,6 +42,10 @@ export class AdministrationComponent implements OnInit {
 
       this.fetchRequests();
       this.fetchChats();
+
+      this.socket.on('chat new sync', (data: any) => {
+        this.chats?.push(data);
+      });
     });
   }
 
@@ -48,75 +56,71 @@ export class AdministrationComponent implements OnInit {
   fetchChats(): void {
     this.adminService.getChats().subscribe((response: iHttpResponse) => {
       if (response.success) {
-        this.chats = response.data;
-        this.listenForEvents(response.data.map((chat: any) => chat._id));
+        if (response.data.length > 0) {
+          this.chats = response.data;
+          this.selectChat(0);
+        }
       }
     });
   }
 
-  leaveChat(): void {
-    this.chat = undefined;
-    this.inChat = false;
+  endChat(): void {
+    this.socket.emit('chat end', { id: this.chat._id });
+    this.chats?.splice(this.chats?.findIndex((chat: any) => chat._id === this.chat._id), 1);
+    if (this.chats !== undefined) {
+      this.chat = this.selectChat(0);
+    }
   }
 
   selectChat(index: number): void {
     if (this.chats !== undefined) {
       this.chat = this.chats[index];
       this.inChat = true;
+      this.socket.on(`message new ${this.chat._id}`, (data: any) => {
+        this.chat.messages.push(data);
+      });
     }
   }
 
   sendMessage(): void {
-    this.socket.emit('message new', {
-      admin: true,
-      id: this.chat._id,
-      fullName: 'Admin',
-      message: this.message,
-    });
-    this.chat.messages.push({
-      admin: true,
-      id: this.chat._id,
-      fullName: 'Admin',
-      message: this.message,
-    });
+    this.socket.emit('message new', { admin: true, id: this.chat._id, fullName: 'Admin', message: this.message });
+    this.chat.messages.push({ admin: true, id: this.chat._id, fullName: 'Admin', message: this.message });
     this.message = '';
-  }
-
-  listenForEvents(ids: any): void {
-    ids.forEach((id: string) => {
-      this.socket.on(`message new ${id}`, (data: any) => {
-        let chat = this.chats?.find((chat) => chat._id === id);
-        chat.messages.push(data);
-      });
-    });
   }
 
   fetchRequests(): void {
     this.adminService.requests().subscribe((response: iHttpResponse) => {
       if (response.success) {
         this.requests = response.data;
+        this.requestsStore = response.data;
       }
     });
   }
 
-  approve(id: string): void {
-    this.adminService.approve({ id }).subscribe((response: iHttpResponse) => {
-      if (response.success) {
-        this.fetchRequests();
-      }
+  approve(id: string, amount: number): void {
+    this.adminService
+      .approve({ id, amount })
+      .subscribe((response: iHttpResponse) => {
+        if (response.success) {
+          let request = this.requests?.find((request: any) => request._id === id);
+          request.approved = true;
+          request.status = 'approved';
+        }
 
-      this.alertsStoreService.setAlert({
-        text: response.message,
-        type: `${response.success ? 'success' : 'error'}`,
-        show: true,
+        this.alertsStoreService.setAlert({
+          text: response.message,
+          type: `${response.success ? 'success' : 'error'}`,
+          show: true,
+        });
       });
-    });
   }
 
   reject(id: string): void {
     this.adminService.reject({ id }).subscribe((response: iHttpResponse) => {
       if (response.success) {
-        this.fetchRequests();
+        let request = this.requests?.find((request: any) => request._id === id);
+        request.approved = false;
+        request.status = 'rejected';
       }
       this.alertsStoreService.setAlert({
         text: response.message,
@@ -124,5 +128,24 @@ export class AdministrationComponent implements OnInit {
         show: true,
       });
     });
+  }
+
+  filter(searchStr: string): void {
+    if (searchStr.length <= 0) {
+      this.requests = this.requestsStore;
+    } else {
+      let regex = new RegExp(`${searchStr.toLowerCase()}.*`);
+      this.requests = this.requestsStore?.filter((request: any) => {
+        return regex.test(request.requestedBy.username.toLowerCase());
+      });
+    }
+  }
+
+  filterByStatus(val: string) {
+    if (val === 'all') {
+      this.fetchRequests();
+    } else {
+      this.requests = this.requestsStore?.filter((request: any) => request.status === val);
+    }
   }
 }

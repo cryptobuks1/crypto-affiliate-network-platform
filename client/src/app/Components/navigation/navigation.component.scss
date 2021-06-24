@@ -61,10 +61,12 @@ nav {
     pointer-events: none;
     z-index: 10;
     transition: width 225ms linear;
+    border-right: none;
 
     &.open {
       width: $navWidth;
       pointer-events: auto;
+      border-right: 1px solid #ffd700;
     }
   }
 }

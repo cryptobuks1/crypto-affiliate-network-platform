@@ -13,6 +13,10 @@ import updatePasswordController from '../controllers/users/updatePasswordControl
 import setUserTokenController from '../controllers/users/setUserTokenController';
 import verifyEmailController from '../controllers/users/verifyEmailController';
 import updateEmailController from '../controllers/users/updateEmailController';
+import balanceHistoryController from '../controllers/users/balanceHistoryController';
+import inviteFriendController from '../controllers/users/inviteFriendController';
+import newKycController from '../controllers/users/kycController';
+import myKycController from '../controllers/users/getKycController';
 
 router.get('/profile', profileController);
 router.post('/upload', upload.array('files', 10), uploadController);
@@ -25,5 +29,10 @@ router.put('/profile/update-password', updatePasswordController);
 router.get('/profile/set-token', setUserTokenController);
 router.put('/profile/verify-email', verifyEmailController);
 router.put('/profile/update-email', updateEmailController);
+
+router.get('/dashboard/balance-history', balanceHistoryController);
+router.post('/dashboard/invite-friend', inviteFriendController);
+router.post('/dashboard/kyc-request', newKycController);
+router.get('/dashboard/my-kyc', myKycController);
 
 export default router;

@@ -22,6 +22,10 @@
     "@angular/platform-browser-dynamic": "~11.0.0",
     "@angular/router": "~11.0.0",
     "@auth0/angular-jwt": "^5.0.2",
+    "@juggle/resize-observer": "^3.3.1",
+    "canvasjs": "^1.8.3",
+    "echarts": "^5.1.2",
+    "ngx-echarts": "^7.0.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
@@ -30,6 +34,7 @@
     "@angular-devkit/build-angular": "~0.1100.1",
     "@angular/cli": "~11.0.1",
     "@angular/compiler-cli": "~11.0.0",
+    "@types/canvasjs": "^1.9.6",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
     "@types/three": "^0.129.1",

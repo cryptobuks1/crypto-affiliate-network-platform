@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenService } from 'src/app/Services/token.service';
 import { Router } from '@angular/router';
+import { PartialObserver } from 'rxjs';
 
 @Component({
   selector: 'app-navigation',
@@ -12,7 +13,11 @@ export class NavigationComponent implements OnInit {
 
   constructor(private router: Router, public tokenService: TokenService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.router.events.subscribe((e: any) => {
+      this.navState = false;
+    });
+  }
 
   logout(): void {
     this.tokenService.clearToken();

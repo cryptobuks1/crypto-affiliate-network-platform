@@ -11,7 +11,6 @@ import { serverAddr } from 'src/app/Services/settings';
   styleUrls: ['./claim-buy.component.scss'],
 })
 export class ClaimBuyComponent implements OnInit {
-  private __ngContext__: any;
   public uploaded: string[] | undefined;
   public myRequests: any[] | undefined;
   public amount: number | undefined;

@@ -34,6 +34,14 @@ async function startChat(req, res) {
                 email: req.body.email,
                 fullName: req.body.fullName,
             },
+            messages: [
+                {
+                    admin: false,
+                    fullName: req.body.fullName,
+                    message: req.body.description,
+                    createdAt: new Date(),
+                },
+            ],
         });
 
         return res.json({

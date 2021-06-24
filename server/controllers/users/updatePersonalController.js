@@ -3,6 +3,12 @@ import userModel from '../../models/user.model';
 
 async function updatePersonalDetails(req, res) {
     try {
+        const user = await userModel.findUser({ _id: req.session.uid });
+        const updated = await userModel.updateReferralCodes(
+            user.affiliateCode,
+            req.body.affiliateCode
+        );
+
         await userModel.updateUser(req.session.uid, {
             affiliateCode: req.body.affiliateCode,
         });

@@ -11,9 +11,15 @@
     <p>Pending Approval</p>
   </div>
 
-  <div class="dashboard-grid-item">
+  <div class="dashboard-grid-item graph">
     <div class="icon"><span class="material-icons">trending_up</span></div>
-    <h3>Portfolio</h3>
+    <div
+      *ngIf="!loadingChart"
+      echarts
+      [options]="options"
+      class="graph-container"
+    ></div>
+    <p *ngIf="loadingChart">Loading..</p>
   </div>
 
   <div class="dashboard-grid-item verify-identity">
@@ -26,7 +32,8 @@
       >Verify Identity</a
     >
   </div>
-  <div class="dashboard-grid-item">
+
+  <div class="dashboard-grid-item setup-payments">
     <div class="icon right">
       <span class="material-icons">credit_card</span>
     </div>
@@ -39,14 +46,22 @@
     <p>{{ affiliateLink() }}</p>
     <mat-form-field appearance="outline">
       <mat-label>Enter email</mat-label>
-      <input matInput placeholder="Enter email" />
+      <input matInput placeholder="Enter email" [(ngModel)]="email" />
     </mat-form-field>
-    <button color="primary" mat-raised-button>Invite Friend</button>
+    <button (click)="inviteFriend()" color="primary" mat-raised-button>
+      Invite Friend
+    </button>
   </div>
 
-  <div class="dashboard-grid-item">
+  <div class="dashboard-grid-item earings-history">
     <div class="icon right"><span class="material-icons">history</span></div>
     <h3>Earnings History</h3>
+    <div class="list" *ngIf="balanceHistory">
+      <div class="list-item" *ngFor="let item of balanceHistory">
+        <p>{{ item.createdAt | date: "short" }}</p>
+        <p>USD {{ roundInt(item.amount) }}</p>
+      </div>
+    </div>
   </div>
 </div>
 

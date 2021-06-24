@@ -77,45 +77,51 @@ const userSchema = new Schema({
 const UserModel = mongoose.model('User', userSchema);
 
 async function signUp(data, ipAddr) {
-    if (
-        data.referralCode != undefined ||
-        (data.referralCode != null && data.referralCode.length > 0)
-    ) {
-        const referer = await UserModel.findOne({
-            affiliateCode: data.referralCode,
-        });
-
-        try {
-            const salt = bcrypt.genSaltSync(10);
-            const hash = bcrypt.hashSync(data.password, salt);
-
-            const user = await new UserModel({
-                username: data.username,
-                password: hash,
-                email: data.email,
-                affiliateCode: randStr(15),
-                referralCode: data.referralCode || null,
-                tos: data.tos || false,
-            }).save();
-
-            if (referer != null) {
-                referer.referrals.push(user._id);
-                await referer.save();
+    console.log('data', data);
+    try {
+        let referer = null;
+        const referralCodeExists =
+            data.referralCode !== null &&
+            data.referralCode !== undefined &&
+            data.referralCode.length > 0;
+        if (referralCodeExists) {
+            try {
+                referer = await UserModel.findOne({
+                    affiliateCode: data.referralCode,
+                });
+            } catch (err) {
+                console.log(err);
             }
-
-            await personalModel.createPersonal({ belongsTo: user._id });
-            await loginHistoryModel.create({
-                belongsTo: user._id,
-                success: true,
-                ipAddr: ipAddr,
-            });
-            return Promise.resolve(user);
-        } catch (err) {
-            return Promise.reject('sign up failed');
         }
-    }
 
-    return Promise.reject('hang tight...');
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(data.password, salt);
+
+        const user = await new UserModel({
+            username: data.username,
+            password: hash,
+            email: data.email,
+            affiliateCode: randStr(15),
+            referralCode: data.referralCode || null,
+            tos: data.tos || false,
+        }).save();
+
+        if (referer !== null) {
+            referer.referrals.push(user._id);
+            await referer.save();
+        }
+
+        await personalModel.createPersonal({ belongsTo: user._id });
+        await loginHistoryModel.create({
+            belongsTo: user._id,
+            success: true,
+            ipAddr: ipAddr,
+        });
+        return Promise.resolve(user);
+    } catch (err) {
+        console.log(err);
+        return Promise.reject('sign up failed');
+    }
 }
 
 async function signIn(data, ipAddr) {
@@ -197,6 +203,18 @@ async function updateUser(id, update) {
     }
 }
 
+async function updateReferralCodes(oldCode, newCode) {
+    try {
+        await UserModel.updateMany(
+            { referralCode: oldCode },
+            { referralCode: newCode }
+        );
+        return Promise.resolve('updated!');
+    } catch (err) {
+        return Promise.reject(err);
+    }
+}
+
 export default {
     signUp,
     signIn,
@@ -205,4 +223,5 @@ export default {
     updatePassword,
     updateUser,
     findUsers,
+    updateReferralCodes,
 };

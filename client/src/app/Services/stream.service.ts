@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { serverAddr } from './settings';
 
 declare const io: any;
 
@@ -9,7 +10,7 @@ export class StreamService {
   private socket: any | undefined;
 
   constructor() {
-    this.socket = io('http://localhost:3000');
+    this.socket = io(serverAddr);
   }
 
   sendMessage(data: any): void {

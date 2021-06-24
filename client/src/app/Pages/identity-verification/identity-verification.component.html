@@ -1,1 +1,64 @@
-<p>identity-verification works!</p>
+<section class="page container">
+  <h1>Identity Verification</h1>
+  <section *ngIf="!myKycData">
+    <form>
+      <button
+        (click)="files.click()"
+        class="file-upload-btn"
+        color="primary"
+        aria-label="upload file button"
+        title="Select files"
+        mat-fab
+      >
+        <span class="material-icons">upload_file</span>
+      </button>
+
+      <div class="uploaded" *ngFor="let file of uploaded">
+        <img [src]="getURL(file.src)" alt="Uploaded file" />
+        <mat-form-field appearance="outline">
+          <mat-label>Which type of file is this?</mat-label>
+          <mat-select [(ngModel)]="file.description" name="fileType">
+            <mat-option value="idCardFront">Identity Card Front</mat-option>
+            <mat-option value="idCardBack">Identity Card Back</mat-option>
+            <mat-option value="passportFront">Passport Front</mat-option>
+            <mat-option value="passportBack">Passport Back</mat-option>
+            <mat-option value="creditCardFront">Credit Card Front</mat-option>
+            <mat-option value="creidtCardBack">Credit Card Back</mat-option>
+            <mat-option value="utilityBill">Utility Bill</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <button
+        class="submit-form"
+        color="primary"
+        *ngIf="uploaded && uploaded.length > 0"
+        (click)="submit()"
+        mat-raised-button
+      >
+        Send Files
+      </button>
+    </form>
+  </section>
+
+  <section *ngIf="myKycData" class="myKycData">
+    <p>Submitted: {{ myKycData.createdAt | date: "short" }}</p>
+    <p>Status: {{ myKycData.status }}</p>
+    <p>Files: {{ myKycData.files.length }}</p>
+    <br />
+    <div class="files">
+      <div class="file" *ngFor="let file of myKycData.files">
+        <img [src]="getURL(file.src)" />
+        <p>{{ strConv(file.description) }}</p>
+      </div>
+    </div>
+  </section>
+</section>
+
+<input
+  type="file"
+  (change)="upload($event)"
+  accept="image/jpeg, image/jpg, image/png"
+  #files
+  multiple
+/>

@@ -1,30 +1,35 @@
 import dotenv from 'dotenv';
-import nodemailer from 'nodemailer';
+import mailgun from 'mailgun-js';
 
 dotenv.config();
 
 async function send(settings) {
-    try {
-        let transporter = nodemailer.createTransport({
-            host: 'smtp.gmail.com',
-            port: 587,
-            secure: false,
-            auth: {
-                user: process.env.EMAIL_ADDR,
-                pass: process.env.EMAIL_PW,
-            },
-        });
+    const auth = {
+        apiKey: process.env.MAILGUN_API_KEY,
+        domain: process.env.MAILGUN_DOMAIN,
+    };
 
-        await transporter.sendMail({
-            from: process.env.EMAIL,
-            to: settings.receiver,
-            subject: settings.subject,
-            // text: "something went wrong",
-            html: settings.html,
-        });
-    } catch (err) {
-        Promise.reject(err);
-    }
+    const data = {
+        from: 'noreply <me@samples.mailgun.org>',
+        to: settings.receiver,
+        subject: settings.subject,
+        text: '',
+        html: settings.html,
+    };
+
+    console.log(settings);
+
+    return new Promise((resolve, reject) => {
+        mailgun(auth)
+            .messages()
+            .send(data, (err, body) => {
+                if (err) {
+                    return reject(err);
+                }
+
+                return resolve(body);
+            });
+    });
 }
 
 export default { send };
