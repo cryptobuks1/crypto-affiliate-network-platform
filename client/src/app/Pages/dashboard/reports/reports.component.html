@@ -1,9 +1,18 @@
-<section>
-  <h3>My Referrals ({{ referrals.length }})</h3>
+<section *ngIf="earnings">
+  <h3>My Referrals ({{ earnings.length }})</h3>
+  <div class="filter">
+    <select [(ngModel)]="filterOption" (change)="filter(filterOption)">
+      <option value="htl">High To Low</option>
+      <option value="lth">Low To High</option>
+      <option value="nto">New To Old</option>
+      <option value="otn">Old To New</option>
+    </select>
+  </div>
   <ul>
-    <li *ngFor="let referral of referrals">
-      <p>{{ referral.email }}</p>
-      <p>{{ referral.createdAt | date: "medium" }}</p>
+    <li *ngFor="let earning of earnings">
+      <p>USD {{ roundInt(earning.amount) }}</p>
+      <p>{{ earning.createdAt | date: 'short' }}</p>
+      <p>{{ earning.cameFrom.username }}</p>
     </li>
   </ul>
 </section>

@@ -8,7 +8,7 @@ const users = [];
 const hashes = JSON.parse(fs.readFileSync('txthashes.json'));
 let usersAdded = 0;
 let requestsAdded = 0;
-let referralCode = 'AeJBwBiFlWQ54Uq';
+let referralCode = 'rcxelBMgpdtCIqI';
 
 /*
     duplication errors might occur due to txthashes.json 
@@ -19,14 +19,11 @@ let referralCode = 'AeJBwBiFlWQ54Uq';
     await database.connect();
 })();
 
+const usedHashes = [];
+
 async function addUsers(n) {
     try {
         for (let i = 0; i < n; i++) {
-            if (users.length > 0) {
-                referralCode =
-                    users[Math.floor(Math.random() * users.length)]
-                        .affiliateCode;
-            }
 
             let data = {
                 username: faker.internet.userName(),
@@ -45,7 +42,6 @@ async function addUsers(n) {
             }
 
             usersAdded++;
-            users.push(newUser);
         }
 
         console.log('Users added', usersAdded);
@@ -63,18 +59,24 @@ async function addUsers(n) {
 async function addRequest(id) {
     const hash = hashes[Math.floor(Math.random() * hashes.length)];
 
-    let data = {
-        requestedBy: id,
-        amount: Math.round(Math.random() * 100),
-        proof: [
-            'files-1624360745087.PNG',
-            'files-1624355270023.PNG',
-            'files-1624473820434.PNG',
-        ],
-        transactionHash: hash,
-    };
+    if (!usedHashes.includes(hash)) {
+        usedHashes.push(hash);
 
-    await requestsModel.newRequest(data);
+        let data = {
+            requestedBy: id,
+            amount: Math.ceil(Math.random() * 100),
+            proof: [
+                'files-1624360745087.PNG',
+                'files-1624355270023.PNG',
+                'files-1624473820434.PNG',
+            ],
+            transactionHash: hash,
+        };
+
+        await requestsModel.newRequest(data);
+    } else {
+        return addRequest(id);
+    }
 }
 
-addUsers(50);
+addUsers(125);

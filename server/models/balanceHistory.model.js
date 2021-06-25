@@ -46,4 +46,12 @@ async function getHistory(filter) {
     }
 }
 
-export default { create, getHistory };
+async function insertMany(data) {
+    try {
+        return await BalanceHistoryModel.insertMany(data);
+    } catch (err) {
+        return Promise.reject(err);
+    }
+}
+
+export default { create, getHistory, insertMany };

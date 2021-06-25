@@ -1,6 +1,6 @@
 <section class="news-ticker" *ngIf="priceData && dataPoints">
   <p *ngFor="let dp of dataPoints">
     {{ dp.label }}
-    {{ dp.price }}
+    {{ roundInt(dp.price) }}
   </p>
 </section>

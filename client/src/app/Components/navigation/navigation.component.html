@@ -1,6 +1,8 @@
 <nav [ngClass]="{ open: navState }">
-  <img src="/assets/img/BNBG-1.png" alt="" />
-
+  <div class="logo">
+    <img src="/assets/img/BNBG-1.png" alt="" />
+  </div>
+  
   <div class="links">
     <div *ngIf="!tokenService.loggedIn()">
       <a routerLink="/login">Login</a>

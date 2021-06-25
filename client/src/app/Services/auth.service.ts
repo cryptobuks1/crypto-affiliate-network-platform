@@ -17,122 +17,96 @@ export class AuthService {
   ) {}
 
   profile(): Observable<iHttpResponse> {
-    return this.httpClient.get<iHttpResponse>(`${this.serverAddr}/profile`, {
-      headers: this.tokenService.headers(),
-    });
+    return this.httpClient.get<iHttpResponse>(`${this.serverAddr}/profile`, 
+    { headers: this.tokenService.headers() });
   }
 
   upload(data: FormData): Observable<iHttpResponse> {
-    return this.httpClient.post<iHttpResponse>(
-      `${this.serverAddr}/upload`,
-      data,
+    return this.httpClient.post<iHttpResponse>(`${this.serverAddr}/upload`, data,
       { headers: this.tokenService.headers() }
     );
   }
 
   requestMoney(data: any): Observable<iHttpResponse> {
-    return this.httpClient.post<iHttpResponse>(
-      `${this.serverAddr}/request-money`,
-      data,
-      {
-        headers: this.tokenService.headers(),
-      }
+    return this.httpClient.post<iHttpResponse>(`${this.serverAddr}/request-money`, data,
+      { headers: this.tokenService.headers() }
     );
   }
 
   myReferrals(): Observable<iHttpResponse> {
-    return this.httpClient.get<iHttpResponse>(
-      `${this.serverAddr}/my-referrals`,
-      {
-        headers: this.tokenService.headers(),
-      }
+    return this.httpClient.get<iHttpResponse>(`${this.serverAddr}/my-referrals`,
+      { headers: this.tokenService.headers() }
     );
   }
 
   myRequests(): Observable<iHttpResponse> {
-    return this.httpClient.get<iHttpResponse>(
-      `${this.serverAddr}/my-requests`,
-      {
-        headers: this.tokenService.headers(),
-      }
+    return this.httpClient.get<iHttpResponse>(`${this.serverAddr}/my-requests`,
+      { headers: this.tokenService.headers() }
     );
   }
 
   myPersonalDetails(): Observable<iHttpResponse> {
-    return this.httpClient.get<iHttpResponse>(
-      `${this.serverAddr}/profile/personal`,
+    return this.httpClient.get<iHttpResponse>(`${this.serverAddr}/profile/personal`,
       { headers: this.tokenService.headers() }
     );
   }
 
   updateMyPersonalDetails(data: any): Observable<iHttpResponse> {
-    return this.httpClient.put<iHttpResponse>(
-      `${this.serverAddr}/profile/personal`,
-      data,
+    return this.httpClient.put<iHttpResponse>(`${this.serverAddr}/profile/personal`, data,
       { headers: this.tokenService.headers() }
     );
   }
 
   updatePassword(data: any): Observable<iHttpResponse> {
-    return this.httpClient.put<iHttpResponse>(
-      `${this.serverAddr}/profile/update-password`,
-      data,
+    return this.httpClient.put<iHttpResponse>(`${this.serverAddr}/profile/update-password`, data,
       { headers: this.tokenService.headers() }
     );
   }
 
   setToken(): Observable<iHttpResponse> {
-    return this.httpClient.get<iHttpResponse>(
-      `${this.serverAddr}/profile/set-token`,
+    return this.httpClient.get<iHttpResponse>(`${this.serverAddr}/profile/set-token`,
       { headers: this.tokenService.headers() }
     );
   }
 
   verifyEmail(token: string): Observable<iHttpResponse> {
-    return this.httpClient.put<iHttpResponse>(
-      `${this.serverAddr}/profile/verify-email`,
-      { token },
+    return this.httpClient.put<iHttpResponse>(`${this.serverAddr}/profile/verify-email`, { token },
       { headers: this.tokenService.headers() }
     );
   }
 
   updateEmail(data: any): Observable<iHttpResponse> {
-    return this.httpClient.put<iHttpResponse>(
-      `${this.serverAddr}/profile/update-email`,
-      data,
+    return this.httpClient.put<iHttpResponse>(`${this.serverAddr}/profile/update-email`, data,
       { headers: this.tokenService.headers() }
     );
   }
 
   balanceHistory(): Observable<iHttpResponse> {
-    return this.httpClient.get<iHttpResponse>(
-      `${this.serverAddr}/dashboard/balance-history`,
-      {
-        headers: this.tokenService.headers(),
-      }
+    return this.httpClient.get<iHttpResponse>(`${this.serverAddr}/dashboard/balance-history`,
+      { headers: this.tokenService.headers() }
     );
   }
 
   inviteFriend(data: any): Observable<iHttpResponse> {
-    return this.httpClient.post<iHttpResponse>(
-      `${this.serverAddr}/dashboard/invite-friend`,
-      data,
+    return this.httpClient.post<iHttpResponse>(`${this.serverAddr}/dashboard/invite-friend`, data,
       { headers: this.tokenService.headers() }
     );
   }
 
   newKycRequest(data: any): Observable<iHttpResponse> {
-    return this.httpClient.post<iHttpResponse>(
-      `${this.serverAddr}/dashboard/kyc-request `,
-      data,
+    return this.httpClient.post<iHttpResponse>(`${this.serverAddr}/dashboard/kyc-request `, data,
       { headers: this.tokenService.headers() }
     );
   }
 
   myKyc(): Observable<iHttpResponse> {
-    return this.httpClient.get<iHttpResponse>(
-      `${this.serverAddr}/dashboard/my-kyc`,
+    return this.httpClient.get<iHttpResponse>(`${this.serverAddr}/dashboard/my-kyc`,
       { headers: this.tokenService.headers() }
     );
+  }
+
+  myEarnings(): Observable<iHttpResponse> {
+    return this.httpClient.get<iHttpResponse>(`${this.serverAddr}/my-earnings`, 
+    { headers: this.tokenService.headers() });
   }
 }

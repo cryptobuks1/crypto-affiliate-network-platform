@@ -25,6 +25,19 @@ export class NewsTickerComponent implements OnInit, OnChanges {
       ];
     }
   }
+  
+  roundInt(int: number): number | string {
+    if (int != undefined) {
+      let numWithZeroes = int.toLocaleString('en', {
+        useGrouping: false,
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      });
+      return numWithZeroes;
+    }
+
+    return 0;
+  }
 
   ngOnInit(): void {}
 }

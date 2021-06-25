@@ -17,12 +17,18 @@ import balanceHistoryController from '../controllers/users/balanceHistoryControl
 import inviteFriendController from '../controllers/users/inviteFriendController';
 import newKycController from '../controllers/users/kycController';
 import myKycController from '../controllers/users/getKycController';
+import myEarningsController from '../controllers/users/myEarningsController';
 
 router.get('/profile', profileController);
 router.post('/upload', upload.array('files', 10), uploadController);
 router.post('/request-money', requestMoneyController);
+
+
 router.get('/my-referrals', myReferralsController);
 router.get('/my-requests', myRequestsController);
+router.get('/my-earnings', myEarningsController);
+
+
 router.get('/profile/personal', getPersonalController);
 router.put('/profile/personal', updatePersonalController);
 router.put('/profile/update-password', updatePasswordController);
@@ -30,9 +36,11 @@ router.get('/profile/set-token', setUserTokenController);
 router.put('/profile/verify-email', verifyEmailController);
 router.put('/profile/update-email', updateEmailController);
 
+
 router.get('/dashboard/balance-history', balanceHistoryController);
 router.post('/dashboard/invite-friend', inviteFriendController);
 router.post('/dashboard/kyc-request', newKycController);
 router.get('/dashboard/my-kyc', myKycController);
+
 
 export default router;

@@ -48,3 +48,28 @@ form {
     width: 100%;
   }
 }
+
+@media only screen and (max-width: 900px) {
+  .overview {
+    h1 {
+      font-size: 4rem;
+    }
+  }
+}
+
+
+@media only screen and (max-width: 740px) {
+  .overview {
+    h1 {
+      font-size: 3rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .overview {
+    h1 {
+      font-size: 2.2rem;
+    }
+  }
+}

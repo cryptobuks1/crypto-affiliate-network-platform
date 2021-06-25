@@ -23,7 +23,7 @@ export class AdministrationComponent implements OnInit {
   public filterByStatusValue: string = 'all';
   public searchStr: string = '';
   public asideOpen: boolean = false;
-  
+
   constructor(
     private alertsStoreService: AlertsStoreService,
     public adminService: AdminService,
@@ -40,13 +40,13 @@ export class AdministrationComponent implements OnInit {
         this.router.navigate(['/']);
       }
 
-      this.fetchRequests();
+      this.fetchRequests(); 
       this.fetchChats();
 
       this.socket.on('chat new sync', (data: any) => {
         this.chats?.push(data);
       });
-    });
+    }); 
   }
 
   getURL(img: string): string {
@@ -67,7 +67,7 @@ export class AdministrationComponent implements OnInit {
   endChat(): void {
     this.socket.emit('chat end', { id: this.chat._id });
     this.chats?.splice(this.chats?.findIndex((chat: any) => chat._id === this.chat._id), 1);
-    if (this.chats !== undefined) {
+    if (this.chats !== undefined && this.chats.length > 0) {
       this.chat = this.selectChat(0);
     }
   }

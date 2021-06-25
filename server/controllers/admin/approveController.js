@@ -12,8 +12,6 @@ async function approve(req, res) {
             data: result,
         });
     } catch (err) {
-        console.log(err);
-
         return res.json({
             message: `something went wrong`,
             success: false,

@@ -8,26 +8,65 @@ import { AuthService } from 'src/app/Services/auth.service';
   styleUrls: ['./reports.component.scss'],
 })
 export class ReportsComponent implements OnInit {
-  private __ngContext__: any;
   public referrals: any[] = [];
-  public user: any | undefined;
+  public earnings: any[] = [];
+  public filterOption: string = 'htl';
 
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    // this.profile();
-    this.myReferrals();
+    this.myEarnings();
   }
 
   profile(): void {
-    this.authService.profile().subscribe((response: iHttpResponse) => {});
   }
 
-  myReferrals() {
-    this.authService.myReferrals().subscribe((response: iHttpResponse) => {
-      if (response.success) {
-        this.referrals = response.data;
-      }
+  myEarnings() {
+    let unique: any[] = [];
+    let used: any[] = [];
+
+    this.authService.myEarnings().subscribe((response: iHttpResponse) => {
+      response.data.forEach((item: any) => {
+        if(!used.includes(item.cameFrom.username)) {
+          used.push(item.cameFrom.username);
+          unique.push(item);
+        } else {
+          let index = unique.findIndex((uitem: any) => uitem.cameFrom.username === item.cameFrom.username)
+          unique[index].amount += item.amount;
+        }
+      });
+
+      this.earnings = unique;
+      this.filter('htl');
     });
+  }
+
+  
+  roundInt(int: number): number | string {
+    if (int != undefined) {
+      let numWithZeroes = int.toLocaleString('en', {
+        useGrouping: false,
+        minimumFractionDigits: 2,
+      });
+      return numWithZeroes;
+    }
+
+    return 0;
+  }
+
+
+  filter(filterOption: string): any {
+   switch(filterOption) {
+    case 'htl': return this.earnings = this.earnings.sort((a: any, b: any) => b.amount - a.amount)
+    case 'lth': return this.earnings = this.earnings.sort((a: any, b: any) => a.amount - b.amount);
+
+    case 'nto': return this.earnings = this.earnings.sort((a: any, b: any) => 
+        new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf());
+    
+    case 'otn': return this.earnings = this.earnings.sort((a: any, b: any) => 
+        new Date(a.createdAt).valueOf() - new Date(b.createdAt).valueOf());
+    
+    default: return [];
+   }
   }
 }

@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 import userModel from './user.model';
 import balanceHistoryModel from './balanceHistory.model';
+import earningsModel from './earnings.model';
+
 const Schema = mongoose.Schema;
 
 const requestSchema = new Schema({
@@ -48,53 +50,69 @@ async function findRequests(filter) {
     }
 }
 
+async function updateBalanceHistory(newHistories) {
+    try {
+        const result = await balanceHistoryModel.insertMany(newHistories);
+        return Promise.resolve(result);
+    } catch (err) {
+        return Promise.reject(err);
+    }
+}
+
 async function approveRequest(requestId, amount) {
+    const histories = [];
+
     try {
         const request = await RequestModel.findOne({ _id: requestId });
         const user = await userModel.findUser({ _id: request.requestedBy });
 
-        if (user.referralCode !== null) {
-            const referredBy = await userModel.findUser({
-                affiliateCode: user.referralCode,
-            });
+        user.pendingBalance -= request.amount;
+        user.balance += amount;
+        request.approved = true;
+        request.status = 'approved';
 
+        histories.push({
+            amount: user.balance,
+            belongsTo: user._id
+        });
+
+        histories.push({
+            amount: amount,
+            belongsTo: user._id,
+            summary: false
+        });
+
+        if (user.referralCode !== null) {
+            const referredBy = await userModel.findUser({ affiliateCode: user.referralCode });
             referredBy.balance += (amount / 100) * referredBy.percentage;
 
-            await balanceHistoryModel.create({
+            histories.push({
                 amount: referredBy.balance,
-                belongsTo: referredBy._id,
-                summary: true,
+                belongsTo: referredBy._id
             });
 
-            await balanceHistoryModel.create({
+            histories.push({
                 amount: (amount / 100) * referredBy.percentage,
                 belongsTo: referredBy._id,
-                summary: false,
+                summary: false
+            });
+
+            await earningsModel.create({
+                amount: (amount / 100) * referredBy.percentage,
+                belongsTo: referredBy._id,
+                cameFrom: user._id
             });
             await referredBy.save();
         }
 
-        request.approved = true;
-        user.pendingBalance -= request.amount;
-        user.balance += amount;
-
-        await balanceHistoryModel.create({
-            amount: user.balance,
-            belongsTo: user._id,
-            summary: true,
-        });
-
-        await balanceHistoryModel.create({
-            amount: amount,
-            belongsTo: user._id,
-            summary: false,
-        });
-
-        request.status = 'approved';
+        await updateBalanceHistory(histories);
         await request.save();
         await user.save();
         return Promise.resolve(request);
+
     } catch (err) {
+        console.log(err);
+
         return Promise.reject(err);
     }
 }
@@ -103,8 +121,10 @@ async function rejectRequest(requestId) {
     try {
         const request = await RequestModel.findOne({ _id: requestId });
         const user = await userModel.findUser({ _id: request.requestedBy });
+
         request.status = 'rejected';
         user.pendingBalance -= request.amount;
+
         await request.save();
         await user.save();
         return Promise.resolve(request);

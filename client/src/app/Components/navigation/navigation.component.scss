@@ -3,33 +3,37 @@
 .toggle-nav {
   display: none;
   position: fixed;
-  top: 0;
+  bottom: 0;
   left: 0;
-  margin: 1rem 0 0 1rem;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
   transition: left 225ms linear;
 
   &.open {
-    left: $navWidth;
+    left: 340px;
   }
 }
 
 nav {
   background-color: #333;
-  border-right: 1px solid #ffd700;
-  width: $navWidth;
+  width: 340px;
   height: 100%;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   padding: 100px 0;
-
-  img {
-    width: calc(#{$navWidth} * 0.75);
-    margin: 0 auto;
-    display: block;
+  border-right: 1px solid #ffd700;
+  .logo {
+    width: 340px;
+    display: flex;
+    justify-content: center;
+    img {
+      width: 80%;
+      display: block;
+    }
   }
 
   .links {
     padding: 50px 0;
-    width: $navWidth;
+    width: 340px;
     a {
       width: 75%;
       display: block;
@@ -61,10 +65,9 @@ nav {
     pointer-events: none;
     z-index: 10;
     transition: width 225ms linear;
-    border-right: none;
 
     &.open {
-      width: $navWidth;
+      width: 340px;
       pointer-events: auto;
       border-right: 1px solid #ffd700;
     }
