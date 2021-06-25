@@ -1,86 +1,22 @@
-<mat-tab-group>
-  <mat-tab label="Requests">
-    <div class="filter-requests">
-      <input [(ngModel)]="searchStr" (change)="filter(searchStr)" placeholder="Filter.."/>
-      <select [(ngModel)]="filterByStatusValue" (change)="filterByStatus(filterByStatusValue)">
-        <option value="all">All</option>
-        <option value="pending">Pending</option>
-        <option value="approved">Approved</option>
-        <option value="rejected">Rejected</option>
-      </select>
-    </div>
-
-    <section *ngIf="!requests">
-      <p>Loading...</p>
-    </section>
-
-    <mat-accordion *ngIf="requests">
-      <mat-expansion-panel *ngFor="let request of requests; let i = index">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{ request.createdAt | date: "short" }}
-          </mat-panel-title>
-          <mat-panel-description>
-            <p class="txnHash">{{ request.transactionHash }}</p>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-
-        <div class="body">
-          <p>
-            <span>Requested Amount:</span> USD
-            <input [(ngModel)]="request.amount" *ngIf="request.status === 'pending'" />
-            <span *ngIf="request.status !== 'pending'">{{ request.amount }}</span>
-          </p>
-
-          <p><span>Username:</span> {{ request.requestedBy.username }}</p>
-          <p><span>Email:</span> {{ request.requestedBy.email }}</p>
-          <p *ngIf="request.requestedBy.referralCode"><span>Referred By:</span> {{ request.requestedBy.referralCode }}</p>
-          <p><span>Referrals:</span> {{ request.requestedBy.referrals.length }}</p>
-          <p><span>Status:</span> {{ request.status }}</p>
-
-          <div class="images">
-            <img *ngFor="let img of request.proof" [src]="getURL(img)" alt="" />
-          </div>
-
-          <div class="actions" *ngIf="request.status === 'pending'">
-            <button class="reject" (click)="reject(request._id)" title="Reject this request" color="warn" mat-fab>
-              <span class="material-icons">close</span>
-            </button>
-
-            <button class="approve" (click)="approve(request._id, request.amount)" title="Approve this request" color="primary" mat-fab>
-              <span class="material-icons">done</span>
-            </button>
-          </div>
-
-        </div>
-      </mat-expansion-panel>
-    </mat-accordion>
+<mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="changeTab($event)" animationDuration="0ms">
+  <mat-tab label="Payment Requests">
+    <ng-template matTabContent>
+      <app-admin-payment-requests></app-admin-payment-requests>
+    </ng-template>
   </mat-tab>
   <mat-tab label="Live Chat">
-    <button (click)="asideOpen = !asideOpen ? true : false" class="toggle-chats" color="primary" mat-fab><span class="material-icons">chat</span></button>
-
-    <section class="chats" *ngIf="chats">
-      <aside [ngClass]="{ 'open': asideOpen }">
-        <div class="chats-ind" *ngFor="let chat of chats; let i = index" (click)="selectChat(i)">
-          <span>Messages: {{ chat.messages.length }}</span>
-          <span>Started By: {{ chat.startedBy.fullName }}</span>
-          <span>Started At: {{ chat.createdAt | date: "shortTime" }}</span>
-        </div>
-      </aside>
-
-      <div class="chat" *ngIf="chat">
-        <div class="messages">
-          <div class="chat-message" *ngFor="let chatMessage of chat.messages">
-            <p><span>{{ chatMessage.fullName }}:</span>{{ chatMessage.message }}</p>
-          </div>
-        </div>
-
-        <div class="chat-actions" *ngIf="!chat.ended">
-          <button (click)="endChat()" color="warn" mat-raised-button>End Chat</button>
-          <input placeholder="Message..." [(ngModel)]="message" />
-          <button (click)="sendMessage()" color="primary" mat-raised-button>Send Message</button>
-        </div>
-      </div>
-    </section>
+    <ng-template matTabContent>
+      <app-admin-live-chat></app-admin-live-chat>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Kyc Requests">
+    <ng-template matTabContent>
+      <app-admin-kyc-requests></app-admin-kyc-requests>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Contact">
+    <ng-template matTabContent>
+      <app-admin-contact></app-admin-contact>
+    </ng-template>
   </mat-tab>
 </mat-tab-group>

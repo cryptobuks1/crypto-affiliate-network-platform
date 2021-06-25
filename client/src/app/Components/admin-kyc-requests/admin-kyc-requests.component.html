@@ -1,0 +1,31 @@
+<mat-accordion *ngIf="requests">
+    <mat-expansion-panel *ngFor="let request of requests">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ request.belongsTo.username }}
+        </mat-panel-title>
+        <mat-panel-description>
+            {{ request.status }}
+        </mat-panel-description>
+        <mat-panel-description>
+          {{ request.createdAt | date: 'short' }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      
+      <div class="images">
+        <div class="file" *ngFor="let file of request.files">
+            <img [src]="getURL(file.src)" />
+            <p>{{ file.description }}</p>
+        </div>  
+      </div>
+
+      <div class="body">
+        <p>Status: {{ request.status }}</p>
+      </div>
+
+      <div class="actions">
+          <button (click)="reject(request._id)" color="warn" mat-raised-button>Reject</button>
+          <button (click)="approve(request._id)" color="primary" mat-raised-button>Approve</button>
+      </div>
+    </mat-expansion-panel>
+</mat-accordion>

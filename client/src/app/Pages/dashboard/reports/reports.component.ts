@@ -11,14 +11,26 @@ export class ReportsComponent implements OnInit {
   public referrals: any[] = [];
   public earnings: any[] = [];
   public filterOption: string = 'htl';
+  public user: any | undefined;
 
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     this.myEarnings();
+    this.profile();
   }
 
+  
+  affiliateLink(): string {
+    return `${window.location.origin}/register?ref=${this.user.affiliateCode}`;
+  }
+  
   profile(): void {
+    this.authService.profile().subscribe((response: iHttpResponse) => {
+      if(response.success) {
+        this.user = response.data;
+      }
+    });
   }
 
   myEarnings() {
@@ -56,6 +68,7 @@ export class ReportsComponent implements OnInit {
 
 
   filter(filterOption: string): any {
+    console.log(filterOption);
    switch(filterOption) {
     case 'htl': return this.earnings = this.earnings.sort((a: any, b: any) => b.amount - a.amount)
     case 'lth': return this.earnings = this.earnings.sort((a: any, b: any) => a.amount - b.amount);

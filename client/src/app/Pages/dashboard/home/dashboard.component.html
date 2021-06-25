@@ -1,42 +1,21 @@
 <div class="dashboard-grid" *ngIf="user">
-  <div class="dashboard-grid-item available-balance">
-    <div class="icon"><span class="material-icons">lock_open</span></div>
-    <h3>USD {{ roundInt(user.balance) }}</h3>
-    <p>Withdrawable</p>
-  </div>
-
-  <div class="dashboard-grid-item locked-balance">
-    <div class="icon"><span class="material-icons">lock</span></div>
-    <h3>USD {{ roundInt(user.pendingBalance) }}</h3>
-    <p>Pending Approval</p>
-  </div>
-
   <div class="dashboard-grid-item graph">
     <div class="icon"><span class="material-icons">trending_up</span></div>
-    <div
-      *ngIf="!loadingChart"
-      echarts
-      [options]="options"
-      class="graph-container"
-    ></div>
+    <div *ngIf="!loadingChart" echarts [options]="options" class="graph-container"></div>
     <p *ngIf="loadingChart">Loading..</p>
   </div>
 
   <div class="dashboard-grid-item verify-identity">
-    <div class="icon right">
-      <span class="material-icons">assignment_ind</span>
-    </div>
+    <div class="icon right"><span class="material-icons">assignment_ind</span></div>
     <h3>KYC Verification</h3>
-
-    <a routerLink="/identity-verification" color="primary" mat-raised-button
-      >Verify Identity</a
-    >
+    <div *ngIf="!user.identityVerified">
+      <a routerLink="/identity-verification" color="primary" mat-raised-button>Verify Identity</a>
+    </div>
+    <p *ngIf="user.identityVerified">Your identity is verified <span class="material-icons">done</span></p>
   </div>
 
   <div class="dashboard-grid-item setup-payments">
-    <div class="icon right">
-      <span class="material-icons">credit_card</span>
-    </div>
+    <div class="icon right"><span class="material-icons">credit_card</span></div>
     <h3>Setup Payments</h3>
   </div>
 
@@ -48,9 +27,7 @@
       <mat-label>Enter email</mat-label>
       <input matInput placeholder="Enter email" [(ngModel)]="email" />
     </mat-form-field>
-    <button (click)="inviteFriend()" color="primary" mat-raised-button>
-      Invite Friend
-    </button>
+    <button (click)="inviteFriend()" color="primary" mat-raised-button>Invite Friend</button>
   </div>
 
   <div class="dashboard-grid-item earings-history">

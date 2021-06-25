@@ -2,22 +2,30 @@
   <div class="logo">
     <img src="/assets/img/BNBG-1.png" alt="" />
   </div>
-  
+
   <div class="links">
-    <div *ngIf="!tokenService.loggedIn()">
+
+    <div class="links-group" *ngIf="!tokenService.loggedIn()">
+      <a routerLink="/dashboard/claim-buy" *ngIf="tokenService.loggedIn() && user" class="balance">USD {{ roundInt(user.balance) }}</a>
       <a routerLink="/login">Login</a>
       <a routerLink="/register">Register</a>
     </div>
 
-    <div *ngIf="tokenService.loggedIn()">
+    <div class="links-group" *ngIf="tokenService.loggedIn()">
+      <a routerLink="/dashboard/claim-buy" *ngIf="tokenService.loggedIn() && user" class="balance">USD {{ roundInt(user.balance) }}</a>
       <a routerLink="/dashboard/home">Dashboard</a>
       <a routerLink="/dashboard/claim-buy">Buy & Claim BNBG</a>
       <a routerLink="/dashboard/reports">Affiliate Reports</a>
-      <a (click)="logout()">Logout</a>
     </div>
 
-    <div>
+    <div class="links-group">
       <a routerLink="/contact">Contact</a>
+      <a routerLink="/dashboard/account-settings" *ngIf="tokenService.loggedIn()">Account Settings</a>
+      <a *ngIf="tokenService.loggedIn()" (click)="logout()">Logout</a>
+    </div>
+
+    <div class="links-group">
+        <p>Users Online: {{onlineNow}}</p>
     </div>
   </div>
 </nav>

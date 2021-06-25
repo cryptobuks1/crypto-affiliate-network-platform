@@ -1,0 +1,25 @@
+<button (click)="asideOpen = !asideOpen ? true : false" class="toggle-chats" color="primary" mat-fab><span class="material-icons">chat</span></button>
+
+<section class="chats" *ngIf="chats">
+  <aside [ngClass]="{ 'open': asideOpen }">
+    <div class="chats-ind" *ngFor="let chat of chats; let i = index" (click)="selectChat(i)">
+      <span>Messages: {{ chat.messages.length }}</span>
+      <span>Started By: {{ chat.startedBy.fullName }}</span>
+      <span>Started At: {{ chat.createdAt | date: "shortTime" }}</span>
+    </div>
+  </aside>
+
+  <div class="chat" *ngIf="chat">
+    <div class="messages">
+      <div class="chat-message" *ngFor="let chatMessage of chat.messages">
+        <p><span>{{ chatMessage.fullName }}:</span>{{ chatMessage.message }}</p>
+      </div>
+    </div>
+
+    <div class="chat-actions" *ngIf="!chat.ended">
+      <button (click)="endChat()" color="warn" mat-raised-button>End Chat</button>
+      <input placeholder="Message..." [(ngModel)]="message" />
+      <button (click)="sendMessage()" color="primary" mat-raised-button>Send Message</button>
+    </div>
+  </div>
+</section>

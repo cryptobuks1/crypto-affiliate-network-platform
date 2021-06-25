@@ -82,12 +82,4 @@ export class IdentityVerificationComponent implements OnInit {
       });
   }
 
-  strConv(str: string): string {
-    if (str !== null) {
-      let parts = str.match(/[A-Z][a-z]+|[0-9]+/g);
-      if (parts !== null) return parts.join(' ');
-    }
-
-    return str;
-  }
 }

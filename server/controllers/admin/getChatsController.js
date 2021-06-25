@@ -8,6 +8,7 @@ async function getChats(req, res) {
             success: true,
             data: chats,
         });
+
     } catch (err) {
         return res.json({
             message: 'something went wrong',

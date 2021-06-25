@@ -9,7 +9,7 @@ async function setUserToken(req, res) {
 
         user.token = token;
         await user.save();
-        await mail.send({
+        await mail.send_mailgun({
             receiver: user.email,
             subject: `Your token is: ${token}`,
             html: `<p>${token}</p>`,

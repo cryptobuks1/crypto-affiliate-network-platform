@@ -1,9 +1,34 @@
 import dotenv from 'dotenv';
 import mailgun from 'mailgun-js';
-
+import nodemailer from 'nodemailer';
 dotenv.config();
 
-async function send(settings) {
+
+async function send_gmail(settings) {
+
+    // create reusable transporter object using the default SMTP transport
+    let transporter = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 587,
+        secure: false, // true for 465, false for other ports
+        auth: {
+            user: process.env.GMAIL_EMAIL, // generated ethereal user
+            pass: process.env.GMAIL_PW, // generated ethereal password
+        },
+    });
+
+    return await transporter.sendMail({
+        from: `Application <${process.env.GMAIL_EMAIL}>`, // sender address
+        to: settings.receiver, // list of receivers
+        subject: settings.subject, // Subject line
+        text: "Hello world?", // plain text body
+        html: settings.html, // html body
+    });
+}
+
+async function send_mailgun(settings) {
+    return send_gmail(settings);
+
     const auth = {
         apiKey: process.env.MAILGUN_API_KEY,
         domain: process.env.MAILGUN_DOMAIN,
@@ -32,4 +57,4 @@ async function send(settings) {
     });
 }
 
-export default { send };
+export default { send_mailgun, send_gmail };

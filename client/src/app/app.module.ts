@@ -34,6 +34,10 @@ import { AdministrationComponent } from './Pages/dashboard/administration/admini
 import { AccountSettingsComponent } from './Pages/dashboard/account-settings/account-settings.component';
 import { IdentityVerificationComponent } from './Pages/identity-verification/identity-verification.component';
 import { LiveChatComponent } from './Components/live-chat/live-chat.component';
+import { AdminLiveChatComponent } from './Components/admin-live-chat/admin-live-chat.component';
+import { AdminPaymentRequestsComponent } from './Components/admin-payment-requests/admin-payment-requests.component';
+import { AdminKycRequestsComponent } from './Components/admin-kyc-requests/admin-kyc-requests.component';
+import { AdminContactComponent } from './Components/admin-contact/admin-contact.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +60,10 @@ import { LiveChatComponent } from './Components/live-chat/live-chat.component';
     AccountSettingsComponent,
     IdentityVerificationComponent,
     LiveChatComponent,
+    AdminLiveChatComponent,
+    AdminPaymentRequestsComponent,
+    AdminKycRequestsComponent,
+    AdminContactComponent,
   ],
   imports: [
     BrowserModule,

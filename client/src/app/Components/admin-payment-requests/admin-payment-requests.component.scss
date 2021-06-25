@@ -1,0 +1,67 @@
+.body {
+    .images {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+  
+      img {
+        max-height: 125px;
+      }
+    }
+  
+    .actions {
+      padding: 1rem 0;
+  
+      button:not(:last-of-type) {
+        margin-right: 1rem;
+      }
+    }
+  }
+  
+  
+  
+  .filter-requests {
+    padding: 1rem 0;
+    display: flex;
+    mat-form-field {
+      padding-bottom: 0;
+  
+      &:first-child {
+        width: 100%;
+        margin-right: .5rem;
+      }
+  
+      &:last-child {
+        margin-left: .5rem;
+      }
+  
+      &::ng-deep .mat-form-field-wrapper {
+        padding-bottom: 0 !important;
+      }
+    }
+  }
+  
+  .txnHash {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  @media only screen and(max-width: 1400px) {
+    .txnHash {
+      max-width: 30ch;
+    }
+  }
+  
+  @media only screen and(max-width: 640px) {
+    .txnHash {
+      max-width: 10ch;
+    }
+  }
+  
+  @media only screen and(max-width: 500px) {
+    .txnHash {
+      display: none;
+    }
+  }
+  

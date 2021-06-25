@@ -36,7 +36,7 @@ async function newKyc(data) {
 
 async function findKycs(filter) {
     try {
-        return await KycModel.find(filter);
+        return await KycModel.find(filter).populate({ path: 'belongsTo', model: 'User' });
     } catch (err) {
         return Promise.reject(err);
     }
@@ -50,4 +50,12 @@ async function findKyc(filter) {
     }
 }
 
-export default { newKyc, findKycs, findKyc };
+async function updateKyc(filter, update) {
+    try {
+        return await KycModel.findOneAndUpdate(filter, update);
+    } catch (err) {
+        return Promise.reject(err);
+    }
+}
+
+export default { newKyc, findKycs, findKyc, updateKyc };

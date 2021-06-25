@@ -18,35 +18,49 @@ export class AdminService {
 
   isAdmin(): Observable<iHttpResponse> {
     return this.httpClient.get<iHttpResponse>(`${this.serverAddr}`, {
-      headers: this.tokenService.headers(),
+      headers: this.tokenService.headers()
     });
   }
 
   requests(): Observable<iHttpResponse> {
     return this.httpClient.get<iHttpResponse>(`${this.serverAddr}/requests`, {
-      headers: this.tokenService.headers(),
+      headers: this.tokenService.headers()
     });
   }
 
   approve(data: any): Observable<iHttpResponse> {
-    return this.httpClient.put<iHttpResponse>(
-      `${this.serverAddr}/approve`,
-      data,
-      { headers: this.tokenService.headers() }
-    );
+    return this.httpClient.put<iHttpResponse>(`${this.serverAddr}/approve`, data, { 
+      headers: this.tokenService.headers() 
+    });
   }
 
   reject(data: any): Observable<iHttpResponse> {
-    return this.httpClient.put<iHttpResponse>(
-      `${this.serverAddr}/reject`,
-      data,
-      { headers: this.tokenService.headers() }
-    );
+    return this.httpClient.put<iHttpResponse>(`${this.serverAddr}/reject`, data, { 
+      headers: this.tokenService.headers() 
+    });
   }
 
   getChats(): Observable<iHttpResponse> {
     return this.httpClient.get<iHttpResponse>(`${this.serverAddr}/get-chats`, {
-      headers: this.tokenService.headers(),
+      headers: this.tokenService.headers()
+    });
+  }
+
+  getKycs(): Observable<iHttpResponse> {
+    return this.httpClient.get<iHttpResponse>(`${this.serverAddr}/get-kycs`, {
+      headers: this.tokenService.headers()
+    });
+  }
+
+  approveKyc(data: any): Observable<iHttpResponse> {
+    return this.httpClient.put<iHttpResponse>(`${this.serverAddr}/approve-kyc`, data, {
+      headers: this.tokenService.headers()
+    });
+  }
+
+  rejectKyc(data: any): Observable<iHttpResponse> {
+    return this.httpClient.put<iHttpResponse>(`${this.serverAddr}/reject-kyc`, data, {
+      headers: this.tokenService.headers()
     });
   }
 }

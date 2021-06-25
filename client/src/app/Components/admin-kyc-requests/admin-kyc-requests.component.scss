@@ -1,0 +1,23 @@
+.images {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem 0;
+
+    img {
+      max-height: 125px;
+
+      &:not(:last-of-type) {
+          margin-right: .5rem;
+      }
+    }
+}
+
+.body {
+    padding-bottom: 1rem;
+}
+
+.actions {
+    button:not(:last-of-type) {
+        margin-right: .5rem;
+    }
+}

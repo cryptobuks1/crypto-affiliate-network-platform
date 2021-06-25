@@ -18,13 +18,13 @@
         <mat-form-field appearance="outline">
           <mat-label>Which type of file is this?</mat-label>
           <mat-select [(ngModel)]="file.description" name="fileType">
-            <mat-option value="idCardFront">Identity Card Front</mat-option>
-            <mat-option value="idCardBack">Identity Card Back</mat-option>
-            <mat-option value="passportFront">Passport Front</mat-option>
-            <mat-option value="passportBack">Passport Back</mat-option>
-            <mat-option value="creditCardFront">Credit Card Front</mat-option>
-            <mat-option value="creidtCardBack">Credit Card Back</mat-option>
-            <mat-option value="utilityBill">Utility Bill</mat-option>
+            <mat-option value="Identity Card Front">Identity Card Front</mat-option>
+            <mat-option value="Identity Card Back">Identity Card Back</mat-option>
+            <mat-option value="Passport Front">Passport Front</mat-option>
+            <mat-option value="Passport Back">Passport Back</mat-option>
+            <mat-option value="Credit Card Front">Credit Card Front</mat-option>
+            <mat-option value="Credit Card Back">Credit Card Back</mat-option>
+            <mat-option value="Utility Bill">Utility Bill</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -49,7 +49,7 @@
     <div class="files">
       <div class="file" *ngFor="let file of myKycData.files">
         <img [src]="getURL(file.src)" />
-        <p>{{ strConv(file.description) }}</p>
+        <p>{{ file.description }}</p>
       </div>
     </div>
   </section>

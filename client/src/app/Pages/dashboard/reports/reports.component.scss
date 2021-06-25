@@ -2,15 +2,26 @@ section {
   margin: 2rem 0;
   h3 {
     margin-bottom: 1rem;
+    font-size: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    span {
+      font-size: 1rem;
+    }
   }
 
   .filter {    
     margin-bottom: 1rem;
 
-    select {
+    mat-form-field {
       width: 100%;
-      padding: .75rem;
-      border: 1px solid rgb(238, 238, 238);
+      padding-bottom: 0;
+
+      &::ng-deep .mat-form-field-wrapper {
+        padding-bottom: 0 !important;
+      }
     }
   }
 
