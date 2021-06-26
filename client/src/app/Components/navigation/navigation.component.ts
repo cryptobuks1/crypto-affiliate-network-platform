@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/auth.service';
 import { iHttpResponse } from 'src/app/Interfaces/http.interface';
 import { StreamService } from 'src/app/Services/stream.service';
+import { BalanceStoreService } from 'src/app/Store/balance-store.service';
 
 @Component({
   selector: 'app-navigation',
@@ -17,11 +18,12 @@ export class NavigationComponent implements OnInit {
   public onlineNow: number = 0;
 
   constructor(
+    private balanceStore: BalanceStoreService,
     private streamService: StreamService,
     private authService: AuthService,
     private router: Router,
     public tokenService: TokenService) {
-      this.socket = streamService.getSocket();
+      this.socket = this.streamService.getSocket();
   }
 
   ngOnInit(): void {
@@ -34,6 +36,10 @@ export class NavigationComponent implements OnInit {
 
     this.socket.on('broadcast online', (data: any) => {
       this.onlineNow = data;
+    });
+
+    this.balanceStore.getBalance().subscribe((newBalance: number) => {
+      this.user.balance = newBalance;
     });
   }
 

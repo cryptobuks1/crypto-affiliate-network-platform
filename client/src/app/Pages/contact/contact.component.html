@@ -1,6 +1,20 @@
 <section class="page container">
-  <h1>Contact</h1>
-  <section>
-    <form></form>
+  <section class="content">
+    <h1>Contact</h1>
+    <form>
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input placeholder="Name" [disabled]="loading" [(ngModel)]="formData.name" name="name" matInput/>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input placeholder="Email" [disabled]="loading" [(ngModel)]="formData.email" name="email" matInput/>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Message</mat-label>
+        <textarea placeholder="Message" [disabled]="loading" [(ngModel)]="formData.message" name="message" matInput></textarea>
+      </mat-form-field>
+      <button (click)="contact()" [disabled]="loading" color="primary" mat-raised-button>Send Message</button>
+    </form>
   </section>
 </section>

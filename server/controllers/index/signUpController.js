@@ -50,7 +50,7 @@ async function signUpController(req, res) {
     try {
         const newUser = await userModel.signUp(
             req.body,
-            req.headers['x-forwarded-for'] || req.connection.remoteAddress
+            req.body.ipAddr || (req.headers['x-forwarded-for'] || req.connection.remoteAddress)
         );
 
         return res.json({

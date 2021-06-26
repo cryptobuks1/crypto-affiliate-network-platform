@@ -20,6 +20,8 @@ export class IdentityVerificationComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    window.document.title = 'BNBG | Identity Verification';
+
     this.myKyc();
   }
 

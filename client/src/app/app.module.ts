@@ -12,7 +12,9 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSliderModule } from '@angular/material/slider';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { RecaptchaModule } from "ng-recaptcha";
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Pages/auth/login/login.component';
@@ -38,6 +40,9 @@ import { AdminLiveChatComponent } from './Components/admin-live-chat/admin-live-
 import { AdminPaymentRequestsComponent } from './Components/admin-payment-requests/admin-payment-requests.component';
 import { AdminKycRequestsComponent } from './Components/admin-kyc-requests/admin-kyc-requests.component';
 import { AdminContactComponent } from './Components/admin-contact/admin-contact.component';
+import { LoginHistoryComponent } from './Pages/login-history/login-history.component';
+import { WithdrawalComponent } from './Pages/withdrawal/withdrawal.component';
+import { AdminWithdrawalsComponent } from './Components/admin-withdrawals/admin-withdrawals.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +69,9 @@ import { AdminContactComponent } from './Components/admin-contact/admin-contact.
     AdminPaymentRequestsComponent,
     AdminKycRequestsComponent,
     AdminContactComponent,
+    LoginHistoryComponent,
+    WithdrawalComponent,
+    AdminWithdrawalsComponent,
   ],
   imports: [
     BrowserModule,
@@ -79,6 +87,8 @@ import { AdminContactComponent } from './Components/admin-contact/admin-contact.
     MatButtonModule,
     MatTabsModule,
     MatExpansionModule,
+    MatSliderModule,
+    RecaptchaModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'),
     }),

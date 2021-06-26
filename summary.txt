@@ -1,0 +1,30 @@
+NODE_ENV = what mode should the server be in? development or production
+PORT = where the server should listen for incomming requests
+SERVER_ADDR = the domain where the server is hosted ( https://mywebsite.com or localhost:port )
+CLIENT_ADDR = the domain where the client is hosted ( https://mywebsite.com or localhost:port )
+DB_URI = mongodb uri can be acquired on ( https://cloud.mongodb.com/ ) - ask me if you have any questions 
+MAILGUN_API_KEY = mailgun api key can be acquired on ( https://www.mailgun.com/ )
+MAILGUN_DOMAIN = mailgun domain can be set on ( https://www.mailgun.com/ ) on the dashboard 
+GMAIL_EMAIL = standard gmail account ( https://gmail.com ) 
+GMAIL_PW = standard gmail password ( https://gmail.com )
+RECAPTCHA_SECRET = secret key generated from ( https://developers.google.com/recaptcha/docs/verify )
+
+DB_URI might look something like this
+
+DB_URI = mongodb+srv://  <username>  :  <password>  @  <yourcluster>  .mebkn.mongodb.net/  <your database>   ?retryWrites=true&w=majority
+
+remove the <> and spaces from the url and replace the stuff between <> with your details acquired on https://cloud.mongodb.com/
+
+server can be started with npm start or npm run dev 
+client can be started with npm start or ng serve
+client can be compiled to a production bundle with ng build --prod
+the bundled files will be in client/dist and should be moved into the server/public folder 
+
+The application is built with server, client seperation which enables 
+the client to be re-built or re-constructed or built on a different platform 
+and keep the same server. The project is built in the MEAN Stack.
+
+- MongoDB as the database
+- Express as the server library
+- Angular11 as the client framework
+- Node.js as the server run time

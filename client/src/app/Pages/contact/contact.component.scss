@@ -1,0 +1,24 @@
+.content {
+    width: 500px;
+
+    h1 {
+        margin-bottom: 1.5rem !important;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    
+        button {
+            display: block;
+            margin: 0 0 0 auto;
+        }
+    }
+}
+
+@media only screen and(max-width: 700px) {
+    .content {
+        width: 90%;
+        margin: 0 auto;
+    }
+}

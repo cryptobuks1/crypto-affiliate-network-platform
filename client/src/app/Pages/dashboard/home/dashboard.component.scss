@@ -76,6 +76,10 @@
     &.setup-payments {
       grid-column: 3/5;
       grid-row: 1;
+      
+      h3, p {
+        margin-bottom: .75rem;
+      }
     }
 
     &.invite-friends {

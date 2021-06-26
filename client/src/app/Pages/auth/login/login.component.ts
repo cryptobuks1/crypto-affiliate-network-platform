@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   public username: string = '';
   public password: string = '';
   public keepMeLoggedIn: boolean = false;
+  public allowLogins: boolean = false;
 
   constructor(
     private httpService: HttpService,
@@ -21,18 +22,33 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    window.document.title = 'BNBG | Login';
+  }
+
+  resolved(captchaResponse: string) {
+    this.httpService.verifyRecaptchaKey(captchaResponse).subscribe((response: any) => {
+      if(response.success) {
+        this.allowLogins = true;
+      } else {
+        this.alertsStoreService.setAlert({
+          text: 'recaptcha failed',
+          type: 'error',
+          show: true
+        });
+      }
+    });
+  }
 
   login(): void {
-    this.httpService
+    this.httpService.getLoginDetails().subscribe((response: any) => {
+      this.httpService
       .login({
         username: this.username,
         password: this.password,
         keepMeLoggedIn: this.keepMeLoggedIn,
-      })
-      .subscribe((response) => {
-        console.log(response);
-
+        ipAddr: response.query
+      }).subscribe((response) => {
         this.alertsStoreService.setAlert({
           text: response.message,
           type: `${!response.success ? 'error' : 'success'}`,
@@ -44,5 +60,6 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/dashboard/home']);
         }
       });
+    });
   }
 }

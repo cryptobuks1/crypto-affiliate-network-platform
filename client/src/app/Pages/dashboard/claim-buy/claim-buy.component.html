@@ -3,51 +3,22 @@
   <form>
     <mat-form-field appearance="outline">
       <mat-label>Amount in USD</mat-label>
-      <input
-        type="number"
-        [(ngModel)]="amount"
-        name="amount"
-        placeholder="25"
-        matInput
-      />
+      <input type="number" [disabled]="loading" [(ngModel)]="amount" name="amount" placeholder="25" matInput />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Transaction Hash</mat-label>
-      <input
-        type="text"
-        [(ngModel)]="transactionHash"
-        name="transactionHash"
-        placeholder="0x4d6e16e57d0fca5cfbb1aa86249826c9a78cf2da9f67e789ffaefb4d6623e08f"
-        matInput
-      />
+      <input type="text" [disabled]="loading" [(ngModel)]="transactionHash" name="transactionHash" placeholder="0x4d6e16e57d0fca5cfbb1aa86249826c9a78cf2da9f67e789ffaefb4d6623e08f" matInput />
     </mat-form-field>
     <section *ngIf="uploaded && uploaded.length > 0">
       <div class="images">
-        <img
-          title="Remove image"
-          *ngFor="let img of uploaded; let i = index"
-          [src]="getURL(img)"
-          alt="Uploaded Image"
-          (click)="uploaded.splice(i, 1)"
-        />
+        <img title="Remove image" *ngFor="let img of uploaded; let i = index" [src]="getURL(img)" alt="Uploaded Image" (click)="uploaded.splice(i, 1)" />
       </div>
     </section>
     <div class="actions">
-      <button
-        (click)="files.click()"
-        class="file-upload-btn"
-        color="primary"
-        aria-label="upload file button"
-        mat-fab
-      >
+      <button [disabled]="loading" (click)="files.click()" class="file-upload-btn" color="primary" aria-label="upload file button" mat-fab>
         <span class="material-icons">upload_file</span>
       </button>
-      <button
-        class="submit-request"
-        (click)="submit()"
-        color="primary"
-        mat-raised-button
-      >
+      <button [disabled]="loading" class="submit-request" (click)="submit()" color="primary" mat-raised-button>
         Submit Request
       </button>
     </div>

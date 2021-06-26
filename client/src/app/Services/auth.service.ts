@@ -111,4 +111,28 @@ export class AuthService {
       headers: this.tokenService.headers() 
     });
   }
+
+  myHistory(): Observable<iHttpResponse> {
+    return this.httpClient.get<iHttpResponse>(`${this.serverAddr}/my-history`, {
+      headers: this.tokenService.headers()
+    });
+  }
+
+  myWithdrawals(): Observable<iHttpResponse> {
+    return this.httpClient.get<iHttpResponse>(`${this.serverAddr}/my-withdrawals`, {
+      headers: this.tokenService.headers()
+    });
+  }
+
+  requestWithdrawal(data: any): Observable<iHttpResponse> {
+    return this.httpClient.post<iHttpResponse>(`${this.serverAddr}/request-withdrawal`, data, {
+      headers: this.tokenService.headers()
+    });
+  }
+
+  cancelWithdrawal(data: any): Observable<iHttpResponse> {
+    return this.httpClient.put<iHttpResponse>(`${this.serverAddr}/cancel-withdrawal`, data, {
+      headers: this.tokenService.headers()
+    });
+  }
 }

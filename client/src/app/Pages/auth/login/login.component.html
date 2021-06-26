@@ -7,35 +7,18 @@
     <form>
       <mat-form-field appearance="outline">
         <mat-label>Username</mat-label>
-        <input
-          type="text"
-          [(ngModel)]="username"
-          name="username"
-          placeholder="Username"
-          id="username"
-          matInput
-        />
+        <input type="text" [(ngModel)]="username" name="username" placeholder="Username" id="username" matInput />
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Password</mat-label>
-        <input
-          type="password"
-          [(ngModel)]="password"
-          name="password"
-          placeholder="Password"
-          id="password"
-          matInput
-        />
+        <input type="password" [(ngModel)]="password" name="password" placeholder="Password" id="password" matInput />
       </mat-form-field>
 
-      <mat-checkbox [(ngModel)]="keepMeLoggedIn" name="keepMeLoggedIn"
-        >Keep me logged in on this device?</mat-checkbox
-      >
-      <!-- <section>
-                <mat-label>Are you a robot?</mat-label>
-                <p>Google Recaptcha</p>
-            </section> -->
-      <button (click)="login()" color="primary" mat-raised-button>Login</button>
+      <mat-checkbox [(ngModel)]="keepMeLoggedIn" name="keepMeLoggedIn">Keep me logged in on this device?</mat-checkbox>
+      
+      <re-captcha theme="dark" (resolved)="resolved($event)" siteKey="6LdIw1obAAAAAFI1CmqoyNro9ocUuaG0QLMGCL6z"></re-captcha>
+
+      <button [disabled]="!allowLogins" (click)="login()" color="primary" mat-raised-button>Login</button>
     </form>
   </div>
 </section>

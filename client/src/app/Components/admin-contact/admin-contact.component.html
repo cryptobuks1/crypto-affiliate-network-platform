@@ -1,1 +1,21 @@
-<p>admin-contact works!</p>
+<mat-accordion *ngIf="messages">
+    <mat-expansion-panel *ngFor="let message of messages">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+            {{ message.createdAt | date: 'short' }}
+        </mat-panel-title>
+        <mat-panel-description>
+            {{ message.name }}
+        </mat-panel-description>
+        <mat-panel-description>
+            {{ message.email }}
+        </mat-panel-description>
+        <mat-panel-description>
+            {{ message.responded ? 'resolved' : 'requires attention' }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <p>{{ message.message }}</p>
+      <button (click)="resolve(message._id)" color="primary" mat-raised-button>Mark As Resolved</button>
+    </mat-expansion-panel>
+</mat-accordion>

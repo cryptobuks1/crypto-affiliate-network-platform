@@ -1,0 +1,10 @@
+button {
+    margin-top: 1rem;
+}
+
+mat-panel-description, 
+mat-panel-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

@@ -2,26 +2,11 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const kycSchema = new Schema({
-    createdAt: {
-        type: Date,
-        default: new Date(),
-    },
-    updatedAt: {
-        type: Date,
-        default: new Date(),
-    },
-    files: {
-        type: Array,
-        required: true,
-    },
-    belongsTo: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-    },
-    status: {
-        type: String,
-        default: 'pending',
-    },
+    createdAt: { type: Date, default: new Date() },
+    updatedAt: { type: Date, default: new Date() },
+    files: { type: Array, required: true },
+    belongsTo: { type: Schema.Types.ObjectId, ref: 'User' },
+    status: { type: String, default: 'pending' }
 });
 
 const KycModel = mongoose.model('kyc', kycSchema);

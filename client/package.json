@@ -25,6 +25,7 @@
     "@juggle/resize-observer": "^3.3.1",
     "canvasjs": "^1.8.3",
     "echarts": "^5.1.2",
+    "ng-recaptcha": "^8.0.0",
     "ngx-echarts": "^7.0.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

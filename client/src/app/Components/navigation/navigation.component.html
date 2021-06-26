@@ -4,9 +4,7 @@
   </div>
 
   <div class="links">
-
     <div class="links-group" *ngIf="!tokenService.loggedIn()">
-      <a routerLink="/dashboard/claim-buy" *ngIf="tokenService.loggedIn() && user" class="balance">USD {{ roundInt(user.balance) }}</a>
       <a routerLink="/login">Login</a>
       <a routerLink="/register">Register</a>
     </div>
@@ -16,6 +14,7 @@
       <a routerLink="/dashboard/home">Dashboard</a>
       <a routerLink="/dashboard/claim-buy">Buy & Claim BNBG</a>
       <a routerLink="/dashboard/reports">Affiliate Reports</a>
+      <a routerLink="/dashboard/withdrawal">Withdrawal</a>
     </div>
 
     <div class="links-group">
@@ -24,9 +23,9 @@
       <a *ngIf="tokenService.loggedIn()" (click)="logout()">Logout</a>
     </div>
 
-    <div class="links-group">
-        <p>Users Online: {{onlineNow}}</p>
-    </div>
+    <div class="links-group" *ngIf="tokenService.loggedIn() && user && user.administrator">
+        <p>Online: {{onlineNow}}</p>
+      </div>
   </div>
 </nav>
 
@@ -35,8 +34,7 @@
   [ngClass]="{ open: navState }"
   (click)="navState = !navState ? true : false"
   color="primary"
-  mat-fab
->
+  mat-fab>
   <span class="material-icons" *ngIf="!navState">menu</span>
   <span class="material-icons" *ngIf="navState">close</span>
 </button>

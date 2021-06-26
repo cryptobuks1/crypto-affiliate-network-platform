@@ -22,7 +22,9 @@ export class ResetPasswordComponent implements OnInit {
     private httpService: HttpService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    window.document.title = 'BNBG | Reset Password';
+  }
 
   resetPassword(): void {
     this.httpService

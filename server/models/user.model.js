@@ -5,79 +5,30 @@ import loginHistoryModel from './loginHistory.model';
 import personalModel from './personal.model';
 
 const Schema = mongoose.Schema;
+
 const userSchema = new Schema({
-    createdAt: {
-        type: Date,
-        default: new Date(),
-    },
-    updatedAt: {
-        type: Date,
-        default: new Date(),
-    },
-    username: {
-        type: String,
-        required: true,
-    },
-    password: {
-        type: String,
-        required: true,
-    },
-    emailVerified: {
-        type: Boolean,
-        default: false,
-    },
-    identityVerified: {
-        type: Boolean,
-        default: false,
-    },
-    email: {
-        type: String,
-        required: true,
-    },
-    balance: {
-        type: Number,
-        default: 0,
-    },
-    administrator: {
-        type: Boolean,
-        default: false,
-    },
-    pendingBalance: {
-        type: Number,
-        default: 0,
-    },
-    percentage: {
-        type: Number,
-        default: 1,
-    },
-    referralCode: {
-        type: String,
-        default: null,
-    },
-    affiliateCode: {
-        type: String,
-        required: true,
-        unique: true,
-    },
-    tos: {
-        type: Boolean,
-        default: false,
-    },
-    resetPasswordToken: {
-        type: String,
-        default: null,
-    },
-    token: {
-        type: String,
-        default: null,
-    },
-    referrals: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    createdAt: { type: Date, default: new Date() },
+    updatedAt: { type: Date, default: new Date() },
+    username: { type: String, required: true },
+    password: { type: String, required: true },
+    emailVerified: { type: Boolean, default: false },
+    identityVerified: { type: Boolean, default: false },
+    email: { type: String, required: true },
+    balance: { type: Number, default: 0 },
+    administrator: { type: Boolean, default: false },
+    pendingBalance: { type: Number, default: 0 },
+    percentage: { type: Number, default: 1 },
+    referralCode: { type: String, default: null },
+    affiliateCode: { type: String, required: true, unique: true },
+    tos: { type: Boolean, default: false },
+    resetPasswordToken: { type: String, default: null },
+    token: { type: String, default: null },
+    referrals: [{ type: Schema.Types.ObjectId, ref: 'User' }]
 });
 
 const UserModel = mongoose.model('User', userSchema);
 
 async function signUp(data, ipAddr) {
-    console.log('data', data);
     try {
         let referer = null;
         const referralCodeExists =
@@ -156,7 +107,6 @@ async function findUser(filter, includePW) {
         if (!includePW) {
             return UserModel.findOne(filter).select({ password: 0 }).exec();
         }
-
         return UserModel.findOne(filter);
     } catch (err) {
         return Promise.reject(err);
@@ -186,6 +136,7 @@ async function updatePassword(id, password) {
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(password, salt);
         const user = await UserModel.findOne({ _id: id });
+        user.lastUpdated = new Date();
         user.password = hash;
         user.resetPasswordToken = null;
         return await user.save();
@@ -197,7 +148,10 @@ async function updatePassword(id, password) {
 
 async function updateUser(id, update) {
     try {
-        return await UserModel.findOneAndUpdate({ _id: id }, update);
+        return await UserModel.findOneAndUpdate({ _id: id }, {
+            ...update,
+            lastUpdated: new Date()
+        });
     } catch (err) {
         return Promise.reject(err);
     }
@@ -206,8 +160,8 @@ async function updateUser(id, update) {
 async function updateReferralCodes(oldCode, newCode) {
     try {
         await UserModel.updateMany(
-            { referralCode: oldCode },
-            { referralCode: newCode }
+            { referralCode: oldCod },
+            { referralCode: newCode, lastUpdated: new Date() }
         );
         return Promise.resolve('updated!');
     } catch (err) {

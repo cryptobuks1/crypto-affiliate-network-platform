@@ -17,7 +17,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.adminService.isAdmin().subscribe((response: iHttpResponse) => {
-      console.log(response);
       this.isAdmin = response.data;
     });
 

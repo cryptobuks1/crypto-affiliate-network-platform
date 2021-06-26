@@ -24,8 +24,8 @@
       </div>
 
       <div class="actions">
-          <button (click)="reject(request._id)" color="warn" mat-raised-button>Reject</button>
-          <button (click)="approve(request._id)" color="primary" mat-raised-button>Approve</button>
+          <button *ngIf="request.status !== 'rejected'" (click)="reject(request._id)" color="warn" mat-raised-button>Reject</button>
+          <button *ngIf="request.status !== 'approved'" (click)="approve(request._id)" color="primary" mat-raised-button>Approve</button>
       </div>
     </mat-expansion-panel>
 </mat-accordion>

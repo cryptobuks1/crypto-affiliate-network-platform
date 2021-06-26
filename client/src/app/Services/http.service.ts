@@ -16,6 +16,15 @@ export class HttpService {
     private tokenService: TokenService
   ) {}
 
+  getLoginDetails(): Observable<any> {
+    /*
+      const response = await fetch('http://ip-api.com/json');
+      const loginData = await response.json();
+      data.ipAddr = loginData.query;
+    */
+    return this.httpClient.get<any>('http://ip-api.com/json');
+  }
+
   login(data: any): Observable<iHttpResponse> {
     return this.httpClient.post<iHttpResponse>(`${this.serverAddr}/sign-in`, data);
   }
@@ -46,9 +55,19 @@ export class HttpService {
     });
   }
 
+  contact(data: any): Observable<iHttpResponse> {
+    return this.httpClient.post<iHttpResponse>(`${this.serverAddr}/contact`, data);
+  }
+
   findChat(chatId: string): Observable<iHttpResponse> {
     return this.httpClient.get<iHttpResponse>(`${this.serverAddr}/find-chat/${chatId}`, {
       headers: { headers: this.tokenService.headers() }
+    });
+  }
+
+  verifyRecaptchaKey(response: string): Observable<iHttpResponse> {
+    return this.httpClient.post<iHttpResponse>(`${this.serverAddr}/verify-recaptcha`, {
+      response: response
     });
   }
 }

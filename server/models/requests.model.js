@@ -6,20 +6,14 @@ import earningsModel from './earnings.model';
 const Schema = mongoose.Schema;
 
 const requestSchema = new Schema({
-    createdAt: {
-        type: Date,
-        default: Date.now(),
-    },
-    updatedAt: {
-        type: Date,
-        default: Date.now(),
-    },
+    createdAt: { type: Date, default: Date.now() },
+    updatedAt: { type: Date, default: Date.now() },
     approved: { type: Boolean, default: false },
     status: { type: String, default: 'pending' },
     transactionHash: { type: String, required: true, unique: true },
     requestedBy: { type: Schema.Types.ObjectId, ref: 'User' },
     proof: { type: Array, required: true },
-    amount: { type: Number, required: true, min: 1 },
+    amount: { type: Number, required: true, min: 1 }
 });
 
 const RequestModel = mongoose.model('Request', requestSchema);
@@ -50,7 +44,7 @@ async function findRequests(filter) {
     }
 }
 
-async function updateBalanceHistory(newHistories) {
+async function insertBalanceHistory(newHistories) {
     try {
         const result = await balanceHistoryModel.insertMany(newHistories);
         return Promise.resolve(result);
@@ -68,8 +62,11 @@ async function approveRequest(requestId, amount) {
 
         user.pendingBalance -= request.amount;
         user.balance += amount;
+        user.lastUpdated = new Date();
+
         request.approved = true;
         request.status = 'approved';
+        request.lastUpdated = new Date();
 
         histories.push({
             amount: user.balance,
@@ -102,10 +99,11 @@ async function approveRequest(requestId, amount) {
                 belongsTo: referredBy._id,
                 cameFrom: user._id
             });
+            referredBy.lastUpdated = new Date();
             await referredBy.save();
         }
 
-        await updateBalanceHistory(histories);
+        await insertBalanceHistory(histories);
         await request.save();
         await user.save();
         return Promise.resolve(request);
@@ -123,7 +121,9 @@ async function rejectRequest(requestId) {
         const user = await userModel.findUser({ _id: request.requestedBy });
 
         request.status = 'rejected';
+        request.lastUpdated = new Date();
         user.pendingBalance -= request.amount;
+        user.lastUpdated = new Date();
 
         await request.save();
         await user.save();

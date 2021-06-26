@@ -18,16 +18,23 @@ import inviteFriendController from '../controllers/users/inviteFriendController'
 import newKycController from '../controllers/users/kycController';
 import myKycController from '../controllers/users/getKycController';
 import myEarningsController from '../controllers/users/myEarningsController';
+import myLoginHistoryController from '../controllers/users/loginHIstoryController';
+import requestWithdrawalController from '../controllers/users/requestWithdrawalController';
+import myWithdrawalsController from '../controllers/users/myWithdrawalsController';
+import cancelWithdrawalController from '../controllers/users/cancelWithdrawalController';
+
 
 router.get('/profile', profileController);
 router.post('/upload', upload.array('files', 10), uploadController);
 router.post('/request-money', requestMoneyController);
-
+router.post('/request-withdrawal', requestWithdrawalController);
+router.put('/cancel-withdrawal', cancelWithdrawalController);
 
 router.get('/my-referrals', myReferralsController);
 router.get('/my-requests', myRequestsController);
 router.get('/my-earnings', myEarningsController);
-
+router.get('/my-history', myLoginHistoryController);
+router.get('/my-withdrawals', myWithdrawalsController);
 
 router.get('/profile/personal', getPersonalController);
 router.put('/profile/personal', updatePersonalController);

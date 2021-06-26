@@ -7,62 +7,30 @@
     <form>
       <mat-form-field appearance="outline">
         <mat-label>Username</mat-label>
-        <input
-          type="text"
-          [(ngModel)]="username"
-          name="username"
-          id="username"
-          matInput
-        />
+        <input type="text" [(ngModel)]="username" name="username" id="username" matInput />
       </mat-form-field>
-
+      
       <mat-form-field appearance="outline">
         <mat-label>Password</mat-label>
-        <input
-          type="password"
-          [(ngModel)]="password"
-          name="password"
-          id="password"
-          matInput
-        />
+        <input type="password" [(ngModel)]="password" name="password" id="password" matInput />
       </mat-form-field>
-
+      
       <mat-form-field appearance="outline">
         <mat-label>Confirm Password</mat-label>
-        <input
-          type="password"
-          [(ngModel)]="confirmPassword"
-          name="confirmPassword"
-          id="confirmPassword"
-          matInput
-        />
+        <input type="password" [(ngModel)]="confirmPassword" name="confirmPassword" id="confirmPassword" matInput />
       </mat-form-field>
-
+      
       <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
-        <input
-          type="email"
-          [(ngModel)]="email"
-          name="email"
-          id="email"
-          matInput
-        />
+        <input type="email" [(ngModel)]="email" name="email" id="email" matInput />
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Referral Code</mat-label>
-        <input
-          type="text"
-          [(ngModel)]="referralCode"
-          name="referralCode"
-          id="referralCode"
-          matInput
-        />
+        <input type="text" [(ngModel)]="referralCode" name="referralCode" id="referralCode" matInput/>
       </mat-form-field>
 
-      <mat-checkbox [(ngModel)]="tos" name="tos"
-        >I Agree - Terms & Condition</mat-checkbox
-      >
+      <mat-checkbox [(ngModel)]="tos" name="tos">I Agree - Terms & Condition</mat-checkbox>
 
       <button (click)="register()" color="primary" mat-raised-button>
         Create Account

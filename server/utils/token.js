@@ -1,12 +1,19 @@
 import jwt from "jsonwebtoken";
 import fs from "fs";
 
-function createToken(data) {
+function createToken(data, permanent) {
   const key = fs.readFileSync("./utils/key.pem");
+  let duration;
+
+  if (permanent) {
+    duration = '4380h'
+  } else {
+    duration = '6h';
+  }
 
   return jwt.sign({ data: data }, key, {
     algorithm: "RS256",
-    expiresIn: "12h",
+    expiresIn: duration,
   });
 }
 

@@ -63,4 +63,34 @@ export class AdminService {
       headers: this.tokenService.headers()
     });
   }
+
+  getMessages(): Observable<iHttpResponse> {
+    return this.httpClient.get<iHttpResponse>(`${this.serverAddr}/messages`, {
+      headers: this.tokenService.headers()
+    });
+  }
+
+  updateMessage(data: any): Observable<iHttpResponse> {
+    return this.httpClient.put<iHttpResponse>(`${this.serverAddr}/update-message`, data, {
+      headers: this.tokenService.headers()
+    });
+  }
+
+  getWithdrawals(): Observable<iHttpResponse> {
+    return this.httpClient.get<iHttpResponse>(`${this.serverAddr}/get-withdrawals`, {
+      headers: this.tokenService.headers()
+    });
+  }
+
+  approveWithdrawal(data: any): Observable<iHttpResponse> {
+    return this.httpClient.put<iHttpResponse>(`${this.serverAddr}/approve-withdrawal`, data, {
+      headers: this.tokenService.headers()
+    })
+  }
+
+  rejectWithdrawal(data: any): Observable<iHttpResponse> {
+    return this.httpClient.put<iHttpResponse>(`${this.serverAddr}/reject-withdrawal`, data, {
+      headers: this.tokenService.headers()
+    })
+  }
 }

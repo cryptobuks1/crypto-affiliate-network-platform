@@ -25,6 +25,8 @@ export class DashboardHomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    window.document.title = 'BNBG | Dashboard';
+
     this.profile();
     this.fetchPrices();
     this.fetchBalanceHistory();

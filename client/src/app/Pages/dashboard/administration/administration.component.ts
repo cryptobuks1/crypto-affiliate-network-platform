@@ -12,7 +12,7 @@ import { StreamService } from 'src/app/Services/stream.service';
 })
 export class AdministrationComponent implements OnInit {
   public selected: FormControl = new FormControl(0);
-  public tabs: number[] = [0, 1, 2, 3];
+  public tabs: number[] = [0, 1, 2, 3, 4];
   private socket: any | undefined;
   
   constructor(
@@ -23,6 +23,8 @@ export class AdministrationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    window.document.title = 'BNBG | Administration';
+
     this.adminService.isAdmin().subscribe((response: iHttpResponse) => {
       if (!response.data) {
         this.router.navigate(['/']);
@@ -33,17 +35,17 @@ export class AdministrationComponent implements OnInit {
   }
 
   checkIfTabExists(): void {
-    let search = new URLSearchParams(window.location.search);
-    let tab = search.get('tab');
+    let tab = window.location.hash.split('?tab=')[1];
 
-    if(tab !== null && this.tabs.includes(parseInt(tab))) {
+    if(tab !== undefined && this.tabs.includes(parseInt(tab))) {
       this.selected.setValue(tab);
     }
   }
 
-  changeTab(e: Event) {
-    this.selected.setValue(e);
-    const newURL = window.location.pathname + '?tab='  + this.selected.value;
+  changeTab(tab: number) {
+    
+    this.selected.setValue(tab);
+    const newURL = `/#/dashboard/administration?tab=${this.selected.value}`
     window.history.pushState(null, '', newURL);
   }
 }

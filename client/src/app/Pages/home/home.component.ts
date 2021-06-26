@@ -11,6 +11,8 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router, private tokenService: TokenService) {}
 
   ngOnInit(): void {
+    window.document.title = 'BNBG | Home';
+
     if (this.tokenService.loggedIn()) {
       this.router.navigate(['/dashboard']);
     } else {

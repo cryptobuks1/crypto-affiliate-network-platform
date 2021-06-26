@@ -16,7 +16,7 @@ async function inviteFriend(req, res) {
         const href = `${process.env.CLIENT_ADDR}/register/?ref=${user.affiliateCode}`;
         console.log(href);
 
-        await mail.send_mailgun({
+        await mail.send_gmail({
             receiver: req.body.email,
             subject: 'You have been invited to try...',
             html: `<a href="${href}">Accept Invitation</a>`,

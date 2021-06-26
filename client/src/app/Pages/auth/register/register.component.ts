@@ -26,6 +26,8 @@ export class RegisterComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    window.document.title = 'BNBG | Register';
+
     this.activatedRoute.queryParams.subscribe((params) => {
       if (params.ref != undefined) {
         this.referralCode = params.ref;
@@ -34,26 +36,28 @@ export class RegisterComponent implements OnInit {
   }
 
   register(): void {
-    this.httpService
-      .register({
-        username: this.username,
-        password: this.password,
-        confirmPassword: this.confirmPassword,
-        email: this.email,
-        referralCode: this.referralCode,
-        tos: this.tos,
-      })
-      .subscribe((response) => {
-        this.alertsStoreService.setAlert({
-          text: response.message,
-          type: `${!response.success ? 'error' : 'success'}`,
-          show: true,
-        });
+    this.httpService.getLoginDetails().subscribe((response: any) => {
+      this.httpService
+        .register({
+          username: this.username,
+          password: this.password,
+          confirmPassword: this.confirmPassword,
+          email: this.email,
+          referralCode: this.referralCode,
+          tos: this.tos,
+          ipAddr: response.query
+        }).subscribe((response) => {
+          this.alertsStoreService.setAlert({
+            text: response.message,
+            type: `${!response.success ? 'error' : 'success'}`,
+            show: true,
+          });
 
-        if (response.success) {
-          this.tokenService.setToken(response.data);
-          this.router.navigate(['/dashboard/home']);
-        }
+          if (response.success) {
+            this.tokenService.setToken(response.data);
+            this.router.navigate(['/dashboard/home']);
+          }
+        });
       });
   }
 }

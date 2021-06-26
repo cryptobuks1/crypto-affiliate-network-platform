@@ -15,6 +15,7 @@ export class ClaimBuyComponent implements OnInit {
   public myRequests: any[] | undefined;
   public amount: number | undefined;
   public transactionHash: string | undefined;
+  public loading: boolean = false;
 
   @ViewChild('files') filesInput: ElementRef | undefined;
 
@@ -25,6 +26,8 @@ export class ClaimBuyComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    window.document.title = 'BNBG | Claim & Buy';
+
     this.fetchRequests();
   }
 
@@ -34,7 +37,6 @@ export class ClaimBuyComponent implements OnInit {
 
   fetchRequests(): void {
     this.authService.myRequests().subscribe((response: iHttpResponse) => {
-      console.log(response.data);
       if (response.success) {
         this.myRequests = response.data;
       }
@@ -43,6 +45,8 @@ export class ClaimBuyComponent implements OnInit {
 
   submit(): void {
     if (this.transactionHash != undefined) {
+      this.loading = true;
+
       this.httpService
         .validateHash(this.transactionHash)
         .subscribe((hashResult: any) => {
@@ -66,13 +70,16 @@ export class ClaimBuyComponent implements OnInit {
                   type: `${response.success ? 'success' : 'error'}`,
                   show: true,
                 });
+               this.loading = false;
               });
+            this.loading = false;
           } else {
             this.alertsStoreService.setAlert({
               type: 'error',
               text: "please check the hash you've entered",
               show: true,
             });
+            this.loading = false;
           }
         });
     }

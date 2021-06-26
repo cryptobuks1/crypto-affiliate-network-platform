@@ -17,26 +17,16 @@ import { ReportsComponent } from './Pages/dashboard/reports/reports.component';
 import { AccountSettingsComponent } from './Pages/dashboard/account-settings/account-settings.component';
 import { AdministrationComponent } from './Pages/dashboard/administration/administration.component';
 import { IdentityVerificationComponent } from './Pages/identity-verification/identity-verification.component';
+import { LoginHistoryComponent } from './Pages/login-history/login-history.component';
+import { WithdrawalComponent } from './Pages/withdrawal/withdrawal.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'login', component: LoginComponent, canActivate: [NotAuthGuard] },
-  {
-    path: 'register',
-    component: RegisterComponent,
-    canActivate: [NotAuthGuard],
-  },
-  {
-    path: 'reset-password',
-    component: ResetPasswordComponent,
-    canActivate: [NotAuthGuard],
-  },
-  {
-    path: 'identity-verification',
-    component: IdentityVerificationComponent,
-    canActivate: [AuthGuard],
-  },
+  { path: 'register', component: RegisterComponent, canActivate: [NotAuthGuard] },
+  { path: 'reset-password', component: ResetPasswordComponent, canActivate: [NotAuthGuard] },
+  { path: 'identity-verification', component: IdentityVerificationComponent, canActivate: [AuthGuard] },
   {
     path: 'dashboard',
     component: DashboardComponent,
@@ -47,12 +37,14 @@ const routes: Routes = [
       { path: 'reports', component: ReportsComponent },
       { path: 'account-settings', component: AccountSettingsComponent },
       { path: 'administration', component: AdministrationComponent },
+      { path: 'login-history', component: LoginHistoryComponent },
+      { path: 'withdrawal', component: WithdrawalComponent },
     ],
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

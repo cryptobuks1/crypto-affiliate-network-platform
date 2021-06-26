@@ -5,7 +5,6 @@ dotenv.config();
 
 
 async function send_gmail(settings) {
-
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
@@ -18,17 +17,15 @@ async function send_gmail(settings) {
     });
 
     return await transporter.sendMail({
-        from: `Application <${process.env.GMAIL_EMAIL}>`, // sender address
+        from: `BNBG <${process.env.GMAIL_EMAIL}>`, // sender address
         to: settings.receiver, // list of receivers
         subject: settings.subject, // Subject line
-        text: "Hello world?", // plain text body
+        text: "", // plain text body
         html: settings.html, // html body
     });
 }
 
 async function send_mailgun(settings) {
-    return send_gmail(settings);
-
     const auth = {
         apiKey: process.env.MAILGUN_API_KEY,
         domain: process.env.MAILGUN_DOMAIN,
@@ -41,8 +38,6 @@ async function send_mailgun(settings) {
         text: '',
         html: settings.html,
     };
-
-    console.log(settings);
 
     return new Promise((resolve, reject) => {
         mailgun(auth)

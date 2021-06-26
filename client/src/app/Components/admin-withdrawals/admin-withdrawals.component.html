@@ -1,0 +1,24 @@
+<header>
+    <mat-form-field appearance="outline">
+        <mat-label>Status</mat-label>
+        <mat-select [(ngModel)]="filterValue" placeholder="Status" (selectionChange)="filter()">
+            <mat-option value="pending">Pending</mat-option>
+            <mat-option value="approved">Approved</mat-option>
+            <mat-option value="rejected">Rejected</mat-option>
+        </mat-select>
+    </mat-form-field>
+</header>
+
+<div class="withdrawals" *ngIf="withdrawals">
+    <div class="withdrawal" *ngFor="let withdrawal of withdrawals">
+        <p><span>Requested On:</span> {{ withdrawal.createdAt | date: 'short' }}</p>
+        <p><span>Amount:</span> USD {{ roundInt(withdrawal.amount) }}</p>
+        <p><span>Asset:</span> {{ withdrawal.asset }}</p>
+        <p><span>Wallet Address:</span> {{ withdrawal.walletAddr }}</p>
+        <p [class]="withdrawal.status"><span>Status:</span> {{ withdrawal.status }}</p>
+        <div class="actions">
+            <button *ngIf="!withdrawal.completed" (click)="reject(withdrawal._id)" color="warn" mat-raised-button>Reject</button>
+            <button *ngIf="!withdrawal.completed" (click)="approve(withdrawal._id)" color="primary" mat-raised-button>Approve</button>
+        </div>
+    </div>
+</div>

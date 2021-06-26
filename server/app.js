@@ -19,6 +19,7 @@ database.connect();
 app.use(express.json());
 
 app.use(cors());
+app.use('/', express.static('./public'));
 app.use('/uploads', express.static('./uploads'));
 app.use('/api', extract, index);
 app.use('/api/users', extract, auth, users);

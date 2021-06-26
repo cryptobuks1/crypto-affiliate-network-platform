@@ -2,33 +2,15 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const balanceHistorySchema = new Schema({
-    createdAt: {
-        type: Date,
-        default: new Date(),
-    },
-    updatedAt: {
-        type: Date,
-        default: new Date(),
-    },
-    amount: {
-        type: Number,
-        required: true,
-    },
-    summary: {
-        type: Boolean,
-        default: true,
-    },
-    belongsTo: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: true,
-    },
+    createdAt: { type: Date, default: new Date() },
+    updatedAt: { type: Date, default: new Date() },
+    amount: { type: Number, required: true },
+    summary: { type: Boolean, default: true },
+    belongsTo: { type: Schema.Types.ObjectId, ref: 'User', required: true }
 });
 
-const BalanceHistoryModel = mongoose.model(
-    'BalanceHistory',
-    balanceHistorySchema
-);
+
+const BalanceHistoryModel = mongoose.model('BalanceHistory', balanceHistorySchema);
 
 async function create(data) {
     try {

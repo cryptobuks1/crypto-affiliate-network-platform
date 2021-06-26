@@ -1,0 +1,49 @@
+header {
+    padding-top: 2rem;
+    mat-form-field {
+        width: 100%;
+    }
+}
+
+.withdrawals {
+    .withdrawal {
+        padding: 2rem 0;
+
+        p {
+            margin: 10px 0;
+            
+            span {
+                font-weight: 700;
+                font-size: 1.4rem;
+            }
+
+            &.rejected {
+                color: red;
+            }
+            
+            &.approved {
+                color: green;
+            }
+
+            &.pending {
+                color: rgb(206, 206, 31);
+            }
+        }
+
+        &:not(:last-of-type) {
+            border-bottom: 1px solid rgb(233, 233, 233);
+        }
+
+         button {
+             margin-top: 1rem;
+         }
+
+         .actions {
+             button {
+                 &:not(:last-of-type) {
+                     margin-right: .75rem;
+                 }
+             }
+         }
+    }
+}

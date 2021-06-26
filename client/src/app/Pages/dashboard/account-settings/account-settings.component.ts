@@ -38,6 +38,8 @@ export class AccountSettingsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    window.document.title = 'BNBG | Account Settings';
+
     this.fetchUser();
   }
 
@@ -94,7 +96,6 @@ export class AccountSettingsComponent implements OnInit {
     this.authService
       .updatePassword(this.passwordFormData)
       .subscribe((response: iHttpResponse) => {
-        console.log(response);
         this.alertsStoreService.setAlert({
           text: response.message,
           type: `${response.success ? 'success' : 'error'}`,
@@ -111,7 +112,6 @@ export class AccountSettingsComponent implements OnInit {
   }
 
   updateEmail(): void {
-    console.log(this.emailFormData);
     if (this.emailFormData !== undefined) {
       this.authService
         .updateEmail(this.emailFormData)

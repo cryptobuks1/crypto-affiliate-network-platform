@@ -24,7 +24,6 @@ export class AdminKycRequestsComponent implements OnInit {
     this.adminService.getKycs().subscribe((response: iHttpResponse) => {
       if(response.success) {
         this.requests = response.data;
-        console.log(response.data);
       }
     });
   }

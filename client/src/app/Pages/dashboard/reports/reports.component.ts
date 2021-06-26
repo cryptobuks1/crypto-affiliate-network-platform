@@ -16,6 +16,8 @@ export class ReportsComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
+    window.document.title = 'BNBG | Affiliate Reports';
+
     this.myEarnings();
     this.profile();
   }
@@ -24,7 +26,7 @@ export class ReportsComponent implements OnInit {
   affiliateLink(): string {
     return `${window.location.origin}/register?ref=${this.user.affiliateCode}`;
   }
-  
+
   profile(): void {
     this.authService.profile().subscribe((response: iHttpResponse) => {
       if(response.success) {
@@ -68,7 +70,6 @@ export class ReportsComponent implements OnInit {
 
 
   filter(filterOption: string): any {
-    console.log(filterOption);
    switch(filterOption) {
     case 'htl': return this.earnings = this.earnings.sort((a: any, b: any) => b.amount - a.amount)
     case 'lth': return this.earnings = this.earnings.sort((a: any, b: any) => a.amount - b.amount);

@@ -13,7 +13,7 @@ async function requestToken(req, res) {
 
         const user = await userModel.findUser({ email: req.body.email });
 
-        await mail.send_mailgun({
+        await mail.send_gmail({
             receiver: user.email,
             subject: 'Your password reset token',
             html: resetToken,

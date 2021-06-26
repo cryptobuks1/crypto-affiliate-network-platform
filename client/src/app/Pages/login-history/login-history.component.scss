@@ -1,0 +1,30 @@
+table {
+    background-color: #fff;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    width: 100%;
+    margin: 2rem 0;
+
+    td, th {
+        text-align: left;
+        padding: .7rem;
+        border-bottom: 1px solid rgb(240, 240, 240);
+
+        div {
+            display: flex;
+            align-items: center;
+        }
+        
+        img {
+            width: 16px;
+            height: 16px;
+            object-fit: contain;
+            margin-left: 1rem;
+        }
+    }
+
+    tr:last-of-type {
+        td {
+            border: none;
+        }
+    }
+}

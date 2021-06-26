@@ -1,0 +1,23 @@
+<h1>Login History</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>IP</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let dataPoint of loginHistory">
+            <td>{{ dataPoint.createdAt | date: 'short' }}</td>
+            <td>
+                <div>
+                    {{ dataPoint.ipAddr }}
+                    <img [src]="'https://api.hostip.info/flag.php?ip=' + dataPoint.ipAddr"/>
+                </div>
+            </td>
+            <td>{{ dataPoint.success ? 'successful' : 'unsuccessful' }}</td>
+        </tr>
+    </tbody>
+</table>
