@@ -19,17 +19,13 @@ export class DashboardHomeComponent implements OnInit {
   public email: string | undefined;
 
   constructor(
-    private httpService: HttpService,
     private authService: AuthService,
-    private alertsStoreService: AlertsStoreService
   ) {}
 
   ngOnInit(): void {
     window.document.title = 'BNBG | Dashboard';
 
     this.profile();
-    this.fetchPrices();
-    this.fetchBalanceHistory();
   }
 
   profile(): void {
@@ -38,73 +34,6 @@ export class DashboardHomeComponent implements OnInit {
     });
   }
 
-  affiliateLink(): string {
-    return `${window.location.origin}/register?ref=${this.user.affiliateCode}`;
-  }
-
-  fetchPrices(): void {
-    this.httpService
-      .prices()
-      .subscribe((response) => (this.priceData = response.data));
-  }
-
-  setOptions(): void {
-    this.options = {
-      backgroundColor: '#333',
-      xAxis: {
-        type: 'category',
-        data: this.balanceHistorySummary?.map(
-          (dataPoint) =>
-            new Date(dataPoint.createdAt).toISOString().split('T')[0]
-        ),
-      },
-      yAxis: {
-        type: 'value',
-      },
-      series: [
-        {
-          data: this.balanceHistorySummary?.map(
-            (dataPoint) => dataPoint.amount
-          ),
-          type: 'line',
-          color: '#ffd700',
-        },
-      ],
-    };
-    this.loadingChart = false;
-  }
-
-  inviteFriend(): void {
-    this.authService
-      .inviteFriend({ email: this.email })
-      .subscribe((response: iHttpResponse) => {
-        if (response.success) {
-          this.email = '';
-        }
-
-        this.alertsStoreService.setAlert({
-          text: response.message,
-          show: true,
-          type: `${response.success ? 'info' : 'error'}`,
-        });
-      });
-  }
-
-  fetchBalanceHistory(): void {
-    this.authService.balanceHistory().subscribe((response: iHttpResponse) => {
-      if (response.success) {
-        this.balanceHistory = response.data.filter(
-          (dataPoint: any) => !dataPoint.summary
-        );
-
-        this.balanceHistorySummary = response.data.filter(
-          (dataPoint: any) => dataPoint.summary
-        );
-
-        this.setOptions();
-      }
-    });
-  }
 
   roundInt(int: number): number | string {
     if (int != undefined) {

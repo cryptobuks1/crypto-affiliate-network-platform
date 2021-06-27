@@ -11,9 +11,9 @@ import { AlertsStoreService } from 'src/app/Store/alerts-store.service';
 })
 export class AdminPaymentRequestsComponent implements OnInit {
   public requests: any[] | undefined;
-  public requestsStore: any[] | undefined;
   public filterByStatusValue: string = 'all';
-  public searchStr: string = '';
+  public amountRendered: number = 10;
+  public nProducts: number = 1;
 
   constructor(
     private alertsStoreService: AlertsStoreService,
@@ -28,12 +28,21 @@ export class AdminPaymentRequestsComponent implements OnInit {
   }
 
   fetchRequests(): void {
-    this.adminService.requests().subscribe((response: iHttpResponse) => {
-      if (response.success) {
+    this.adminService.requestsSlice(this.amountRendered * this.nProducts, this.filterByStatusValue)
+    .subscribe((response: iHttpResponse) => {
+      if(response.success) {
         this.requests = response.data;
-        this.requestsStore = response.data;
       }
     });
+  } 
+
+  loadMore(): void {
+    this.nProducts += 1;
+    this.fetchRequests();
+  }
+
+  changeAmount(): void {
+    this.fetchRequests();
   }
 
   approve(id: string, amount: number): void {
@@ -69,22 +78,9 @@ export class AdminPaymentRequestsComponent implements OnInit {
     });
   }
 
-  filter(searchStr: string): void {
-    if (searchStr.length <= 0) {
-      this.requests = this.requestsStore;
-    } else {
-      let regex = new RegExp(`${searchStr.toLowerCase()}.*`);
-      this.requests = this.requestsStore?.filter((request: any) => {
-        return regex.test(request.requestedBy.username.toLowerCase());
-      });
-    }
-  }
 
-  filterByStatus(val: string) {
-    if (val === 'all') {
-      this.fetchRequests();
-    } else {
-      this.requests = this.requestsStore?.filter((request: any) => request.status === val);
-    }
+  filterByStatus(): void {
+    this.nProducts = 1;
+    this.fetchRequests();
   }
 }

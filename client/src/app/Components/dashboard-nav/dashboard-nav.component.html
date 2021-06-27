@@ -1,14 +1,17 @@
 <nav class="dashboard-nav">
   <div class="container">
-    <div>
-      <a routerLink="/dashboard/administration" *ngIf="isAdmin" color="primary" mat-fab>
-        <span class="material-icons">admin_panel_settings</span>
+    <div class="links">
+      <a routerLink="/dashboard/administration" *ngIf="isAdmin">
+        <span>Administration</span>
+        <span class="material-icons-outlined">admin_panel_settings</span>
       </a>
-      <a routerLink="/dashboard/account-settings" color="primary" mat-fab>
-        <span class="material-icons">settings</span>
+      <a routerLink="/dashboard/account-settings">
+        <span>Account Settings</span>
+        <span class="material-icons-outlined">settings</span>
       </a>
-      <a routerLink="/dashboard/login-history" color="primary" mat-fab>
-        <span class="material-icons">history</span>
+      <a routerLink="/dashboard/login-history">
+        <span>Login History</span>
+        <span class="material-icons-outlined">history</span>
       </a>
     </div>
   </div>

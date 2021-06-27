@@ -1,0 +1,7 @@
+<section *ngIf="user">
+    <h3>KYC Verification</h3>
+    <div *ngIf="!user.identityVerified">
+    <a routerLink="/identity-verification" color="primary" mat-raised-button>Verify Identity</a>
+    </div>
+    <p *ngIf="user.identityVerified">Your identity is verified <span class="material-icons-outlined">done</span></p>
+</section>

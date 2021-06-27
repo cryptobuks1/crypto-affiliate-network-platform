@@ -1,16 +1,20 @@
 <div class="filter-requests">
     <mat-form-field appearance="outline">
-      <mat-label>Username</mat-label>
-      <input [(ngModel)]="searchStr" (change)="filter(searchStr)" placeholder="Username" matInput/>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
       <mat-label>Status</mat-label>        
-      <mat-select [(ngModel)]="filterByStatusValue" (selectionChange)="filterByStatus(filterByStatusValue)">
+      <mat-select [(ngModel)]="filterByStatusValue" (selectionChange)="filterByStatus()">
           <mat-option value="all">All</mat-option>
           <mat-option value="pending">Pending</mat-option>
           <mat-option value="approved">Approved</mat-option>
           <mat-option value="rejected">Rejected</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Amount</mat-label>        
+      <mat-select [(ngModel)]="amountRendered" (selectionChange)="changeAmount()">
+          <mat-option value="10">10</mat-option>
+          <mat-option value="25">25</mat-option>
+          <mat-option value="50">50</mat-option>
+          <mat-option value="100">100</mat-option>
       </mat-select>
     </mat-form-field>
 </div>
@@ -49,14 +53,20 @@
 
       <div class="actions" *ngIf="request.status === 'pending'">
         <button class="reject" (click)="reject(request._id)" title="Reject this request" color="warn" mat-fab>
-          <span class="material-icons">close</span>
+          <span class="material-icons-outlined">close</span>
         </button>
 
         <button class="approve" (click)="approve(request._id, request.amount)" title="Approve this request" color="primary" mat-fab>
-          <span class="material-icons">done</span>
+          <span class="material-icons-outlined">done</span>
         </button>
       </div>
-
     </div>
   </mat-expansion-panel>
 </mat-accordion>
+
+<footer>
+  <a class="load-more" (click)="loadMore()">
+    <span>Load More</span> 
+    <span class="material-icons-outlined">refresh</span>
+  </a>
+</footer>

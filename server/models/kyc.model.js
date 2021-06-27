@@ -1,4 +1,6 @@
 import mongoose from 'mongoose';
+import { io } from '../sockets';
+
 const Schema = mongoose.Schema;
 
 const kycSchema = new Schema({
@@ -37,7 +39,9 @@ async function findKyc(filter) {
 
 async function updateKyc(filter, update) {
     try {
-        return await KycModel.findOneAndUpdate(filter, update);
+        const result = await KycModel.findOneAndUpdate(filter, update);
+        io.emit(`update ${result.belongsTo}`, 'your kyc request has been updated');
+        return Promise.resolve(result);
     } catch (err) {
         return Promise.reject(err);
     }

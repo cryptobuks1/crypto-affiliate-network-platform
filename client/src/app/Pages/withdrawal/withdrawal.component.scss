@@ -16,17 +16,19 @@ header.overview {
     }
 }
 
-@media only screen and(max-width: 900px) {
-    header.overview {
+section {
+
+    &.identity-not-verified {
+        padding-top: 70px;
+        display: flex;
         flex-direction: column;
 
-        .block {
-            margin: .5rem 0 .5rem 0;
+        button {
+            width: 10rem;
+            margin-top: 2rem;
         }
     }
-}
 
-section {
     form {
         padding: 50px 0;
         display: flex;
@@ -34,6 +36,7 @@ section {
 
         mat-slider {
             margin-bottom: 1rem;
+            width: 40%;
         }
 
         button {
@@ -82,5 +85,33 @@ section {
          button {
              margin-top: 1rem;
          }
+    }
+}
+
+@media only screen and(max-width: 900px) {
+    header.overview {
+        flex-direction: column;
+
+        .block {
+            margin: .5rem 0 .5rem 0;
+        }
+    }
+
+    section {
+
+        &.identity-not-verified {
+
+            p {
+                max-width: 80%;
+            }
+            align-items: center;
+            text-align: center;       
+        }
+    
+        form {
+            mat-slider {
+                width: 100%;
+            }
+        }
     }
 }

@@ -1,32 +1,107 @@
 <nav [ngClass]="{ open: navState }">
+
   <div class="logo">
     <img src="/assets/img/BNBG-1.png" alt="" />
   </div>
 
   <div class="links">
     <div class="links-group" *ngIf="!tokenService.loggedIn()">
-      <a routerLink="/login">Login</a>
-      <a routerLink="/register">Register</a>
+      <h3>Account Access</h3>
+      <a routerLinkActive="active-link" routerLink="/login">
+        <div>
+          <span class="material-icons-outlined">login</span>
+          <span>Login</span>
+        </div>
+      </a>
+      <a routerLinkActive="active-link" routerLink="/register">
+        <div>
+          <span class="material-icons-outlined">app_registration</span>
+          <span>Register</span>
+        </div>
+      </a>
+      <a routerLinkActive="active-link" routerLink="/reset-password">
+        <div>
+          <span class="material-icons-outlined">password</span>
+          <span>Account Recovery</span>
+        </div>
+      </a>
     </div>
 
     <div class="links-group" *ngIf="tokenService.loggedIn()">
-      <a routerLink="/dashboard/claim-buy" *ngIf="tokenService.loggedIn() && user" class="balance">USD {{ roundInt(user.balance) }}</a>
-      <a routerLink="/dashboard/home">Dashboard</a>
-      <a routerLink="/dashboard/claim-buy">Buy & Claim BNBG</a>
-      <a routerLink="/dashboard/reports">Affiliate Reports</a>
-      <a routerLink="/dashboard/withdrawal">Withdrawal</a>
+      <h3>Dashboard</h3>
+      <a routerLinkActive="active-link" routerLink="/dashboard/home">
+        <div>
+          <span class="material-icons-outlined">dashboard</span>
+          <span>Dashboard</span>
+        </div>
+      </a>
+      <a routerLinkActive="active-link" routerLink="/dashboard/claim-buy">
+        <div>
+          <span class="material-icons-outlined">storefront</span>
+          <span>Buy & Claim BNBG</span>
+        </div>
+      </a>
+      <a routerLinkActive="active-link" routerLink="/dashboard/reports">
+        <div>
+          <span class="material-icons-outlined">trending_up</span>
+          <span>Affiliate Reports</span>
+        </div>
+      </a>
+      <a routerLinkActive="active-link" routerLink="/dashboard/withdrawal">
+        <div>
+          <span class="material-icons-outlined">paid</span> 
+          <span>Withdrawal</span>   
+        </div>
+      </a>
     </div>
 
+    <div class="links-group" *ngIf="tokenService.loggedIn()">
+      <h3>Account</h3>
+      <a routerLinkActive="active-link" routerLink="/dashboard/account-settings">
+        <div>
+          <span class="material-icons-outlined">manage_accounts</span>
+          <span>Account Settings</span>
+        </div>
+      </a>
+      <a (click)="logout()">
+        <div>
+          <span class="material-icons-outlined">logout</span>
+          <span>Logout</span>
+        </div>
+      </a>
+      <a routerLink="/dashboard/login-history">
+        <div>
+          <span class="material-icons-outlined">history</span>
+          <span>Login History</span>
+        </div>
+      </a>
+    </div>
     <div class="links-group">
-      <a routerLink="/contact">Contact</a>
-      <a routerLink="/dashboard/account-settings" *ngIf="tokenService.loggedIn()">Account Settings</a>
-      <a *ngIf="tokenService.loggedIn()" (click)="logout()">Logout</a>
+      <h3>Other</h3>
+      <a routerLinkActive="active-link" routerLink="/contact">
+        <div>
+          <span class="material-icons-outlined">contact_page</span>
+          <span>Contact</span>
+        </div>
+      </a>
+      <a routerLink="/dashboard/administration" *ngIf="user && isAdmin">
+        <div>
+          <span class="material-icons-outlined">admin_panel_settings</span>
+          <span>Administration</span>
+        </div>
+      </a>
     </div>
-
-    <div class="links-group" *ngIf="tokenService.loggedIn() && user && user.administrator">
-        <p>Online: {{onlineNow}}</p>
-      </div>
   </div>
+  
+  <footer *ngIf="tokenService.loggedIn() && user">
+    <div class="footer-content">
+      <p class="balance" title="Balance">USD {{ roundInt(user.balance) }}</p>
+      <p *ngIf="tokenService.loggedIn() && user && user.administrator" class="online-now" title="Online users now">
+        <span></span> 
+        {{onlineNow}}
+      </p>
+    </div>
+  </footer>
 </nav>
 
 <button
@@ -35,6 +110,6 @@
   (click)="navState = !navState ? true : false"
   color="primary"
   mat-fab>
-  <span class="material-icons" *ngIf="!navState">menu</span>
-  <span class="material-icons" *ngIf="navState">close</span>
+  <span class="material-icons-outlined" *ngIf="!navState">menu</span>
+  <span class="material-icons-outlined" *ngIf="navState">close</span>
 </button>

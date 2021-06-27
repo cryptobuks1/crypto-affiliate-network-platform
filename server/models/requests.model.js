@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import userModel from './user.model';
 import balanceHistoryModel from './balanceHistory.model';
 import earningsModel from './earnings.model';
+import { io } from '../sockets';
 
 const Schema = mongoose.Schema;
 
@@ -23,6 +24,7 @@ async function newRequest(data) {
         const request = await new RequestModel(data).save();
         const user = await userModel.findUser({ _id: data.requestedBy });
         user.pendingBalance += data.amount;
+        io.emit(`update ${user._id}`, 'your request has been received');
         await user.save();
         return Promise.resolve(request);
     } catch (err) {
@@ -37,8 +39,20 @@ async function findRequests(filter) {
                 path: 'requestedBy',
                 model: 'User',
                 select: { password: 0 },
-            })
-            .exec();
+            }).exec();
+    } catch (err) {
+        return Promise.reject(err);
+    }
+}
+
+async function findRequestsSlice(filter, limit) {
+    try {
+        return await RequestModel.find(filter).limit(limit)
+            .populate({
+                path: 'requestedBy',
+                model: 'User',
+                select: { password: 0 },
+            }).exec();
     } catch (err) {
         return Promise.reject(err);
     }
@@ -100,9 +114,11 @@ async function approveRequest(requestId, amount) {
                 cameFrom: user._id
             });
             referredBy.lastUpdated = new Date();
+            io.emit(`update ${user._id}`, 'you have earned money');
             await referredBy.save();
         }
 
+        io.emit(`update ${user._id}`, 'your request has been approved');
         await insertBalanceHistory(histories);
         await request.save();
         await user.save();
@@ -124,7 +140,7 @@ async function rejectRequest(requestId) {
         request.lastUpdated = new Date();
         user.pendingBalance -= request.amount;
         user.lastUpdated = new Date();
-
+        io.emit(`update ${user._id}`, 'your request has been rejected');
         await request.save();
         await user.save();
         return Promise.resolve(request);
@@ -133,4 +149,4 @@ async function rejectRequest(requestId) {
     }
 }
 
-export default { newRequest, findRequests, approveRequest, rejectRequest };
+export default { newRequest, findRequests, approveRequest, rejectRequest, findRequestsSlice };

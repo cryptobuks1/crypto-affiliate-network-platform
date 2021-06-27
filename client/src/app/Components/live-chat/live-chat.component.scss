@@ -25,7 +25,7 @@
     bottom: 0;
   }
 
-  header {
+  header.window-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -60,17 +60,46 @@
       flex-grow: 1;
       overflow-x: hidden;
       overflow-y: auto;
+      padding: 1.6rem;
 
-      .message {
-        padding: 0.5rem;
+      .chat-message {
         &:not(:last-of-type) {
-          border-bottom: 1px solid rgb(238, 238, 238);
+          margin-bottom: 1rem;
         }
 
-        span {
-          display: inline-block;
-          margin-right: 0.5rem;
-          font-weight: bold;
+        header {
+          display: flex;
+          align-items: center;
+          padding: 10px 1rem;
+          
+          .date {
+            color: rgb(158, 158, 158);
+          }
+          
+          p {
+            font-size: .8rem;
+
+            &:first-of-type {
+              margin-right: .5rem;
+            }
+          }
+        }
+
+        &.admin {
+            .body {
+              background-color: #3a3a3a;
+            }
+        }
+
+        .body {
+          padding: 1rem;
+          line-height: 26px;
+          font-size: 16px;
+          border-radius: 7px;
+          color: #fff;
+          position: relative;
+          background-color: #ffd700;
+
         }
       }
     }

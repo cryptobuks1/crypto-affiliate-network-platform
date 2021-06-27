@@ -3,6 +3,7 @@ import { iHttpResponse } from 'src/app/Interfaces/http.interface';
 import { HttpService } from 'src/app/Services/http.service';
 import { AlertsStoreService } from 'src/app/Store/alerts-store.service';
 import { StreamService } from 'src/app/Services/stream.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-live-chat',
@@ -20,13 +21,14 @@ export class LiveChatComponent implements OnInit {
     description: '',
   };
   public chatData: any | undefined;
+  public moment: any | undefined;
 
   constructor(
     private streamService: StreamService,
     private alertsStoreService: AlertsStoreService,
-    private httpService: HttpService
-  ) {
+    private httpService: HttpService) {
     this.socket = streamService.getSocket();
+    this.moment = moment;
   }
 
   ngOnInit(): void {
@@ -69,15 +71,13 @@ export class LiveChatComponent implements OnInit {
   }
 
   sendMessage(): void {
-    if (
-      this.chatMessage !== undefined &&
-      this.chatMessage.length > 0 &&
-      this.chatMessage !== null
-    ) {
+    console.log(this.chatData);
+
+    if (this.chatMessage !== undefined && this.chatMessage.length > 0 && this.chatMessage !== null) {
       this.streamService.sendMessage({
         message: this.chatMessage,
         id: this.chatData._id,
-        fullName: 'You',
+        fullName: this.chatData.startedBy.fullName,
         admin: false,
       });
       this.chatData.messages.push({

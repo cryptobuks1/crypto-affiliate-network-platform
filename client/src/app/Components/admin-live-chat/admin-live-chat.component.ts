@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StreamService } from 'src/app/Services/stream.service';
 import { AdminService } from 'src/app/Services/admin.service';
 import { iHttpResponse } from 'src/app/Interfaces/http.interface';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-admin-live-chat',
@@ -14,12 +15,14 @@ export class AdminLiveChatComponent implements OnInit {
   public chat: any | undefined;
   public asideOpen: boolean = false;
   private socket: any | undefined;
-  public message: string | undefined;
+  public message: string | undefined = '';
+  public moment: any | undefined;
 
   constructor(
     private adminService: AdminService,
     private streamService: StreamService) {
     this.socket = this.streamService.getSocket();
+    this.moment = moment;
   }
 
   ngOnInit(): void {
@@ -28,16 +31,18 @@ export class AdminLiveChatComponent implements OnInit {
     this.socket.on('chat new sync', (data: any) => {
       this.chats?.push(data);
     });
-
   }
 
   fetchChats(): void {
     this.adminService.getChats().subscribe((response: iHttpResponse) => {
+      console.log(response.data);
+
       if (response.success) {
-        if (response.data.length > 0) {
-          this.chats = response.data;
+        this.chats = response.data;
+        this.chats = response.data;
+
+        if (response.data.length > 0) 
           this.selectChat(0);
-        }
       }
     });
   }
@@ -61,6 +66,8 @@ export class AdminLiveChatComponent implements OnInit {
   }
 
   sendMessage(): void {
+    if(this.message !== undefined && this.message?.trim().length <= 0) return;
+    
     this.socket.emit('message new', { admin: true, id: this.chat._id, fullName: 'Admin', message: this.message });
     this.chat.messages.push({ admin: true, id: this.chat._id, fullName: 'Admin', message: this.message });
     this.message = '';

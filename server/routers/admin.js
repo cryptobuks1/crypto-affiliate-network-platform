@@ -14,28 +14,30 @@ import updateMessageController from '../controllers/admin/updateMessageControlle
 import approveWithdrawalController from '../controllers/admin/approveWithdrawalController';
 import rejectWithdrawalController from '../controllers/admin/rejectWithdrawalController';
 import getWithdrawalsController from '../controllers/admin/getWithdrawalsController';
+import getRequestsSliceController from '../controllers/admin/getRequestsSliceController';
 
 router.get('/', isAdminController);
 router.get('/requests', getRequestsController);
-
+router.get('/requests/:slice/:status', getRequestsSliceController);
 
 router.put('/approve', approveController); // money request
 router.put('/reject', rejectController); // money request
-
 
 router.get('/get-chats', getChatsController);
 router.get('/get-kycs', getKycsController);
 router.put('/approve-kyc', approveKycController);
 router.put('/reject-kyc', rejectKycController);
 
-
 router.get('/messages', getMessagesController);
 router.put('/update-message', updateMessageController);
-
 
 router.get('/get-withdrawals', getWithdrawalsController);
 router.put('/approve-withdrawal', approveWithdrawalController);
 router.put('/reject-withdrawal', rejectWithdrawalController);
 
+
+import stream from './stream';
+
+router.get('/stream-state', stream.streamState);
 
 export default router;

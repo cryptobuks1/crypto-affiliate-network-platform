@@ -43,11 +43,9 @@ router.get('/profile/set-token', setUserTokenController);
 router.put('/profile/verify-email', verifyEmailController);
 router.put('/profile/update-email', updateEmailController);
 
-
 router.get('/dashboard/balance-history', balanceHistoryController);
 router.post('/dashboard/invite-friend', inviteFriendController);
 router.post('/dashboard/kyc-request', newKycController);
 router.get('/dashboard/my-kyc', myKycController);
-
 
 export default router;

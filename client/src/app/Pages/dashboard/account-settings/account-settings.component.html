@@ -1,30 +1,17 @@
 <section class="overview" *ngIf="user">
-  <h1>Account Settings</h1>
-  <p *ngIf="user.emailVerified">
-    Your email is verified <span class="material-icons">done</span>
-  </p>
+  <header>
+    <h1>Account Settings</h1>
+  </header>
+
   <p *ngIf="!user.emailVerified">Your email is not verified</p>
-  <a
-    *ngIf="!user.emailVerified && !tokenSent"
-    color="primary"
-    mat-raised-button
-    (click)="setToken()"
-    >verify now</a
-  >
+  <a *ngIf="!user.emailVerified && !tokenSent" color="primary" mat-raised-button (click)="setToken()">verify now</a>
+
   <div *ngIf="tokenSent && !user.emailVerified" class="token-form">
     <mat-form-field appearance="outline">
       <mat-label>Token</mat-label>
-      <input
-        type="text"
-        name="token"
-        placeholder="Token"
-        [(ngModel)]="token"
-        matInput
-      />
+      <input type="text" name="token" placeholder="Token" [(ngModel)]="token" matInput />
     </mat-form-field>
-    <button (click)="submitToken()" color="primary" mat-raised-button>
-      Verify
-    </button>
+    <button (click)="submitToken()" color="primary" mat-raised-button>Verify</button>
   </div>
 </section>
 
@@ -32,44 +19,22 @@
   <h3>Personal Information</h3>
   <mat-form-field appearance="outline">
     <mat-label>Username</mat-label>
-    <input
-      [value]="user.username"
-      placeholder="Username"
-      name="username"
-      disabled
-      matInput
-    />
+    <input [value]="user.username" placeholder="Username" name="username" disabled matInput />
   </mat-form-field>
+
   <mat-form-field appearance="outline">
     <mat-label>Affiliate Code</mat-label>
-    <input
-      type="text"
-      name="affiliateCode"
-      [(ngModel)]="user.affiliateCode"
-      placeholder="Affiliate Code"
-      matInput
-    />
+    <input type="text" name="affiliateCode" [(ngModel)]="user.affiliateCode" placeholder="Affiliate Code" matInput />
   </mat-form-field>
+
   <mat-form-field appearance="outline">
     <mat-label>First Name</mat-label>
-    <input
-      type="text"
-      name="firstName"
-      placeholder="First Name"
-      [(ngModel)]="formData.firstName"
-      matInput
-    />
+    <input type="text" name="firstName" placeholder="First Name" [(ngModel)]="formData.firstName" matInput />
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Last Name</mat-label>
-    <input
-      type="text"
-      name="lastName"
-      placeholder="Last Name"
-      [(ngModel)]="formData.lastName"
-      matInput
-    />
+    <input type="text" name="lastName" placeholder="Last Name" [(ngModel)]="formData.lastName" matInput />
   </mat-form-field>
 
   <mat-form-field appearance="outline">
@@ -83,141 +48,71 @@
 
   <mat-form-field appearance="outline">
     <mat-label>Address</mat-label>
-    <input
-      type="text"
-      name="address"
-      placeholder="Address"
-      [(ngModel)]="formData.address"
-      matInput
-    />
+    <input type="text" name="address" placeholder="Address" [(ngModel)]="formData.address" matInput />
   </mat-form-field>
-
   <mat-form-field appearance="outline">
     <mat-label>Zip Code</mat-label>
-    <input
-      type="text"
-      name="zipCode"
-      placeholder="Zip Code"
-      [(ngModel)]="formData.zipCode"
-      matInput
-    />
+    <input type="text" name="zipCode" placeholder="Zip Code" [(ngModel)]="formData.zipCode" matInput />
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>City</mat-label>
-    <input
-      type="text"
-      name="city"
-      placeholder="City"
-      [(ngModel)]="formData.city"
-      matInput
-    />
+    <input type="text" name="city" placeholder="City" [(ngModel)]="formData.city" matInput />
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>State</mat-label>
-    <input
-      type="text"
-      name="state"
-      placeholder="State"
-      [(ngModel)]="formData.state"
-      matInput
-    />
+    <input type="text" name="state" placeholder="State" [(ngModel)]="formData.state" matInput />
   </mat-form-field>
 
-  <button (click)="submit()" color="primary" mat-raised-button>
-    Update Account Settings
-  </button>
+  <button (click)="submit()" color="primary" mat-raised-button>Update Account Settings</button>
 </form>
-<form *ngIf="passwordFormData && user">
+
+<form *ngIf="passwordFormData && user" id="change-password">
   <h3>Update Password</h3>
 
   <mat-form-field appearance="outline">
     <mat-label>Old Password</mat-label>
-    <input
-      type="password"
-      name="oldPassword"
-      placeholder="Old Password"
-      [(ngModel)]="passwordFormData.oldPassword"
-      matInput
-    />
+    <input type="password" name="oldPassword" placeholder="Old Password" [(ngModel)]="passwordFormData.oldPassword" matInput />
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>New Password</mat-label>
-    <input
-      type="password"
-      name="newPassword"
-      placeholder="New Password"
-      [(ngModel)]="passwordFormData.newPassword"
-      matInput
-    />
+    <input type="password" name="newPassword" placeholder="New Password" [(ngModel)]="passwordFormData.newPassword" matInput />
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Confirm New Password</mat-label>
-    <input
-      type="password"
-      name="confirmNewPassword"
-      placeholder="Confirm New Password"
-      [(ngModel)]="passwordFormData.confirmNewPassword"
-      matInput
-    />
+    <input type="password" name="confirmNewPassword" placeholder="Confirm New Password" [(ngModel)]="passwordFormData.confirmNewPassword" matInput />
   </mat-form-field>
 
-  <button (click)="updatePassword()" color="primary" mat-raised-button>
-    Update Password
-  </button>
+  <button (click)="updatePassword()" color="primary" mat-raised-button> Update Password</button>
 </form>
 
-<form *ngIf="emailFormData && user">
-  <h3>Update Email</h3>
+<form *ngIf="emailFormData && user" id="change-email">
+  <header>
+    <h3>Update Email</h3>
+    <p *ngIf="user.emailVerified">Your email is verified <span class="material-icons-outlined">done</span></p>
+  </header>
 
   <mat-form-field appearance="outline">
     <mat-label>Current Email</mat-label>
-    <input
-      type="email"
-      name="email"
-      placeholder="Email"
-      disabled
-      [value]="user.email"
-      matInput
-    />
+    <input type="email" name="email" placeholder="Email" disabled [value]="user.email" matInput />
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>Password</mat-label>
-    <input
-      type="password"
-      name="password"
-      placeholder="Password"
-      [(ngModel)]="emailFormData.password"
-      matInput
-    />
+    <input type="password" name="password" placeholder="Password" [(ngModel)]="emailFormData.password" matInput />
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>New Email</mat-label>
-    <input
-      type="email"
-      name="newEmail"
-      placeholder="New Email"
-      [(ngModel)]="emailFormData.newEmail"
-      matInput
-    />
+    <input type="email" name="newEmail" placeholder="New Email" [(ngModel)]="emailFormData.newEmail" matInput />
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Confirm New Email</mat-label>
-    <input
-      type="email"
-      name="confirmNewEmail"
-      placeholder="Confirm New Email"
-      [(ngModel)]="emailFormData.confirmNewEmail"
-      matInput
-    />
+    <input type="email" name="confirmNewEmail" placeholder="Confirm New Email" [(ngModel)]="emailFormData.confirmNewEmail" matInput />
   </mat-form-field>
 
-  <button (click)="updateEmail()" color="primary" mat-raised-button>
-    Update Email
-  </button>
+  <button (click)="updateEmail()" color="primary" mat-raised-button>Update Email</button>
 </form>

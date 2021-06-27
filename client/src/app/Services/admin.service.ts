@@ -28,6 +28,12 @@ export class AdminService {
     });
   }
 
+  requestsSlice(slice: number, status: string): Observable<iHttpResponse> {
+    return this.httpClient.get<iHttpResponse>(`${this.serverAddr}/requests/${slice}/${status}`, {
+      headers: this.tokenService.headers()
+    });
+  }
+
   approve(data: any): Observable<iHttpResponse> {
     return this.httpClient.put<iHttpResponse>(`${this.serverAddr}/approve`, data, { 
       headers: this.tokenService.headers() 
@@ -92,5 +98,11 @@ export class AdminService {
     return this.httpClient.put<iHttpResponse>(`${this.serverAddr}/reject-withdrawal`, data, {
       headers: this.tokenService.headers()
     })
+  }
+
+  streamState(): Observable<iHttpResponse> {
+    return this.httpClient.get<iHttpResponse>(`${this.serverAddr}/stream-state`, {
+      headers: this.tokenService.headers()
+    });
   }
 }

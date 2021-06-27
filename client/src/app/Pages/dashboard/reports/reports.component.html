@@ -13,9 +13,9 @@
   </div>
   <ul>
     <li *ngFor="let earning of earnings">
-      <p>USD {{ roundInt(earning.amount) }}</p>
-      <p>{{ earning.createdAt | date: 'short' }}</p>
-      <p>{{ earning.cameFrom.username }}</p>
+      <p class="amount">USD {{ roundInt(earning.amount) }}</p>
+      <p class="date">{{ earning.createdAt | date: 'short' }}</p>
+      <p class="username">{{ earning.cameFrom.username }}</p>
     </li>
   </ul>
 </section>

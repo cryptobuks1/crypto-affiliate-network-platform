@@ -1,12 +1,11 @@
 import chatModel from '../models/chat.model';
+import streamStore from '../store/stream.store';
 
-let online = 0;
-
-export default function (socket) {
-    online++;
+function connection(socket) {
+    streamStore.online++;
 
     socket.on('message new', (data) => {
-        chatModel.sendMessage(data);
+        chatModel.sendMessage(data); // store messages in db
         socket.broadcast.emit(`message new ${data.id}`, data);
     });
 
@@ -15,16 +14,26 @@ export default function (socket) {
     });
 
     socket.on('chat end', (data) => {
-        chatModel.endChat(data.id);
+        chatModel.endChat(data.id); // update db
         socket.broadcast.emit(`chat end ${data.id}`, {
             message: 'chat ended'
         });
     });
 
     socket.on('disconnect', () => {
-        online--;
-        socket.broadcast.emit('broadcast online', online);
+        streamStore.online--;
+        socket.broadcast.emit('broadcast online', streamStore.online);
     });
 
-    socket.broadcast.emit('broadcast online', online);
+    socket.broadcast.emit('broadcast online', streamStore.online);
 }
+
+function streamState(req, res) {
+    return res.json({
+        message: 'some data',
+        success: true,
+        data: streamStore
+    });
+}
+
+export default { connection, streamState };

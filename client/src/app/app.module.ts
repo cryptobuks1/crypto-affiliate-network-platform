@@ -43,6 +43,11 @@ import { AdminContactComponent } from './Components/admin-contact/admin-contact.
 import { LoginHistoryComponent } from './Pages/login-history/login-history.component';
 import { WithdrawalComponent } from './Pages/withdrawal/withdrawal.component';
 import { AdminWithdrawalsComponent } from './Components/admin-withdrawals/admin-withdrawals.component';
+import { BalanceHistoryComponent } from './Components/balance-history/balance-history.component';
+import { InviteFriendComponent } from './Components/invite-friend/invite-friend.component';
+import { SetupPaymentsComponent } from './Components/setup-payments/setup-payments.component';
+import { VerifyIdentityComponent } from './Components/verify-identity/verify-identity.component';
+import { EarningsChartComponent } from './Components/earnings-chart/earnings-chart.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +77,11 @@ import { AdminWithdrawalsComponent } from './Components/admin-withdrawals/admin-
     LoginHistoryComponent,
     WithdrawalComponent,
     AdminWithdrawalsComponent,
+    BalanceHistoryComponent,
+    InviteFriendComponent,
+    SetupPaymentsComponent,
+    VerifyIdentityComponent,
+    EarningsChartComponent,
   ],
   imports: [
     BrowserModule,

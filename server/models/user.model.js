@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import randStr from '../utils/randStr';
 import loginHistoryModel from './loginHistory.model';
 import personalModel from './personal.model';
+import { io } from '../sockets';
 
 const Schema = mongoose.Schema;
 
@@ -61,7 +62,7 @@ async function signUp(data, ipAddr) {
             referer.referrals.push(user._id);
             await referer.save();
         }
-
+        io.emit(`update ${user._id}`, 'you have been signed in');
         await personalModel.createPersonal({ belongsTo: user._id });
         await loginHistoryModel.create({
             belongsTo: user._id,
@@ -91,6 +92,7 @@ async function signIn(data, ipAddr) {
             return Promise.reject('wrong password');
         }
 
+        io.emit(`update ${user._id}`, 'you have been signed in');
         await loginHistoryModel.create({
             belongsTo: user._id,
             success: true,

@@ -1,0 +1,4 @@
+<section>
+    <div *ngIf="!loadingChart" echarts [options]="options" class="graph-container"></div>
+    <p *ngIf="loadingChart">Loading..</p>
+</section>

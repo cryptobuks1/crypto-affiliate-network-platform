@@ -15,7 +15,7 @@ export class WithdrawalComponent implements OnInit {
   public asset: string | undefined = 'bitcoin';
   public loading: boolean = false;
   public withdrawals: any[] | undefined;
-  private withdrawalsStore: any[] | undefined;
+  public withdrawalsStore: any[] | undefined;
   public walletAddr: any | undefined;
   public filterValue: string | undefined = 'pending';
   public pendingWithdrawalsBalance: number = 0;
@@ -40,6 +40,14 @@ export class WithdrawalComponent implements OnInit {
     })
   }
 
+  formatLabel(value: number) {
+    if (value >= 1000) {
+      return Math.round(value / 1000) + 'k';
+    }
+
+    return value;
+  }
+  
   calcPendingBalance(): void {
     let val = 0;
     this.withdrawalsStore?.forEach((withdrawal: any) => {

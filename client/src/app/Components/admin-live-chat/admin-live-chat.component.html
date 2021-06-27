@@ -1,24 +1,29 @@
-<button (click)="asideOpen = !asideOpen ? true : false" class="toggle-chats" color="primary" mat-fab><span class="material-icons">chat</span></button>
+<button (click)="asideOpen = !asideOpen ? true : false" class="toggle-chats" color="primary" mat-fab><span class="material-icons-outlined">chat</span></button>
 
 <section class="chats" *ngIf="chats">
   <aside [ngClass]="{ 'open': asideOpen }">
-    <div class="chats-ind" *ngFor="let chat of chats; let i = index" (click)="selectChat(i)">
-      <span>Messages: {{ chat.messages.length }}</span>
-      <span>Started By: {{ chat.startedBy.fullName }}</span>
-      <span>Started At: {{ chat.createdAt | date: "shortTime" }}</span>
+    <div class="chats-ind" *ngFor="let availableChats of chats; let i = index" (click)="selectChat(i)" [ngClass]="{ 'selected': chat._id === availableChats._id }">
+      <span>{{ availableChats.startedBy.fullName }}</span>
+      <span class="lastMessage">{{ moment(availableChats.messages[availableChats.messages.length - 1].createdAt).fromNow() }}</span>
     </div>
   </aside>
 
   <div class="chat" *ngIf="chat">
     <div class="messages">
-      <div class="chat-message" *ngFor="let chatMessage of chat.messages">
-        <p><span>{{ chatMessage.fullName }}:</span>{{ chatMessage.message }}</p>
+      <div class="chat-message" *ngFor="let chatMessage of chat.messages" [ngClass]="{ 'admin': chatMessage.admin }">
+        <header>
+          <p>{{ chatMessage.fullName }}</p>
+          <p class="date">{{ moment(chatMessage.createdAt).fromNow() }}</p>
+        </header>
+        <div class="body">
+          <p>{{ chatMessage.message }}</p>
+        </div>
       </div>
     </div>
 
     <div class="chat-actions" *ngIf="!chat.ended">
       <button (click)="endChat()" color="warn" mat-raised-button>End Chat</button>
-      <input placeholder="Message..." [(ngModel)]="message" />
+      <input placeholder="Message..." [(ngModel)]="message" (keyup.enter)="sendMessage()" />
       <button (click)="sendMessage()" color="primary" mat-raised-button>Send Message</button>
     </div>
   </div>

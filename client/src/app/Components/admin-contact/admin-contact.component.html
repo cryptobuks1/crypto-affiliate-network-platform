@@ -16,6 +16,6 @@
       </mat-expansion-panel-header>
 
       <p>{{ message.message }}</p>
-      <button (click)="resolve(message._id)" color="primary" mat-raised-button>Mark As Resolved</button>
+      <button *ngIf="!message.responded" (click)="resolve(message._id)" color="primary" mat-raised-button>Mark As Resolved</button>
     </mat-expansion-panel>
 </mat-accordion>

@@ -82,7 +82,7 @@ export class AuthService {
     });
   }
 
-  balanceHistory(): Observable<iHttpResponse> {
+  balanceHistory(data: any): Observable<iHttpResponse> {
     return this.httpClient.get<iHttpResponse>(`${this.serverAddr}/dashboard/balance-history`, { 
       headers: this.tokenService.headers() 
     });

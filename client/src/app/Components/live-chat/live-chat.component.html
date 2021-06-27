@@ -1,35 +1,18 @@
 <div class="open-window">
-  <button
-    (click)="windowOpen = !windowOpen ? true : false"
-    [ngClass]="{ open: windowOpen }"
-    color="primary"
-    mat-fab
-  >
-    <span class="material-icons"> contact_support </span>
+  <button (click)="windowOpen = !windowOpen ? true : false" [ngClass]="{ open: windowOpen }" color="primary" mat-fab>
+    <span class="material-icons-outlined">contact_support</span>
   </button>
 </div>
 
 <div class="chat-window" [ngClass]="{ open: windowOpen }">
-  <header>
+  <header class="window-header">
     <h3>Live Chat</h3>
     <div>
-      <button
-        class="end-chat"
-        *ngIf="chatData"
-        (click)="endChat()"
-        color="warn"
-        title="End Chat"
-        mat-raised-button
-      >
+      <button class="end-chat" *ngIf="chatData" (click)="endChat()" color="warn" title="End Chat" mat-raised-button>
         End Chat
       </button>
-      <button
-        (click)="windowOpen = false"
-        title="Close Window"
-        class="close-window"
-        mat-mini-fab
-      >
-        <span class="material-icons">close</span>
+      <button (click)="windowOpen = false" title="Close Window" class="close-window" mat-mini-fab>
+        <span class="material-icons-outlined">close</span>
       </button>
     </div>
   </header>
@@ -38,31 +21,19 @@
     <form>
       <mat-form-field appearance="outline">
         <mat-label>Full Name</mat-label>
-        <input
-          placeholder="Full Name"
-          [(ngModel)]="formData.fullName"
-          name="fullName"
-          matInput
-        />
+        <input placeholder="Full Name" [(ngModel)]="formData.fullName" name="fullName" matInput />
       </mat-form-field>
+
       <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
-        <input
-          placeholder="Email"
-          [(ngModel)]="formData.email"
-          name="email"
-          matInput
-        />
+        <input placeholder="Email" [(ngModel)]="formData.email" name="email" matInput />
       </mat-form-field>
+
       <mat-form-field appearance="outline">
         <mat-label>Describe Your Problem / Question</mat-label>
-        <textarea
-          placeholder="Describe Your Problem / Question"
-          [(ngModel)]="formData.description"
-          name="description"
-          matInput
-        ></textarea>
+        <textarea placeholder="Describe Your Problem / Question" [(ngModel)]="formData.description" name="description" matInput></textarea>
       </mat-form-field>
+
       <button (click)="startChat()" color="primary" mat-raised-button>
         Start Chat
       </button>
@@ -70,21 +41,21 @@
   </div>
   <div class="active-chat" *ngIf="stage === 'chatting'">
     <div class="messages" *ngIf="chatData">
-      <div class="message" *ngFor="let message of chatData.messages">
-        <p>
-          <span>{{ message.fullName }}:</span> {{ message.message }}
-        </p>
+      <div class="chat-message" *ngFor="let message of chatData.messages" [ngClass]="{ 'admin': message.admin }">
+        <header>
+          <p *ngIf="!message.admin">You</p>
+          <p *ngIf="message.admin">Admin</p>
+          <p>{{ moment(message.createdAt).fromNow() }}</p>
+        </header>
+        <div class="body">
+          <p>{{ message.message }}</p>
+        </div>
       </div>
     </div>
     <form>
-      <input
-        [(ngModel)]="chatMessage"
-        placeholder="Message"
-        name="chatMessage"
-      />
-
+      <input [(ngModel)]="chatMessage" placeholder="Message" name="chatMessage" />
       <button (click)="sendMessage()">
-        <span class="material-icons">send</span>
+        <span class="material-icons-outlined">send</span>
       </button>
     </form>
   </div>

@@ -1,4 +1,4 @@
-<header>
+<header *ngIf="withdrawals">
     <mat-form-field appearance="outline">
         <mat-label>Status</mat-label>
         <mat-select [(ngModel)]="filterValue" placeholder="Status" (selectionChange)="filter()">
@@ -21,4 +21,8 @@
             <button *ngIf="!withdrawal.completed" (click)="approve(withdrawal._id)" color="primary" mat-raised-button>Approve</button>
         </div>
     </div>
+</div>
+
+<div *ngIf="withdrawals && withdrawals.length <= 0">
+    <p>currently 0 {{ filterValue }} withdrawals</p>
 </div>

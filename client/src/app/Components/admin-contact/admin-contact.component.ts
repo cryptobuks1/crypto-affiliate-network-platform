@@ -25,6 +25,8 @@ export class AdminContactComponent implements OnInit {
         if(response.success) {
           this.messages = response.data;
         }
+        
+        console.log(response.data);
     });  
   }
 

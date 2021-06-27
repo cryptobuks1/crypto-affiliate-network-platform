@@ -13,19 +13,22 @@
     </div>
 </header>
 
-<section *ngIf="user">
+<section *ngIf="user && user.identityVerified">
     <form>
-
-        <mat-slider   
-        thumbLabel
-        min="1" 
-        tickInterval="0.1"
-        [max]="roundInt(user.balance)" 
-        step="0.1" 
-        [(ngModel)]="amount" 
-        aria-label="amount"
-        name="amount"></mat-slider>
-        
+        <div>
+            <p>Amount To Withdraw</p>
+            <mat-slider   
+            thumbLabel
+            min="1" 
+            [displayWith]="formatLabel"
+            placeholder="Amount To Withdraw"
+            tickInterval="0.1"
+            [max]="roundInt(user.balance)" 
+            step="0.1" 
+            [(ngModel)]="amount" 
+            aria-label="amount"
+            name="amount"></mat-slider>
+        </div>
         <mat-form-field appearance="outline">
             <mat-label>Asset</mat-label>
             <mat-select name="asset" [(ngModel)]="asset">
@@ -44,7 +47,12 @@
     </form>
 </section>
 
-<div class="withdrawals" *ngIf="withdrawals">
+<section *ngIf="user && !user.identityVerified" class="identity-not-verified">
+    <p>You must verify your identity before you can request a withdrawal.</p>
+    <button routerLink="/identity-verification" color="primary" mat-raised-button>Verify Identity</button>
+</section>
+
+<div class="withdrawals" *ngIf="withdrawals && withdrawalsStore && withdrawals.length > 0 && withdrawalsStore.length > 0">
     <header>
         <mat-form-field appearance="outline">
             <mat-label>Status</mat-label>

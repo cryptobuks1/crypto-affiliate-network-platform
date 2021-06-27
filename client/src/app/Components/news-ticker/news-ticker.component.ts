@@ -1,31 +1,29 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HttpService } from 'src/app/Services/http.service';
+import { iHttpResponse } from 'src/app/Interfaces/http.interface';
 
 @Component({
   selector: 'news-ticker',
   templateUrl: './news-ticker.component.html',
   styleUrls: ['./news-ticker.component.scss'],
 })
-export class NewsTickerComponent implements OnInit, OnChanges {
-  @Input() priceData: any;
+export class NewsTickerComponent implements OnInit {
   public dataPoints: any[] = [];
 
-  constructor() {}
+  constructor(private httpService: HttpService) {}
 
-  ngOnChanges() {
-    if (this.priceData != undefined) {
-      this.dataPoints = [
-        {
-          label: 'USD/BNB Gold',
-          price: this.priceData.price,
-        },
-        {
-          label: 'USD/BNB',
-          price: this.priceData.price_BNB,
-        },
-      ];
-    }
-  }
+    
+  ngOnInit(): void {}
   
+  fetchPrices(): void {
+    this.httpService.prices().subscribe((response: any) => {
+      this.dataPoints = [
+        { label: 'USD/BNB Gold', price: response.data.price },
+        { label: 'USD/BNB', price: response.data.price_BNB }
+      ];
+    });
+  }
+
   roundInt(int: number): number | string {
     if (int != undefined) {
       let numWithZeroes = int.toLocaleString('en', {
@@ -39,5 +37,4 @@ export class NewsTickerComponent implements OnInit, OnChanges {
     return 0;
   }
 
-  ngOnInit(): void {}
 }

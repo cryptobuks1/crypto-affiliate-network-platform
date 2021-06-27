@@ -1,47 +1,36 @@
 <div class="dashboard-grid" *ngIf="user">
-  <div class="dashboard-grid-item graph">
-    <div class="icon"><span class="material-icons">trending_up</span></div>
-    <div *ngIf="!loadingChart" echarts [options]="options" class="graph-container"></div>
-    <p *ngIf="loadingChart">Loading..</p>
-  </div>
 
-  <div class="dashboard-grid-item verify-identity">
-    <div class="icon right"><span class="material-icons">assignment_ind</span></div>
-    <h3>KYC Verification</h3>
-    <div *ngIf="!user.identityVerified">
-      <a routerLink="/identity-verification" color="primary" mat-raised-button>Verify Identity</a>
+  <div class="column">
+    <div class="dashboard-grid-item graph">
+      <div class="icon"><span class="material-icons-outlined">trending_up</span></div>
+      <app-earnings-chart></app-earnings-chart>
     </div>
-    <p *ngIf="user.identityVerified">Your identity is verified <span class="material-icons">done</span></p>
+  
+    <div class="dashboard-grid-item verify-identity">
+      <div class="icon right"><span class="material-icons-outlined">assignment_ind</span></div>
+      <app-verify-identity></app-verify-identity>
+    </div>  
   </div>
 
-  <div class="dashboard-grid-item setup-payments">
-    <div class="icon right"><span class="material-icons">credit_card</span></div>
-    <h3>Payments</h3>
-    <p>Request a withdrawal or check your previous withdrawals.</p>
-    <a routerLink="/dashboard/withdrawal" color="primary" mat-raised-button>Payments</a>
-  </div>
-
-  <div class="dashboard-grid-item invite-friends">
-    <div class="icon right"><span class="material-icons">redeem</span></div>
-    <h3>Refer & earn 2% 1% 0.5% 3%</h3>
-    <p>{{ affiliateLink() }}</p>
-    <mat-form-field appearance="outline">
-      <mat-label>Enter email</mat-label>
-      <input matInput placeholder="Enter email" [(ngModel)]="email" />
-    </mat-form-field>
-    <button (click)="inviteFriend()" color="primary" mat-raised-button>Invite Friend</button>
-  </div>
-
-  <div class="dashboard-grid-item earings-history">
-    <div class="icon right"><span class="material-icons">history</span></div>
-    <h3>Earnings History</h3>
-    <div class="list" *ngIf="balanceHistory">
-      <div class="list-item" *ngFor="let item of balanceHistory">
-        <p>{{ item.createdAt | date: "short" }}</p>
-        <p>USD {{ roundInt(item.amount) }}</p>
-      </div>
+  <div class="column">
+    <div class="dashboard-grid-item setup-payments">
+      <div class="icon right"><span class="material-icons-outlined">credit_card</span></div>
+      <app-setup-payments></app-setup-payments>
     </div>
+  
+    <div class="dashboard-grid-item invite-friends">
+      <div class="icon right"><span class="material-icons-outlined">redeem</span></div>
+      <app-invite-friend></app-invite-friend>
+    </div>
+  
+    <div class="dashboard-grid-item earings-history">
+      <div class="icon right"><span class="material-icons-outlined">history</span></div>
+      <app-balance-history></app-balance-history>
+    </div>
+    
   </div>
+
 </div>
 
-<news-ticker [priceData]="priceData"></news-ticker>
+<news-ticker></news-ticker>
+ 

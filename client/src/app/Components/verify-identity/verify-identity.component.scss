@@ -1,0 +1,18 @@
+section {
+    a {
+        margin-top: 1rem;
+      }
+    
+      p {
+        display: flex;
+        align-items: center;
+        padding-top: 1rem;
+    
+        span {
+          color: green;
+          font-size: 1rem;
+          display: inline-block;
+          margin-left: .7rem;
+        }
+    }
+}

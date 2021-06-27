@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import userModel from './user.model';
+import { io } from '../sockets';
 
 const Schema = mongoose.Schema;
 
@@ -35,10 +36,12 @@ async function requestWithdrawal(data) {
 
 async function approveWithdrawal(id) {
     try {
-        return await WithdrawalModel.findOneAndUpdate({ _id: id }, {
+        const result = await WithdrawalModel.findOneAndUpdate({ _id: id }, {
             status: 'approved',
             completed: true
         });
+        io.emit(`update ${result.belongsTo}`, 'your withdrawal has been approved');
+        return Promise.resolve(result);
     } catch (err) {
         return Promise.reject(err);
     }
@@ -53,6 +56,7 @@ async function rejectWithdrawal(id) {
 
         const user = await userModel.findUser({ _id: withdrawal.belongsTo });
         user.balance += withdrawal.amount;
+        io.emit(`update ${user._id}`, 'your withdrawal has been rejected');
         return await user.save();
     } catch (err) {
         console.log(err);
@@ -70,6 +74,7 @@ async function cancelWithdrawal(id, uid) {
         }
 
         user.balance += withdrawal.amount;
+        io.emit(`update ${user._id}`, 'your withdrawal has been canceled');
         await user.save();
         return await withdrawal.remove();
     } catch (err) {

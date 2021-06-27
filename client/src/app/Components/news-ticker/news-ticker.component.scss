@@ -7,35 +7,37 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: .5rem;
 
-  p {
-    color: #ffd700;
-    white-space: nowrap;
-    margin: 0 1rem;
+  &:hover {
+    .holder {
+      animation-play-state: paused;
+    }
   }
-}
-
-@media only screen and(max-width:1600px) {
-  .news-ticker {
+  
+  .holder {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    animation: tick 14s linear infinite;
+    right: 0;
+    
     p {
-      font-size: 0.75rem;
+      color: #ffd700;
+      white-space: nowrap;
+      margin: 0 1rem;
     }
   }
 }
 
-@media only screen and(max-width:1400px) {
-  .news-ticker {
-    flex-direction: column;
-    p {
-      font-size: 0.75rem;
-    }
+@keyframes tick {
+  from {
+    right: 100%;
   }
-}
 
-@media only screen and(max-width:490px) {
-  .news-ticker {
-    p {
-      font-size: 0.55rem;
-    }
+  to {
+    right: -100%;
   }
 }

@@ -16,7 +16,7 @@
 
       <mat-checkbox [(ngModel)]="keepMeLoggedIn" name="keepMeLoggedIn">Keep me logged in on this device?</mat-checkbox>
       
-      <re-captcha theme="dark" (resolved)="resolved($event)" siteKey="6LdIw1obAAAAAFI1CmqoyNro9ocUuaG0QLMGCL6z"></re-captcha>
+      <re-captcha (resolved)="resolved($event)" siteKey="6LdIw1obAAAAAFI1CmqoyNro9ocUuaG0QLMGCL6z"></re-captcha>
 
       <button [disabled]="!allowLogins" (click)="login()" color="primary" mat-raised-button>Login</button>
     </form>

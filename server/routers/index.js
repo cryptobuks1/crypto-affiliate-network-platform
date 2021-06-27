@@ -21,8 +21,6 @@ router.get('/find-chat/:chatId', findChatController);
 
 router.post('/contact', contactController);
 
-
 router.post('/verify-recaptcha', verifyRecaptchaController);
-
 
 export default router;

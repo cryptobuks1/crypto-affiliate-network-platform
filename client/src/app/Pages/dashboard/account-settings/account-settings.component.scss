@@ -1,6 +1,4 @@
 .overview {
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  padding: 2rem;
   margin-bottom: 1.7rem;
   color: #313131;
 
@@ -9,19 +7,13 @@
   }
 
   p {
-    padding: 1rem 0;
-    display: flex;
-    align-items: center;
-
-    span {
-      display: inline-block;
-      margin-left: 5px;
-    }
+    margin-bottom: 1rem;
   }
-
+  
   a {
     display: block;
     width: 10rem;
+    margin-top: 1rem;
   }
 
   .token-form {
@@ -33,6 +25,24 @@
 form {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   padding: 2rem;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    p {
+      padding: 1rem 0;
+      display: flex;
+      align-items: center;
+  
+      span {
+        display: inline-block;
+        margin-left: 5px;
+        color: green;
+      }
+    }
+  }
 
   &:not(:last-of-type) {
     margin-bottom: 1.7rem;

@@ -41,6 +41,15 @@ section {
         width: 100%;
         text-align: center;
 
+        &.amount {
+          font-size: .8rem;
+          color: gray
+        }
+
+        &.username {
+          text-transform: lowercase;
+        }
+        
         &:last-of-type {
           text-align: right;
         }

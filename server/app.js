@@ -24,6 +24,6 @@ app.use('/uploads', express.static('./uploads'));
 app.use('/api', extract, index);
 app.use('/api/users', extract, auth, users);
 app.use('/api/admin', extract, auth, isAdmin, admin);
-io.on('connection', stream);
+io.on('connection', stream.connection);
 
 server.listen(process.env.PORT, () => console.log(`Server listening on ${process.env.PORT} 👂`));
