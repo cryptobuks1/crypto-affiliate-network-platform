@@ -64,6 +64,7 @@ export class AdminWithdrawalsComponent implements OnInit {
     this.adminService.getWithdrawals().subscribe((response: iHttpResponse) => {
       if(response.success) {
         this.withdrawalsStore = response.data;
+        console.log(response.data);
         this.filter();
       }
     });

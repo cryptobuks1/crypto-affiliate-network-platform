@@ -17,12 +17,7 @@ export class HttpService {
   ) {}
 
   getLoginDetails(): Observable<any> {
-    /*
-      const response = await fetch('http://ip-api.com/json');
-      const loginData = await response.json();
-      data.ipAddr = loginData.query;
-    */
-    return this.httpClient.get<any>('http://ip-api.com/json');
+    return this.httpClient.get<any>('https://api.ipify.org/?format=json');
   }
 
   login(data: any): Observable<iHttpResponse> {

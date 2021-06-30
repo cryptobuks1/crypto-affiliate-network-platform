@@ -15,20 +15,23 @@
 
 <section *ngIf="user && user.identityVerified">
     <form>
-        <div>
-            <p>Amount To Withdraw</p>
-            <mat-slider   
-            thumbLabel
-            min="1" 
-            [displayWith]="formatLabel"
-            placeholder="Amount To Withdraw"
-            tickInterval="0.1"
-            [max]="roundInt(user.balance)" 
-            step="0.1" 
-            [(ngModel)]="amount" 
-            aria-label="amount"
-            name="amount"></mat-slider>
-        </div>
+        <mat-form-field appearance="outline">
+            <mat-label>Amount To Withdraw</mat-label>
+            <input placeholder="Amount To Withdraw" [(ngModel)]="amount" name="amount" matInput />
+        </mat-form-field>
+
+        <mat-slider   
+        thumbLabel
+        min="1" 
+        [displayWith]="formatLabel"
+        placeholder="Amount To Withdraw"
+        tickInterval="0.1"
+        [max]="roundInt(user.balance)" 
+        step="0.1" 
+        [(ngModel)]="amount" 
+        aria-label="amount"
+        name="amount"></mat-slider>
+
         <mat-form-field appearance="outline">
             <mat-label>Asset</mat-label>
             <mat-select name="asset" [(ngModel)]="asset">
@@ -43,33 +46,40 @@
             <input name="walletAddr" placeholder="Wallet Address" [(ngModel)]="walletAddr" matInput />
         </mat-form-field>
 
-        <button (click)="requestWithdrawal()" color="primary" mat-raised-button>Withdraw USD {{ amount }}</button>
+        <button *ngIf="user && amount" (click)="requestWithdrawal()" color="primary" [disabled]="amount > user.balance" mat-raised-button>Withdraw USD {{ amount }}</button>
     </form>
 </section>
 
-<section *ngIf="user && !user.identityVerified" class="identity-not-verified">
-    <p>You must verify your identity before you can request a withdrawal.</p>
-    <button routerLink="/identity-verification" color="primary" mat-raised-button>Verify Identity</button>
-</section>
+<a (click)="showWithdrawalHistory = !showWithdrawalHistory ? true : false" class="toggle-withdrawals">
+    <span>{{ !showWithdrawalHistory ? 'Show' : 'Hide' }} Withdrawals</span>
+    <span class="material-icons-outlined" [ngClass]="{ 'expanded' : showWithdrawalHistory }">chevron_right</span>
+</a>
 
-<div class="withdrawals" *ngIf="withdrawals && withdrawalsStore && withdrawals.length > 0 && withdrawalsStore.length > 0">
-    <header>
-        <mat-form-field appearance="outline">
-            <mat-label>Status</mat-label>
-            <mat-select [(ngModel)]="filterValue" placeholder="Status" (selectionChange)="filter()">
-                <mat-option value="pending">Pending</mat-option>
-                <mat-option value="approved">Approved</mat-option>
-                <mat-option value="rejected">Rejected</mat-option>
-            </mat-select>
-        </mat-form-field>
-    </header>
-
-    <div class="withdrawal" *ngFor="let withdrawal of withdrawals">
-        <p><span>Requested On:</span> {{ withdrawal.createdAt | date: 'short' }}</p>
-        <p><span>Amount:</span> USD {{ roundInt(withdrawal.amount) }}</p>
-        <p><span>Asset:</span> {{ withdrawal.asset }}</p>
-        <p><span>Wallet Address:</span> {{ withdrawal.walletAddr }}</p>
-        <p [class]="withdrawal.status"><span>Status:</span> {{ withdrawal.status }}</p>
-        <button *ngIf="!withdrawal.completed" (click)="cancelWithdrawal(withdrawal._id)" color="warn" mat-raised-button>Cancel</button>
+<div *ngIf="showWithdrawalHistory">
+    <section *ngIf="user && !user.identityVerified" class="identity-not-verified">
+        <p>You must verify your identity before you can request a withdrawal.</p>
+        <button routerLink="/identity-verification" color="primary" mat-raised-button>Verify Identity</button>
+    </section>
+    
+    <div class="withdrawals" *ngIf="withdrawals && withdrawalsStore && withdrawals.length > 0 && withdrawalsStore.length > 0">
+        <header>
+            <mat-form-field appearance="outline">
+                <mat-label>Status</mat-label>
+                <mat-select [(ngModel)]="filterValue" placeholder="Status" (selectionChange)="filter()">
+                    <mat-option value="pending">Pending</mat-option>
+                    <mat-option value="approved">Approved</mat-option>
+                    <mat-option value="rejected">Rejected</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </header>
+    
+        <div class="withdrawal" *ngFor="let withdrawal of withdrawals">
+            <p><span>Requested On:</span> {{ withdrawal.createdAt | date: 'short' }}</p>
+            <p><span>Amount:</span> USD {{ roundInt(withdrawal.amount) }}</p>
+            <p><span>Asset:</span> {{ withdrawal.asset }}</p>
+            <p><span>Wallet Address:</span> {{ withdrawal.walletAddr }}</p>
+            <p [class]="withdrawal.status"><span>Status:</span> {{ withdrawal.status }}</p>
+            <button *ngIf="!withdrawal.completed" (click)="cancelWithdrawal(withdrawal._id)" color="warn" mat-raised-button>Cancel</button>
+        </div>
     </div>
 </div>

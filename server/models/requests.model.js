@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import userModel from './user.model';
 import balanceHistoryModel from './balanceHistory.model';
 import earningsModel from './earnings.model';
-import { io } from '../sockets';
+import io from '../sockets';
 
 const Schema = mongoose.Schema;
 

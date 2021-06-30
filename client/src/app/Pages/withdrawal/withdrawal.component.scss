@@ -59,7 +59,7 @@ section {
 
         p {
             margin: 10px 0;
-            
+            font-size: .8rem;
             &.rejected {
                 color: red;
             }
@@ -74,7 +74,7 @@ section {
 
             span {
                 font-weight: 700;
-                font-size: 1.4rem;
+                color: #333 !important;
             }
         }
 
@@ -85,6 +85,21 @@ section {
          button {
              margin-top: 1rem;
          }
+    }
+}
+
+.toggle-withdrawals {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    span {
+        transition: all 225ms linear;
+    }
+
+    span.expanded {
+        transform: rotate(90deg);
     }
 }
 
@@ -104,6 +119,7 @@ section {
             p {
                 max-width: 80%;
             }
+
             align-items: center;
             text-align: center;       
         }

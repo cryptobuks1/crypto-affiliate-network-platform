@@ -1,9 +1,11 @@
 <section *ngIf="user">
     <h3>Refer & earn 2% 1% 0.5% 3%</h3>
     <p>{{ affiliateLink() }}</p>
-    <mat-form-field appearance="outline">
-        <mat-label>Enter email</mat-label>
-        <input matInput placeholder="Enter email" [(ngModel)]="email" />
-    </mat-form-field>
-    <button (click)="inviteFriend()" color="primary" mat-raised-button>Invite Friend</button>
+    <form>
+        <mat-form-field appearance="outline">
+            <mat-label>Enter email</mat-label>
+            <input matInput placeholder="Enter email" name="email" [(ngModel)]="email" />
+        </mat-form-field>
+        <button (click)="inviteFriend()" color="primary" mat-raised-button>Invite Friend</button>
+    </form>
 </section>

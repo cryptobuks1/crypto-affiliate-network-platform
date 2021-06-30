@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import userModel from './user.model';
-import { io } from '../sockets';
+import io from '../sockets';
 
 const Schema = mongoose.Schema;
 

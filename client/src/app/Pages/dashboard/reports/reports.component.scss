@@ -6,6 +6,7 @@ section {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-flow: row wrap;
 
     span {
       font-size: 1rem;
@@ -23,6 +24,10 @@ section {
         padding-bottom: 0 !important;
       }
     }
+  }
+
+  .invite-friend {
+    margin-top: 50px;
   }
 
   ul {
@@ -66,7 +71,8 @@ section {
   }
 }
 
-@media only screen and(max-width: 620px) {
+
+@media only screen and (max-width: 620px) {
   section {
     ul {
       li {

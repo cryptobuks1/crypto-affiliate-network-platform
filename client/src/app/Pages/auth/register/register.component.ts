@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
           email: this.email,
           referralCode: this.referralCode,
           tos: this.tos,
-          ipAddr: response.query
+          ipAddr: response.ip
         }).subscribe((response) => {
           this.alertsStoreService.setAlert({
             text: response.message,

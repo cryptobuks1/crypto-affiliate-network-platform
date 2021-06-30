@@ -1,6 +1,8 @@
 import userModel from '../../models/user.model';
 import mail from '../../utils/mail';
 import dotenv from 'dotenv';
+import validators from '../../utils/validators';
+
 dotenv.config();
 
 async function inviteFriend(req, res) {
@@ -11,10 +13,16 @@ async function inviteFriend(req, res) {
             data: null,
         });
 
+    if (!validators.emailValidator(req.body.email))
+        return res.json({
+            message: 'is that a real email?',
+            success: false,
+            data: null
+        });
+
     try {
         const user = await userModel.findUser({ _id: req.session.uid });
         const href = `${process.env.CLIENT_ADDR}/register/?ref=${user.affiliateCode}`;
-        console.log(href);
 
         await mail.send_gmail({
             receiver: req.body.email,

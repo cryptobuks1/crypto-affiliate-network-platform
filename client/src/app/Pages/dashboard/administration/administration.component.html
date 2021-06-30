@@ -1,27 +1,17 @@
 <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="changeTab($event)" animationDuration="0ms">
   <mat-tab label="Payment Requests">
-    <ng-template matTabContent>
-      <app-admin-payment-requests></app-admin-payment-requests>
-    </ng-template>
+    <app-admin-payment-requests></app-admin-payment-requests>
   </mat-tab>
   <mat-tab label="Live Chat">
-    <ng-template matTabContent>
-      <app-admin-live-chat></app-admin-live-chat>
-    </ng-template>
+    <app-admin-live-chat></app-admin-live-chat>
   </mat-tab>
   <mat-tab label="Kyc Requests">
-    <ng-template matTabContent>
-      <app-admin-kyc-requests></app-admin-kyc-requests>
-    </ng-template>
+    <app-admin-kyc-requests></app-admin-kyc-requests>
   </mat-tab>
   <mat-tab label="Contact">
-    <ng-template matTabContent>
-      <app-admin-contact></app-admin-contact>
-    </ng-template>
+    <app-admin-contact></app-admin-contact>
   </mat-tab>
   <mat-tab label="Withdrawals">
-    <ng-template matTabContent>
-      <app-admin-withdrawals></app-admin-withdrawals>
-    </ng-template>
+    <app-admin-withdrawals></app-admin-withdrawals>
   </mat-tab>
 </mat-tab-group>

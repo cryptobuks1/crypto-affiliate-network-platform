@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
     window.document.title = 'BNBG | Home';
 
     if (this.tokenService.loggedIn()) {
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/dashboard/home']);
     } else {
       this.router.navigate(['/login']);
     }

@@ -7,7 +7,7 @@ import * as moment from 'moment';
 @Component({
   selector: 'app-admin-live-chat',
   templateUrl: './admin-live-chat.component.html',
-  styleUrls: ['./admin-live-chat.component.scss']
+  styleUrls: ['./admin-live-chat.component.scss', './chats.component.scss']
 })
 export class AdminLiveChatComponent implements OnInit {
   public chats: any[] | undefined;

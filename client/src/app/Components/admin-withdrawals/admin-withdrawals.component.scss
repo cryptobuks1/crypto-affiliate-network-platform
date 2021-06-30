@@ -11,12 +11,7 @@ header {
 
         p {
             margin: 10px 0;
-            
-            span {
-                font-weight: 700;
-                font-size: 1.4rem;
-            }
-
+            font-size: .8rem;
             &.rejected {
                 color: red;
             }
@@ -28,7 +23,13 @@ header {
             &.pending {
                 color: rgb(206, 206, 31);
             }
+
+            span {
+                font-weight: 700;
+                color: #333 !important;
+            }
         }
+
 
         &:not(:last-of-type) {
             border-bottom: 1px solid rgb(233, 233, 233);

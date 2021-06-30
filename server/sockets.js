@@ -1,11 +1,13 @@
 import { Server } from 'socket.io';
-import { server } from './server';
+import setup from './setup';
 import dotenv from 'dotenv';
 dotenv.config();
 
-export const io = new Server(server, {
+const io = new Server(setup.server, {
     cors: {
         origin: process.env.CLIENT_ADDR,
         methods: ['GET', 'POST'],
-    },
+    }
 });
+
+export default io;

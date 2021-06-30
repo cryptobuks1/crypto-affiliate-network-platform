@@ -5,12 +5,31 @@
   position: fixed;
   bottom: 0;
   left: 0;
-  margin-bottom: 1rem;
-  margin-left: 1rem;
-  transition: left 225ms linear;
+  margin: 0 0 1rem 1rem;
+  transition: all 225ms linear;
 
   &.open {
     left: 340px;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+ .toggle-nav {
+    &.open {
+      top: 0;
+      left: 250px;
+      margin: 1rem 0 0 1rem;
+    }
+ }
+}
+
+@media only screen and(max-height: 700px) {
+  nav {    
+    .logo {
+      img {
+        width: 30% !important;
+      }
+    }
   }
 }
 
@@ -41,7 +60,7 @@ nav {
   h3 {
     width: 74%;
     margin: 0 auto;
-    padding: 2rem 0 1rem 0;
+    padding: 1rem 0;
     text-transform: capitalize;
     font-size: 1.7rem;
     color:#ffffff;
@@ -51,7 +70,8 @@ nav {
     padding: 0 1rem;
     border-top: 1px solid rgb(61, 61, 61);
     padding: 25px 0;
-    
+    width: 340px;
+
     .footer-content {
       display: flex;
       justify-content: space-between;
@@ -85,7 +105,7 @@ nav {
     width: 340px;
     height: 75%;
     overflow: auto;
-    padding: 30px 0 30px 0;
+    padding: 25px 0;
     border-top: 1px solid rgb(61, 61, 61);
     
     a {
@@ -145,3 +165,4 @@ nav {
     }
   }
 }
+

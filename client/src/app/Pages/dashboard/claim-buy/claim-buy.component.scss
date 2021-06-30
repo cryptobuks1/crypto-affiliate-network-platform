@@ -1,20 +1,16 @@
-.faq {
-  padding: 20px 0;
-  ul {
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    padding: 2rem !important;
-
-    li {
-      display: flex;
-      align-items: center;
-      margin-bottom: 8px;
-
-      span {
-        font-weight: 700;
-        margin-right: 0.4rem;
-        color: #313131;
-      }
-    }
+.buy-now {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  
+  a {
+    color: #333;
+    width: 30rem;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
@@ -95,6 +91,16 @@ form {
       white-space: nowrap;
     }
 
+    a {
+      text-decoration: none;
+      color: #333;
+      
+      &:hover {
+        text-decoration: underline;
+        text-decoration-color: rgb(109, 109, 109);
+      }
+    }
+
     tbody {
       tr {
         border-bottom: 1px solid #333;
@@ -129,24 +135,6 @@ form {
     table {
       overflow: auto;
       display: block;
-    }
-  }
-}
-
-@media only screen and(max-width: 850px) {
-  .faq {
-    ul {
-      li {
-        display: flex;
-        align-items: flex-start;
-        flex-direction: column;
-        margin-bottom: 24px;
-
-        span {
-          margin-right: 0;
-          margin-bottom: 8px;
-        }
-      }
     }
   }
 }

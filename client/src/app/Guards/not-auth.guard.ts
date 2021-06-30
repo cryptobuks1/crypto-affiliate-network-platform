@@ -14,14 +14,7 @@ import { TokenService } from '../Services/token.service';
 export class NotAuthGuard implements CanActivate {
   constructor(private tokenService: TokenService) {}
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return !this.tokenService.loggedIn();
   }
 }

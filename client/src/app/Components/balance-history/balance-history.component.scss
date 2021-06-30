@@ -1,9 +1,10 @@
-.list {
+section {
+  .list {
     padding-right: 1rem;
     display: flex;
     flex-direction: column;
     margin: 0.5rem 0;
-    max-height: 225px;
+    max-height: 320px;
     overflow-x: hidden;
     overflow-y: auto;
 
@@ -17,3 +18,4 @@
       }
     }
   }
+}

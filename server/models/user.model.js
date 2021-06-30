@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 import randStr from '../utils/randStr';
 import loginHistoryModel from './loginHistory.model';
 import personalModel from './personal.model';
-import { io } from '../sockets';
+import io from '../sockets';
 
 const Schema = mongoose.Schema;
 

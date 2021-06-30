@@ -7,7 +7,7 @@
   .column {
     display: inherit;
     flex-direction: column;
-    
+    max-height: 100%;
     width: 100%;
 
     &:first-of-type {
@@ -34,9 +34,13 @@
       z-index: 1;
 
       &.right {
-        right: -20px;
+        right: -20px; 
         left: unset;
       }
+    }
+
+    &.earnings-history {
+      flex-grow: 1;
     }
 
     &:hover {
@@ -53,7 +57,11 @@
 
 @media only screen and(max-width: 1401px) {
   .dashboard-grid {
-    flex-wrap: wrap;
+    flex-direction: column;
+
+    .column {
+      margin-right: 0 !important;
+    }
   }
 }
 
@@ -61,5 +69,16 @@
 @media only screen and(max-width: 1200px) {
   .dashboard-grid {
     flex-direction: column;
+  }
+}
+
+
+@media only screen and (max-width: 450px) {
+  .dashboard-grid {
+    .dashboard-grid-item {
+      .icon {
+        display: none;
+      }
+    }
   }
 }

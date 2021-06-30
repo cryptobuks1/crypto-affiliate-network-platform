@@ -8,15 +8,18 @@ import { TokenService } from 'src/app/Services/token.service';
   styleUrls: ['./dashboard.component.scss', '../page.scss'],
 })
 export class DashboardComponent implements OnInit {
+  public loading: boolean = true;
+
   constructor(private tokenService: TokenService, private router: Router) {
     window.addEventListener('resize', this.fixPadding);
-
-    if (window.location.pathname === '/dashboard')
+    if (window.location.hash === '#/dashboard')
       this.router.navigate(['/dashboard/home']);
   }
 
   ngOnInit() {
     this.fixPadding();
+
+    setTimeout(() => this.loading = false, 3000);
   }
 
   fixPadding(): void {

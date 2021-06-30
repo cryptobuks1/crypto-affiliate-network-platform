@@ -36,7 +36,7 @@
     <tbody>
       <tr *ngFor="let request of myRequests">
         <td>{{ request.createdAt | date: "short" }}</td>
-        <td>{{ request.transactionHash }}</td>
+        <td><a [href]="'https://bscscan.com/tx/' + request.transactionHash ">{{ request.transactionHash }}</a></td>
         <td>USD {{ request.amount }}</td>
         <td>
           <span
@@ -50,25 +50,8 @@
   </table>
 </section>
 
-<section class="faq block">
-  <h3>Frequently Asked Questions (FAQ)</h3>
-  <ul>
-    <li>
-      <span>Where can I purchase the token?</span>
-      <p>
-        You can purchase the token here:
-        <a href="https://exchange.pancakeswap.finance/#/swap">Pancake Swap</a>
-      </p>
-    </li>
-    <li>
-      <span>Is it safe?</span>
-      <p>Yes the process is safe and all purchases are credited instantly.</p>
-    </li>
-    <li>
-      <span>What kind of proof should I include?</span>
-      <p>A screenshot of the transaction</p>
-    </li>
-  </ul>
+<section class="buy-now">
+  <a href="https://exchange.pancakeswap.finance/#/swap" target="_blank" color="accent" mat-raised-button>Buy Token Now</a>
 </section>
 
 <input

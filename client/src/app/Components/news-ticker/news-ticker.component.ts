@@ -13,10 +13,14 @@ export class NewsTickerComponent implements OnInit {
   constructor(private httpService: HttpService) {}
 
     
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.fetchPrices();
+  }
   
   fetchPrices(): void {
     this.httpService.prices().subscribe((response: any) => {
+      console.log(response);
+
       this.dataPoints = [
         { label: 'USD/BNB Gold', price: response.data.price },
         { label: 'USD/BNB', price: response.data.price_BNB }

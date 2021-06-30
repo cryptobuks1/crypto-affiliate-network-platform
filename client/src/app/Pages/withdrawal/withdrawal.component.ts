@@ -19,7 +19,8 @@ export class WithdrawalComponent implements OnInit {
   public walletAddr: any | undefined;
   public filterValue: string | undefined = 'pending';
   public pendingWithdrawalsBalance: number = 0;
-
+  public showWithdrawalHistory: boolean = false;
+  
   constructor(
     private alertsStoreService: AlertsStoreService,
     private balanceStore: BalanceStoreService,

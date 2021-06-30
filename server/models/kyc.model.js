@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { io } from '../sockets';
+import io from '../sockets';
 
 const Schema = mongoose.Schema;
 

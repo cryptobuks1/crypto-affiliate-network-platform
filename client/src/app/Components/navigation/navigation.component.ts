@@ -80,6 +80,7 @@ export class NavigationComponent implements OnInit {
 
   getIsAdmin() {
     this.adminService.isAdmin().subscribe((response: iHttpResponse) => {
+      console.log(response)
       this.isAdmin = response.data;
     });
   }

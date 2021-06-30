@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
         username: this.username,
         password: this.password,
         keepMeLoggedIn: this.keepMeLoggedIn,
-        ipAddr: response.query
+        ipAddr: response.ip
       }).subscribe((response) => {
         this.alertsStoreService.setAlert({
           text: response.message,
