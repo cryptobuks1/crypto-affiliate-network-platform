@@ -49,7 +49,6 @@ export class NavigationComponent implements OnInit {
       if(response.success) {
         this.user = response.data;
       }
-      console.log(this.user);
     });
   }
 
@@ -80,7 +79,6 @@ export class NavigationComponent implements OnInit {
 
   getIsAdmin() {
     this.adminService.isAdmin().subscribe((response: iHttpResponse) => {
-      console.log(response)
       this.isAdmin = response.data;
     });
   }

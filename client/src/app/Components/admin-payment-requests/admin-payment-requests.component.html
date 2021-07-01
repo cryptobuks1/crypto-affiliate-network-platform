@@ -36,7 +36,7 @@
 
     <div class="body">
       <p>
-        <span>Requested Amount:</span> USD
+        <span>Requested Amount:</span> BNBG
         <input [(ngModel)]="request.amount" *ngIf="request.status === 'pending'" />
         <span *ngIf="request.status !== 'pending'">{{ request.amount }}</span>
       </p>

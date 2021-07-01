@@ -1,5 +1,4 @@
 header {
-    padding-top: 2rem;
     mat-form-field {
         width: 100%;
     }
@@ -9,6 +8,10 @@ header {
     .withdrawal {
         padding: 2rem 0;
 
+        &:first-of-type {
+            padding-top: 0;
+        }
+        
         p {
             margin: 10px 0;
             font-size: .8rem;

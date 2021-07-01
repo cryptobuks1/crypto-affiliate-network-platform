@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AdminService } from 'src/app/Services/admin.service';
 import { iHttpResponse } from 'src/app/Interfaces/http.interface';
 import { AlertsStoreService } from 'src/app/Store/alerts-store.service';
+import { HttpService } from 'src/app/Services/http.service';
 
 @Component({
   selector: 'app-admin-withdrawals',
@@ -14,12 +15,19 @@ export class AdminWithdrawalsComponent implements OnInit {
   public filterValue: string | undefined = 'pending';
 
   constructor(
+    private httpService: HttpService,
     private adminService: AdminService,
-    private alertsStoreService: AlertsStoreService
-  ) {}
+    private alertsStoreService: AlertsStoreService) {}
 
   ngOnInit(): void {
     this.fetchWithdrawals();
+    this.fetchPriceData();
+  }
+
+  fetchPriceData(): void {
+    this.httpService.prices().subscribe((response: any) => {
+      console.log(response);
+    });
   }
 
   approve(id: string) {

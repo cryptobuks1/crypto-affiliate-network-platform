@@ -1,15 +1,15 @@
 <header class="overview" *ngIf="user">
     <div class="block">
         <h3>Balance</h3>
-        <p>USD {{ roundInt(user.balance) }}</p>
+        <p>BNBG {{ roundInt(user.balance) }}</p>
     </div>
     <div class="block">
         <h3>Pending Balance</h3>
-        <p>USD {{ roundInt(user.pendingBalance) }}</p>
+        <p>BNBG {{ roundInt(user.pendingBalance) }}</p>
     </div>
     <div class="block">
         <h3>Pending Withdrawals</h3>
-        <p>USD {{ roundInt(pendingWithdrawalsBalance) }}</p>
+        <p>BNBG {{ roundInt(pendingWithdrawalsBalance) }}</p>
     </div>
 </header>
 
@@ -46,7 +46,7 @@
             <input name="walletAddr" placeholder="Wallet Address" [(ngModel)]="walletAddr" matInput />
         </mat-form-field>
 
-        <button *ngIf="user && amount" (click)="requestWithdrawal()" color="primary" [disabled]="amount > user.balance" mat-raised-button>Withdraw USD {{ amount }}</button>
+        <button *ngIf="user && amount" (click)="requestWithdrawal()" color="primary" [disabled]="amount > user.balance" mat-raised-button>Withdraw {{ amount }} BNBG</button>
     </form>
 </section>
 
@@ -75,7 +75,7 @@
     
         <div class="withdrawal" *ngFor="let withdrawal of withdrawals">
             <p><span>Requested On:</span> {{ withdrawal.createdAt | date: 'short' }}</p>
-            <p><span>Amount:</span> USD {{ roundInt(withdrawal.amount) }}</p>
+            <p><span>Amount:</span> BNBG {{ roundInt(withdrawal.amount) }}</p>
             <p><span>Asset:</span> {{ withdrawal.asset }}</p>
             <p><span>Wallet Address:</span> {{ withdrawal.walletAddr }}</p>
             <p [class]="withdrawal.status"><span>Status:</span> {{ withdrawal.status }}</p>

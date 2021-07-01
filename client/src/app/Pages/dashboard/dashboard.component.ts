@@ -12,8 +12,6 @@ export class DashboardComponent implements OnInit {
 
   constructor(private tokenService: TokenService, private router: Router) {
     window.addEventListener('resize', this.fixPadding);
-    if (window.location.hash === '#/dashboard')
-      this.router.navigate(['/dashboard/home']);
   }
 
   ngOnInit() {

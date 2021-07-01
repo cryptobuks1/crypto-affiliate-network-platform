@@ -159,10 +159,28 @@ async function updateUser(id, update) {
     }
 }
 
+async function updateMany(updates) {
+    try {
+        let n = 0;
+
+        const result = await Promise.all(updates.map(async (user) => {
+            return await UserModel.updateOne({ _id: user._id }, user.update);
+        }));
+
+        result.forEach(updated => {
+            n += updated.nModified;
+        });
+
+        return Promise.resolve(`Updated ${n} users`);
+    } catch (err) {
+        return Promise.reject('caught error');
+    }
+}
+
 async function updateReferralCodes(oldCode, newCode) {
     try {
         await UserModel.updateMany(
-            { referralCode: oldCod },
+            { referralCode: oldCode },
             { referralCode: newCode, lastUpdated: new Date() }
         );
         return Promise.resolve('updated!');
@@ -180,4 +198,5 @@ export default {
     updateUser,
     findUsers,
     updateReferralCodes,
+    updateMany
 };

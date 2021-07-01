@@ -1,0 +1,23 @@
+<form>
+    <mat-form-field appearance="outline">
+        <mat-label>Announcement</mat-label>
+        <input placeholder="Announcement" [(ngModel)]="announcement.text" name="text" matInput/>
+    </mat-form-field>
+
+    <div class="style">
+        <input type="color" [(ngModel)]="announcement.backgroundColor" name="backgroundColor">
+        <input type="color" [(ngModel)]="announcement.textColor" name="textColor">
+    </div>
+
+    <mat-slide-toggle color="primary" [(ngModel)]="announcement.active" [checked]="announcement.active" name="active">
+        Active (should be shown to website visitors)
+    </mat-slide-toggle>
+</form>
+
+<div class="preview" [style.backgroundColor]="announcement.backgroundColor">
+    <p [style.color]="announcement.textColor">{{ announcement.text }}</p>
+</div>
+
+<div class="actions">
+    <button (click)="save()" color="primary" mat-raised-button>Publish</button>
+</div>

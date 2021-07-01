@@ -1,0 +1,32 @@
+.layout {
+    display: flex;
+    min-height: 100vh;
+    overflow: hidden;
+
+    nav {
+        border-left: 1px solid rgb(233, 233, 233);
+        background-color: #333;
+        a {
+            display: block;
+            padding: 1rem;
+            border-bottom: 1px solid rgb(59, 59, 59);
+            cursor: pointer;
+            color: #fff;
+
+            &:hover {
+                background-color: rgb(66, 66, 66);
+            }
+
+            &.active {
+                background-color: rgb(66, 66, 66);
+            }
+        }
+    }
+
+    section {
+        flex-grow: 1;
+        max-height: 100vh;
+        padding: 2rem;
+        overflow: auto;
+    }
+}

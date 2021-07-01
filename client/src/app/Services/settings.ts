@@ -1,4 +1,4 @@
-const env: string = 'development'; // production development
+const env: string = 'production'; // production development
 
 function getAddr(): string {
     if(env === 'production') {

@@ -1,0 +1,37 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    border-radius: .5rem;
+    overflow: auto;
+
+    th, td {
+        padding: 1rem;
+        text-align: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        select {
+            width: 100%;
+            border: 1px solid rgb(233, 233, 233);
+        }
+    }
+
+    tr:not(:last-of-type) {
+        border-bottom: 1px solid rgb(245, 245, 245);
+    }
+
+    thead {
+        border-bottom: 1px solid rgb(245, 245, 245);
+    }
+
+    tbody {
+        font-size: .8rem;
+    }
+}
+
+button {
+    display: block;
+    margin: 2rem 0 0 auto;
+}

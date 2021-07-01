@@ -28,12 +28,4 @@ function connection(socket) {
     socket.broadcast.emit('broadcast online', streamStore.online);
 }
 
-function streamState(req, res) {
-    return res.json({
-        message: 'some data',
-        success: true,
-        data: streamStore
-    });
-}
-
-export default { connection, streamState };
+export default { connection };

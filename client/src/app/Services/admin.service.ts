@@ -91,7 +91,7 @@ export class AdminService {
   approveWithdrawal(data: any): Observable<iHttpResponse> {
     return this.httpClient.put<iHttpResponse>(`${this.serverAddr}/approve-withdrawal`, data, {
       headers: this.tokenService.headers()
-    })
+    });
   }
 
   rejectWithdrawal(data: any): Observable<iHttpResponse> {
@@ -102,6 +102,30 @@ export class AdminService {
 
   streamState(): Observable<iHttpResponse> {
     return this.httpClient.get<iHttpResponse>(`${this.serverAddr}/stream-state`, {
+      headers: this.tokenService.headers()
+    });
+  }
+
+  setVideos(data: any): Observable<iHttpResponse> {
+    return this.httpClient.put<iHttpResponse>(`${this.serverAddr}/set-videos`, data, {
+      headers: this.tokenService.headers()
+    });
+  }
+
+  setAnnouncement(data: any): Observable<iHttpResponse> {
+    return this.httpClient.put<iHttpResponse>(`${this.serverAddr}/set-announcement`, data, {
+      headers: this.tokenService.headers()
+    });
+  }
+
+  findUsers(): Observable<iHttpResponse> {
+    return this.httpClient.get<iHttpResponse>(`${this.serverAddr}/find-users`, {
+      headers: this.tokenService.headers()
+    });
+  }
+
+  bulkUpdate(data: any): Observable<iHttpResponse> {
+    return this.httpClient.put<iHttpResponse>(`${this.serverAddr}/bulk-update`, data, {
       headers: this.tokenService.headers()
     });
   }

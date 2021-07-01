@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -13,6 +14,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+
 import { NgxEchartsModule } from 'ngx-echarts';
 import { RecaptchaModule } from "ng-recaptcha";
 
@@ -32,7 +35,7 @@ import { ClaimBuyComponent } from './Pages/dashboard/claim-buy/claim-buy.compone
 import { DashboardHomeComponent } from './Pages/dashboard/home/dashboard.component';
 import { ReportsComponent } from './Pages/dashboard/reports/reports.component';
 import { DashboardNavComponent } from './Components/dashboard-nav/dashboard-nav.component';
-import { AdministrationComponent } from './Pages/dashboard/administration/administration.component';
+import { AdministrationComponent } from './Pages/administration/administration.component';
 import { AccountSettingsComponent } from './Pages/dashboard/account-settings/account-settings.component';
 import { IdentityVerificationComponent } from './Pages/identity-verification/identity-verification.component';
 import { LiveChatComponent } from './Components/live-chat/live-chat.component';
@@ -48,6 +51,10 @@ import { InviteFriendComponent } from './Components/invite-friend/invite-friend.
 import { SetupPaymentsComponent } from './Components/setup-payments/setup-payments.component';
 import { VerifyIdentityComponent } from './Components/verify-identity/verify-identity.component';
 import { EarningsChartComponent } from './Components/earnings-chart/earnings-chart.component';
+import { AdminAnnouncementsComponent } from './Components/admin-announcements/admin-announcements.component';
+import { LearnComponent } from './Pages/learn/learn.component';
+import { AnnouncementComponent } from './Components/announcement/announcement.component';
+import { AdminUsersComponent } from './Components/admin-users/admin-users.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +89,10 @@ import { EarningsChartComponent } from './Components/earnings-chart/earnings-cha
     SetupPaymentsComponent,
     VerifyIdentityComponent,
     EarningsChartComponent,
+    AdminAnnouncementsComponent,
+    LearnComponent,
+    AnnouncementComponent,
+    AdminUsersComponent,
   ],
   imports: [
     BrowserModule,
@@ -99,6 +110,7 @@ import { EarningsChartComponent } from './Components/earnings-chart/earnings-cha
     MatExpansionModule,
     MatSliderModule,
     RecaptchaModule,
+    MatSlideToggleModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'),
     }),

@@ -1,0 +1,29 @@
+form {
+    width: 100%;
+
+    mat-form-field {
+        width: 100%;
+    }
+
+    .style {
+        margin-bottom: 1.3rem;
+
+        input:not(:last-of-type) {
+            margin-right: 1rem;
+        }
+    }
+
+    mat-slide-toggle {
+        margin-bottom: 1.3rem;
+    }
+}
+
+.preview {
+    padding: 1rem;
+}
+
+.actions {
+    margin-top: 1.3rem;
+    display: flex;
+    justify-content: flex-end;
+}

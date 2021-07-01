@@ -84,7 +84,13 @@
           <span>Contact</span>
         </div>
       </a>
-      <a routerLink="/dashboard/administration" *ngIf="user && isAdmin">
+      <a routerLinkActive="active-link" routerLink="/learn">
+        <div>
+          <span class="material-icons-outlined">movie</span>
+          <span>Watch & Learn</span>
+        </div>
+      </a>
+      <a routerLink="/administration" *ngIf="user && isAdmin">
         <div>
           <span class="material-icons-outlined">admin_panel_settings</span>
           <span>Administration</span>
@@ -95,7 +101,7 @@
   
   <footer *ngIf="tokenService.loggedIn() && user">
     <div class="footer-content">
-      <p class="balance" title="Balance">USD {{ roundInt(user.balance) }}</p>
+      <p class="balance" title="Balance">BNBG {{ roundInt(user.balance) }}</p>
       <p *ngIf="tokenService.loggedIn() && user && user.administrator" class="online-now" title="Online users now">
         <span></span> 
         {{onlineNow}}

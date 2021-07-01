@@ -1,0 +1,40 @@
+<table>
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Id Verified</th>
+            <th>Email Verified</th>
+            <th>Created At</th>
+            <th>Admin</th>
+            <th>Balance</th>
+            <th>Pending Balance</th>
+            <th>Referrals</th>
+            <th>Affiliate Percentage</th>
+        </tr>
+    </thead>
+    <tbody *ngIf="users">
+        <tr *ngFor="let user of users">
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.identityVerified }}</td>
+            <td>{{ user.emailVerified }}</td>
+            <td>{{ user.createdAt | date: 'short' }}</td>
+            <td>{{ user.administrator }}</td>
+            <td>{{ user.balance }}</td>
+            <td>{{ user.pendingBalance }}</td>
+            <td>{{ user.referrals.length }}</td>
+            <td>
+                <select [(ngModel)]="user.percentage" (change)="addToChangedUsers(user._id)">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                </select>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<button (click)="save()" *ngIf="changedUsers.length > 0" color="primary" mat-raised-button>Save {{ changedUsers.length }} Users</button>

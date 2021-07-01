@@ -65,4 +65,12 @@ export class HttpService {
       response: response
     });
   }
+
+  getVideos(): Observable<iHttpResponse> {
+    return this.httpClient.get<iHttpResponse>(`${this.serverAddr}/get-videos`);
+  }
+
+  getAnnouncement(): Observable<iHttpResponse> {
+    return this.httpClient.get<iHttpResponse>(`${this.serverAddr}/get-annoucement`);
+  }
 }

@@ -14,7 +14,7 @@
         <p><span>Requested On:</span> {{ withdrawal.createdAt | date: 'short' }}</p>
         <p><span>User:</span> {{ withdrawal.belongsTo.username }}</p>
         <p><span>Email:</span> {{ withdrawal.belongsTo.email }}</p>
-        <p><span>Amount:</span> USD {{ roundInt(withdrawal.amount) }}</p>
+        <p><span>Amount:</span> BNBG {{ roundInt(withdrawal.amount) }}</p>
         <p><span>Asset:</span> {{ withdrawal.asset }}</p>
         <p><span>Wallet Address:</span> {{ withdrawal.walletAddr }}</p>
         <p [class]="withdrawal.status"><span>Status:</span> {{ withdrawal.status }}</p>

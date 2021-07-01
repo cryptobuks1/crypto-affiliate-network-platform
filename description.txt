@@ -46,7 +46,6 @@ User Right Menu
 - 2FA security
 - Logout
 
-
 The color you can follow
 https://bnbgold.fund/
 BNB Gold
@@ -66,3 +65,13 @@ Test User Login : marketing@bnbgold.fund
 Password : test1234
 The system is just same like this the different is admin need to manually check the affiliate proof and link
 and there is no investment plan just need to inform in the system how many token they buy so we can know how much bonus they entitled.
+
+
+Modifications:
+
+There is 4 thing I want to add
+1. News popup at top 
+2. Video section for tutorial, youtube video
+3. The affiliate setting can we do % and level in custom because you hardcoded the affiliate percentage and the level.
+4. The admin can set the 1usd= BNBG value set by admin because they claim BNBG token not USD
+The flow is people buy token using USD and they request the BNBG claim by stated how much USD they buy, the flow you do is already correct just need to add some other data table.

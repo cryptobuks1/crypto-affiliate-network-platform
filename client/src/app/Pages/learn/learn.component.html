@@ -1,0 +1,46 @@
+<section class="page container">
+    <h1>
+        Learn About BNBG
+
+        <div>
+            <button title="Edit Videos" class="edit" *ngIf="canEdit && !editing" (click)="editing = true" color="primary" mat-raised-button>
+                <span class="material-icons-outlined">edit</span>
+            </button>
+            
+            <button title="Exit Edit Mode" *ngIf="canEdit && editing" (click)="editing = false" color="warn" mat-raised-button>
+                <span class="material-icons-outlined">close</span>
+            </button>
+    
+            <button title="Save Changes" class="save" *ngIf="canEdit && editing" (click)="save()" mat-raised-button>
+                <span class="material-icons-outlined">done</span>
+            </button>
+        </div>
+    </h1>
+
+    <div class="videos">
+        <div class="grid-item" *ngFor="let video of videos; let i = index">
+            <iframe 
+            [src]="getVideoUrl(video.code)" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+            </iframe>    
+            <div class="modify-video" *ngIf="canEdit && editing">
+                <button title="Remove video" (click)="videos.splice(i, 1)" color="warn" mat-raised-button>
+                    <span class="material-icons-outlined">remove</span>
+                </button>
+                <mat-form-field appearance="outline">
+                    <mat-label>Youtube Video Code</mat-label>
+                    <input [(ngModel)]="video.code" placeholder="Youtube Video Code" matInput/>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="grid-item" *ngIf="editing && canEdit">
+            <div title="Add New Video" class="add-new" (click)="videos.push({ code: 'Ss5Ndz0tn9o' })">
+                <span class="material-icons-outlined">add</span>
+            </div>
+        </div>
+    </div>
+</section> 
