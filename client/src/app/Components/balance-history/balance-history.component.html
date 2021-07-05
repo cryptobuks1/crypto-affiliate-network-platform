@@ -3,7 +3,7 @@
     <div class="list" *ngIf="balanceHistory">
         <div class="list-item" *ngFor="let item of balanceHistory">
         <p>{{ item.createdAt | date: "short" }}</p>
-        <p>USD {{ roundInt(item.amount) }}</p>
+        <p>BNBG {{ roundInt(item.amount) }}</p>
         </div>
     </div>
 </section>

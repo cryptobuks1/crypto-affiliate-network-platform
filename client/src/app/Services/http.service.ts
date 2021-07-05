@@ -14,7 +14,7 @@ export class HttpService {
   constructor(
     private httpClient: HttpClient,
     private tokenService: TokenService
-  ) {}
+  ) { }
 
   getLoginDetails(): Observable<any> {
     return this.httpClient.get<any>('https://api.ipify.org/?format=json');

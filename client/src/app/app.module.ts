@@ -18,6 +18,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { NgxEchartsModule } from 'ngx-echarts';
 import { RecaptchaModule } from "ng-recaptcha";
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Pages/auth/login/login.component';
@@ -111,6 +112,7 @@ import { AdminUsersComponent } from './Components/admin-users/admin-users.compon
     MatSliderModule,
     RecaptchaModule,
     MatSlideToggleModule,
+    CKEditorModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'),
     }),
@@ -118,4 +120,4 @@ import { AdminUsersComponent } from './Components/admin-users/admin-users.compon
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

@@ -1,29 +1,41 @@
 form {
+  width: 100%;
+
+  mat-form-field {
     width: 100%;
+  }
 
-    mat-form-field {
-        width: 100%;
+  .style {
+    margin: 1.3rem 0;
+
+    input:not(:last-of-type) {
+      margin-right: 1rem;
     }
+  }
 
-    .style {
-        margin-bottom: 1.3rem;
-
-        input:not(:last-of-type) {
-            margin-right: 1rem;
-        }
-    }
-
-    mat-slide-toggle {
-        margin-bottom: 1.3rem;
-    }
+  mat-slide-toggle {
+    margin-bottom: 1.3rem;
+  }
 }
 
 .preview {
-    padding: 1rem;
+  padding: 1rem;
 }
 
 .actions {
-    margin-top: 1.3rem;
-    display: flex;
-    justify-content: flex-end;
+  margin-top: 1.3rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+section {
+  margin-top: 2rem;
+
+  .preview {
+    cursor: pointer;
+
+    &:hover {
+      opacity: .85;
+    }
+  }
 }

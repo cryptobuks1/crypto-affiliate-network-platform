@@ -1,8 +1,10 @@
 <form>
-    <mat-form-field appearance="outline">
-        <mat-label>Announcement</mat-label>
-        <input placeholder="Announcement" [(ngModel)]="announcement.text" name="text" matInput/>
-    </mat-form-field>
+    <ckeditor 
+    (ready)="onReady($event)" 
+    [editor]="Editor" 
+    [(ngModel)]="announcement.text" 
+    [data]="announcement.text" 
+    name="announcement"></ckeditor>
 
     <div class="style">
         <input type="color" [(ngModel)]="announcement.backgroundColor" name="backgroundColor">
@@ -15,9 +17,16 @@
 </form>
 
 <div class="preview" [style.backgroundColor]="announcement.backgroundColor">
-    <p [style.color]="announcement.textColor">{{ announcement.text }}</p>
+    <p [style.color]="announcement.textColor" [innerHTML]="announcement.text"></p>
 </div>
 
 <div class="actions">
     <button (click)="save()" color="primary" mat-raised-button>Publish</button>
 </div>
+
+
+<section *ngIf="store && store.length > 0">
+    <div *ngFor="let s of store" class="preview" title="Use" [style.backgroundColor]="s.backgroundColor" (click)="use(s)">
+        <p [style.color]="s.textColor" [innerHTML]="s.text"></p>
+    </div>
+</section>

@@ -1,25 +1,36 @@
 import fs from 'fs';
 
 
-async function setAnnouncement(data) {
+async function setAnnouncement(newData) {
     try {
-        const announcements = await getAnnouncements();
-        announcements.push(data);
-        fs.writeFileSync('./store/announcements.json', JSON.stringify(announcements, null, 4));
+        let data = JSON.parse(fs.readFileSync('./store/announcements.json'));
+
+        data.store.unshift(data.active);
+        data.active = newData;
+
+        fs.writeFileSync('./store/announcements.json', JSON.stringify(data, null, 4));
         return Promise.resolve('announcement updated');
     } catch (err) {
-        console.log(err);
         return Promise.reject('caught error');
     }
 }
 
 async function getAnnouncements() {
     try {
-        let buffer = fs.readFileSync('./store/announcements.json');
-        return Promise.resolve(JSON.parse(buffer));
+        let data = JSON.parse(fs.readFileSync('./store/announcements.json'));
+        return data;
     } catch (err) {
-        return Promise.reject('caught error');
+        return Promise.reject(err);
     }
 }
 
-export default { setAnnouncement, getAnnouncements };
+async function getActiveAnnouncement() {
+    try {
+        let data = JSON.parse(fs.readFileSync('./store/announcements.json'));
+        return data.active;
+    } catch (err) {
+        return Promise.reject(err);
+    }
+}
+
+export default { setAnnouncement, getAnnouncements, getActiveAnnouncement };

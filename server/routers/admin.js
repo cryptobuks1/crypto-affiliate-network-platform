@@ -21,6 +21,7 @@ import setAnnoucementController from '../controllers/admin/setAnnouncementContro
 import findUsersController from '../controllers/admin/findUsersController';
 import streamStateController from '../controllers/admin/streamStateController';
 import bulkUpdateController from '../controllers/admin/bulkUpdateController';
+import getAnnouncementsController from '../controllers/admin/getAnnouncementsController';
 
 router.get('/', isAdminController); // check if a user is admin
 router.get('/requests', getRequestsController); // all the requests sent by users to receieve money
@@ -41,5 +42,6 @@ router.put('/set-announcement', setAnnoucementController);
 router.get('/find-users', findUsersController);
 router.get('/stream-state', streamStateController);
 router.put('/bulk-update', bulkUpdateController);
+router.get('/get-annoucements', getAnnouncementsController);
 
 export default router;

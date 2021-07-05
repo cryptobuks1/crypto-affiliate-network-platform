@@ -33,7 +33,8 @@ form {
     .images {
       display: flex;
       flex-wrap: wrap;
-
+      padding-bottom: 1rem;
+      
       img {
         max-height: 200px;
         border: 2px solid transparent;

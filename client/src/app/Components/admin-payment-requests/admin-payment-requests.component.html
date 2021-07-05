@@ -35,12 +35,7 @@
     </mat-expansion-panel-header>
 
     <div class="body">
-      <p>
-        <span>Requested Amount:</span> BNBG
-        <input [(ngModel)]="request.amount" *ngIf="request.status === 'pending'" />
-        <span *ngIf="request.status !== 'pending'">{{ request.amount }}</span>
-      </p>
-
+      <p><span>Requested Amount:</span> USD {{ request.amount }}</p>
       <p><span>Username:</span> {{ request.requestedBy.username }}</p>
       <p><span>Email:</span> {{ request.requestedBy.email }}</p>
       <p *ngIf="request.requestedBy.referralCode"><span>Referred By:</span> {{ request.requestedBy.referralCode }}</p>
@@ -51,12 +46,17 @@
         <img *ngFor="let img of request.proof" [src]="getURL(img)" alt="" />
       </div>
 
+      <mat-form-field appearance="outline" *ngIf="request.status === 'pending'">
+        <mat-label>Amount Approved BNBG</mat-label>
+        <input type="text" placeholder="Amount Approved BNBG" [(ngModel)]="request.approvedAmount" matInput />
+      </mat-form-field>
+
       <div class="actions" *ngIf="request.status === 'pending'">
         <button class="reject" (click)="reject(request._id)" title="Reject this request" color="warn" mat-fab>
           <span class="material-icons-outlined">close</span>
         </button>
 
-        <button class="approve" (click)="approve(request._id, request.amount)" title="Approve this request" color="primary" mat-fab>
+        <button class="approve" (click)="approve(request._id, request.approvedAmount)" title="Approve this request" color="primary" mat-fab>
           <span class="material-icons-outlined">done</span>
         </button>
       </div>

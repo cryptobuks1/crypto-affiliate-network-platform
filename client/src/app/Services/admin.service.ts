@@ -14,7 +14,7 @@ export class AdminService {
   constructor(
     private tokenService: TokenService,
     private httpClient: HttpClient
-  ) {}
+  ) { }
 
   isAdmin(): Observable<iHttpResponse> {
     return this.httpClient.get<iHttpResponse>(`${this.serverAddr}`, {
@@ -35,14 +35,14 @@ export class AdminService {
   }
 
   approve(data: any): Observable<iHttpResponse> {
-    return this.httpClient.put<iHttpResponse>(`${this.serverAddr}/approve`, data, { 
-      headers: this.tokenService.headers() 
+    return this.httpClient.put<iHttpResponse>(`${this.serverAddr}/approve`, data, {
+      headers: this.tokenService.headers()
     });
   }
 
   reject(data: any): Observable<iHttpResponse> {
-    return this.httpClient.put<iHttpResponse>(`${this.serverAddr}/reject`, data, { 
-      headers: this.tokenService.headers() 
+    return this.httpClient.put<iHttpResponse>(`${this.serverAddr}/reject`, data, {
+      headers: this.tokenService.headers()
     });
   }
 
@@ -126,6 +126,12 @@ export class AdminService {
 
   bulkUpdate(data: any): Observable<iHttpResponse> {
     return this.httpClient.put<iHttpResponse>(`${this.serverAddr}/bulk-update`, data, {
+      headers: this.tokenService.headers()
+    });
+  }
+
+  getAnnouncements(): Observable<iHttpResponse> {
+    return this.httpClient.get<iHttpResponse>(`${this.serverAddr}/get-annoucements`, {
       headers: this.tokenService.headers()
     });
   }

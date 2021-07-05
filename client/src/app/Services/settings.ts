@@ -1,7 +1,7 @@
 const env: string = 'production'; // production development
 
 function getAddr(): string {
-    if(env === 'production') {
+    if (env === 'production') {
         return 'https://ditrix-demo.herokuapp.com';
     }
 
@@ -9,4 +9,4 @@ function getAddr(): string {
 }
 
 export const apiKey: string = '7BDRK3QQ5BQQRY2IXP4EMIESQVGJGGB6DD';
-export const serverAddr: string = getAddr(); 
+export const serverAddr: string = getAddr();

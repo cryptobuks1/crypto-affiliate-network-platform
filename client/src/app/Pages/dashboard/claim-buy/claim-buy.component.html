@@ -2,7 +2,7 @@
   <h3>New Request</h3>
   <form>
     <mat-form-field appearance="outline">
-      <mat-label>Amount Of BNBG Tokens</mat-label>
+      <mat-label>Amount Purchased USD</mat-label>
       <input type="number" [disabled]="loading" [(ngModel)]="amount" name="amount" placeholder="25" matInput />
     </mat-form-field>
     <mat-form-field appearance="outline">
@@ -37,7 +37,7 @@
       <tr *ngFor="let request of myRequests">
         <td>{{ request.createdAt | date: "short" }}</td>
         <td><a [href]="'https://bscscan.com/tx/' + request.transactionHash ">{{ request.transactionHash }}</a></td>
-        <td>BNBG {{ request.amount }}</td>
+        <td>USD {{ request.amount }}</td>
         <td>
           <span
             class="status"

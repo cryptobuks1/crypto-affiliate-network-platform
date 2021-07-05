@@ -1,26 +1,64 @@
-[
-    {
-        "text": "Big important alert! pay attention user!",
-        "backgroundColor": "#3d3d3d",
-        "textColor": "#f0f0f0",
-        "active": true
-    },
-    {
-        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "backgroundColor": "#333",
-        "textColor": "#fff",
-        "active": false
-    },
-    {
-        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+{
+    "active": {
+        "text": "<h2>testestqwtqwtqwtqwtqwt</h2>",
         "backgroundColor": "#333",
         "textColor": "#fff",
         "active": true
     },
-    {
-        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "backgroundColor": "#5dc10b",
-        "textColor": "#fff",
-        "active": false
-    }
-]
+    "store": [
+        {
+            "text": "testest",
+            "backgroundColor": "#333",
+            "textColor": "#fff",
+            "active": true
+        },
+        {
+            "text": "HEllo all website visitors.",
+            "backgroundColor": "#333",
+            "textColor": "#fff",
+            "active": false
+        },
+        {
+            "text": "abcdfgqwtqwtqwtqwt",
+            "backgroundColor": "#333",
+            "textColor": "#fff",
+            "active": false
+        },
+        {
+            "text": "Big important alert! pay attention user!",
+            "backgroundColor": "#3d3d3d",
+            "textColor": "#f0f0f0",
+            "active": false
+        },
+        {
+            "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            "backgroundColor": "#333",
+            "textColor": "#fff",
+            "active": false
+        },
+        {
+            "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            "backgroundColor": "#333",
+            "textColor": "#fff",
+            "active": false
+        },
+        {
+            "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            "backgroundColor": "#5dc10b",
+            "textColor": "#fff",
+            "active": false
+        },
+        {
+            "text": "Big important alert! pay attention user!",
+            "backgroundColor": "#3d3d3d",
+            "textColor": "#f0f0f0",
+            "active": false
+        },
+        {
+            "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            "backgroundColor": "#333",
+            "textColor": "#fff",
+            "active": false
+        }
+    ]
+}

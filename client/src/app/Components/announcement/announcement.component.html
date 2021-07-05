@@ -1,4 +1,4 @@
 <div class="announcement" *ngIf="announcement && showAnnouncement && announcement.active" [style.color]="announcement.textColor" [style.backgroundColor]="announcement.backgroundColor">
-    <p>{{ announcement.text }}</p>
+    <p [innerHTML]="announcement.text"></p>
     <span class="material-icons-outlined" (click)="showAnnouncement = false">close</span>
 </div>

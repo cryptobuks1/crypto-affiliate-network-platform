@@ -1,12 +1,12 @@
 import announcementModel from "../../models/announcement.model";
 
-async function getAnnoucement(req, res) {
+async function getAnnouncements(req, res) {
     try {
-        const announcement = await announcementModel.getActiveAnnouncement();
+        let announcements = await announcementModel.getAnnouncements();
         return res.json({
-            message: '',
+            message: `found something`,
             success: true,
-            data: announcement
+            data: announcements
         });
     } catch (err) {
         return res.json({
@@ -17,4 +17,4 @@ async function getAnnoucement(req, res) {
     }
 }
 
-export default getAnnoucement;
+export default getAnnouncements;

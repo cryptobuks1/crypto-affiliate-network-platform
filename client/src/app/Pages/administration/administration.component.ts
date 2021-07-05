@@ -9,7 +9,7 @@ import { iHttpResponse } from 'src/app/Interfaces/http.interface';
   styleUrls: ['./administration.component.scss'],
 })
 export class AdministrationComponent implements OnInit {
-  public tab: number = 5;
+  public tab: number = 0;
   
   constructor(
     public adminService: AdminService, 
